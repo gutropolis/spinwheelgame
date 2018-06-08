@@ -34,7 +34,7 @@
                         <button type="submit" class="btn btn-submit" >Submit</button>
                     </form>
                 </div>
-				
+				 <a class="menu-items-in" href="{{ route("signupPage") }}">Click here to register your account</a>
                 <!-- End contactus-form-->
             </div>
         </div>

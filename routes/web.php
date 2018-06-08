@@ -368,7 +368,7 @@ Route::get('/login', 'FrontendHomeController@login')->name('loginPage');
 Route::get('/faq', 'FrontendHomeController@Faq')->name('faqPage');
 
 
-Route::get('/signup', 'FrontendHomeController@register');
+Route::get('/signup', 'FrontendHomeController@register')->name('signupPage');
 
 
 //For store data
