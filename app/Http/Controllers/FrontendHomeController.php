@@ -18,7 +18,7 @@ use App\WebmasterSection;
 use App\WebmasterSetting;
 use Illuminate\Http\Request;
 use Mail;
-
+use Auth;
 
 class FrontendHomeController extends Controller
 {
@@ -80,6 +80,7 @@ class FrontendHomeController extends Controller
      */
     public function SEOByLang($lang = "", $seo_url_slug = 0)
     {
+		 
         if ($lang != "") {
             // Set Language
             App::setLocale($lang);
@@ -94,18 +95,24 @@ class FrontendHomeController extends Controller
             case "about" :
                 $id = 1;
                 $section = 1;
-                return $this->topic($section, $id);
+                return $this->aboutPage($section, $id);
                 break;
             case "privacy" :
                 $id = 3;
                 $section = 1;
-                return $this->topic($section, $id);
+                return $this->howitwork($section, $id);
                 break;
             case "terms" :
                 $id = 4;
                 $section = 1;
-                return $this->topic($section, $id);
+                return $this->login($section, $id);
                 break;
+            case "signup" :
+                $id = 5;
+                $section = 1;
+                return $this->signup($section, $id);
+                break;
+
         }
         // General Webmaster Settings
         $WebmasterSettings = WebmasterSetting::find(1);
@@ -140,11 +147,12 @@ class FrontendHomeController extends Controller
                         return $this->topic($section, $id);
                     } else {
                         // Not found
-                        return redirect()->route("HomePage");
+                        //return redirect()->route("HomePage");
                     }
                 }
             }
         }
+		 
 
     }
 
@@ -715,106 +723,11 @@ class FrontendHomeController extends Controller
     public function searchTopics(Request $request)
     {
 
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
+        
+            return view("frontEnd.aboutus");
+            exit;
 
-        $search_word = $request->search_word;
-
-        if ($search_word != "") {
-
-            // count topics by Category
-            $category_and_topics_count = array();
-            $AllSections = Section::where('status', 1)->orderby('row_no', 'asc')->get();
-            if (count($AllSections) > 0) {
-                foreach ($AllSections as $AllSection) {
-                    $category_topics = array();
-                    $TopicCategories = TopicCategory::where('section_id', $AllSection->id)->get();
-                    foreach ($TopicCategories as $category) {
-                        $category_topics[] = $category->topic_id;
-                    }
-
-                    $Topics = Topic::where([['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['status', 1], ['expire_date', null]])->whereIn('id', $category_topics)->orderby('row_no', 'asc')->get();
-                    $category_and_topics_count[$AllSection->id] = count($Topics);
-                }
-            }
-
-            // Get current Category Section details
-            $CurrentCategory = "none";
-            $WebmasterSection = "none";
-            // Get a list of all Category ( for side bar )
-            $Categories = Section::where('father_id', '=',
-                '0')->where('status', 1)->orderby('row_no', 'asc')->get();
-
-            // Topics if NO Cat_ID
-            $Topics = Topic::where('title_ar', 'like', '%' . $search_word . '%')
-                ->orwhere('title_en', 'like', '%' . $search_word . '%')
-                ->orwhere('seo_title_ar', 'like', '%' . $search_word . '%')
-                ->orwhere('seo_title_en', 'like', '%' . $search_word . '%')
-                ->orwhere('details_ar', 'like', '%' . $search_word . '%')
-                ->orwhere('details_en', 'like', '%' . $search_word . '%')
-                ->orderby('id', 'desc')->paginate(env('FRONTEND_PAGINATION'));
-            // Get Most Viewed
-            $TopicsMostViewed = Topic::where([['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['expire_date', null]])->orderby('visits', 'desc')->limit(3)->get();
-
-            // General for all pages
-
-            $WebsiteSettings = Setting::find(1);
-            $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-                1)->orderby('row_no',
-                'asc')->get();
-            $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-                1)->orderby('row_no',
-                'asc')->get();
-            $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-            $FooterMenuLinks_name_ar = "";
-            $FooterMenuLinks_name_en = "";
-            if (count($FooterMenuLinks_father) > 0) {
-                $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-                $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-            }
-            $SideBanners = Banner::where('section_id', $WebmasterSettings->side_banners_section_id)->where('status',
-                1)->orderby('row_no', 'asc')->get();
-
-
-            // Get Latest News
-            $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-            // Page Title, Description, Keywords
-            $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-            $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-            $PageTitle = $search_word;
-            $PageDescription = $WebsiteSettings->$site_desc_var;
-            $PageKeywords = $WebsiteSettings->$site_keywords_var;
-
-            // .. end of .. Page Title, Description, Keywords
-
-            // Send all to the view
-            return view("frontEnd.topics",
-                compact("WebsiteSettings",
-                    "WebmasterSettings",
-                    "HeaderMenuLinks",
-                    "FooterMenuLinks",
-                    "FooterMenuLinks_name_ar",
-                    "FooterMenuLinks_name_en",
-                    "LatestNews",
-                    "search_word",
-                    "SideBanners",
-                    "WebmasterSection",
-                    "Categories",
-                    "Topics",
-                    "CurrentCategory",
-                    "PageTitle",
-                    "PageDescription",
-                    "PageKeywords",
-                    "TopicsMostViewed",
-                    "category_and_topics_count"));
-
-        } else {
-            // If no section name/ID go back to home
-            return redirect()->action('FrontendHomeController@HomePage');
-        }
-
+       
     }
 
     /**
@@ -911,23 +824,7 @@ class FrontendHomeController extends Controller
                 }
                 // .. end of .. Page Title, Description, Keywords
 
-                return view("frontEnd.contact",
-                    compact("WebsiteSettings",
-                        "WebmasterSettings",
-                        "HeaderMenuLinks",
-                        "FooterMenuLinks",
-                        "FooterMenuLinks_name_ar",
-                        "FooterMenuLinks_name_en",
-                        "LatestNews",
-                        "Topic",
-                        "SideBanners",
-                        "WebmasterSection",
-                        "Categories",
-                        "CurrentCategory",
-                        "PageTitle",
-                        "PageDescription",
-                        "PageKeywords",
-                        "TopicsMostViewed"));
+                return view("frontEnd.contact");
 
             } else {
                 return redirect()->action('FrontendHomeController@HomePage');
@@ -1047,72 +944,7 @@ class FrontendHomeController extends Controller
     public function commentSubmit(Request $request)
     {
 
-        $this->validate($request, [
-            'comment_name' => 'required',
-            'comment_message' => 'required',
-            'topic_id' => 'required',
-            'comment_email' => 'required|email'
-        ]);
-
-        if (env('NOCAPTCHA_STATUS', false)) {
-            $this->validate($request, [
-                'g-recaptcha-response' => 'required|captcha'
-            ]);
-        }
-
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        $next_nor_no = Comment::where('topic_id', '=', $request->topic_id)->max('row_no');
-        if ($next_nor_no < 1) {
-            $next_nor_no = 1;
-        } else {
-            $next_nor_no++;
-        }
-
-        $Comment = new Comment;
-        $Comment->row_no = $next_nor_no;
-        $Comment->name = $request->comment_name;
-        $Comment->email = $request->comment_email;
-        $Comment->comment = $request->comment_message;
-        $Comment->topic_id = $request->topic_id;;
-        $Comment->date = date("Y-m-d H:i:s");
-        $Comment->status = $WebmasterSettings->new_comments_status;
-        $Comment->save();
-
-        // Site Details
-        $WebsiteSettings = Setting::find(1);
-        $site_title_var = "site_title_" . trans('backLang.boxCode');
-        $site_email = $WebsiteSettings->site_webmails;
-        $site_url = $WebsiteSettings->site_url;
-        $site_title = $WebsiteSettings->$site_title_var;
-
-        // Topic details
-        $Topic = Topic::where('status', 1)->find($request->topic_id);
-        if (count($Topic) > 0) {
-            $tpc_title_var = "title_" . trans('backLang.boxCode');
-            $tpc_title = $WebsiteSettings->$tpc_title_var;
-
-            // SEND Notification Email
-            if ($WebsiteSettings->notify_comments_status) {
-                if (env('MAIL_USERNAME') != "") {
-                    Mail::send('backEnd.emails.webmail', [
-                        'title' => "NEW Comment on :" . $tpc_title,
-                        'details' => $request->comment_message,
-                        'websiteURL' => $site_url,
-                        'websiteName' => $site_title
-                    ], function ($message) use ($request, $site_email, $site_title, $tpc_title) {
-                        $message->from(env('NO_REPLAY_EMAIL', $request->comment_email), $request->comment_name);
-                        $message->to($site_email);
-                        $message->replyTo($request->comment_email, $site_title);
-                        $message->subject("NEW Comment on :" . $tpc_title);
-
-                    });
-                }
-            }
-        }
-
-        return "OK";
+       return view("frontEnd.topic");
     }
 
 
@@ -1124,66 +956,100 @@ class FrontendHomeController extends Controller
      */
     public function orderSubmit(Request $request)
     {
+        echo 'hello';
+        exit;
+    }
+   
 
-        $this->validate($request, [
-            'order_name' => 'required',
-            'order_phone' => 'required',
-            'order_qty' => 'required',
-            'topic_id' => 'required',
-            'order_email' => 'required|email'
-        ]);
-
-
-        $WebsiteSettings = Setting::find(1);
-        $site_title_var = "site_title_" . trans('backLang.boxCode');
-        $site_email = $WebsiteSettings->site_webmails;
-        $site_url = $WebsiteSettings->site_url;
-        $site_title = $WebsiteSettings->$site_title_var;
-
-        $Topic = Topic::where('status', 1)->find($request->topic_id);
-        if (count($Topic) > 0) {
-            $tpc_title_var = "title_" . trans('backLang.boxCode');
-            $tpc_title = $WebsiteSettings->$tpc_title_var;
-
-            $Webmail = new Webmail;
-            $Webmail->cat_id = 0;
-            $Webmail->group_id = null;
-            $Webmail->contact_id = null;
-            $Webmail->father_id = null;
-            $Webmail->title = "ORDER " . ", Qty=" . $request->order_qty . ", " . $Topic->$tpc_title_var;
-            $Webmail->details = $request->order_message;
-            $Webmail->date = date("Y-m-d H:i:s");
-            $Webmail->from_email = $request->order_email;
-            $Webmail->from_name = $request->order_name;
-            $Webmail->from_phone = $request->order_phone;
-            $Webmail->to_email = $WebsiteSettings->site_webmails;
-            $Webmail->to_name = $WebsiteSettings->$site_title_var;
-            $Webmail->status = 0;
-            $Webmail->flag = 0;
-            $Webmail->save();
-
-
-            // SEND Notification Email
-            $msg_details = "$tpc_title <br> Qty = " . $request->order_qty . "<hr>" . $request->order_message;
-            if ($WebsiteSettings->notify_orders_status) {
-                if (env('MAIL_USERNAME') != "") {
-                    Mail::send('backEnd.emails.webmail', [
-                        'title' => "NEW Order on :" . $tpc_title,
-                        'details' => $msg_details,
-                        'websiteURL' => $site_url,
-                        'websiteName' => $site_title
-                    ], function ($message) use ($request, $site_email, $site_title, $tpc_title) {
-                        $message->from(env('NO_REPLAY_EMAIL', $request->order_email), $request->order_name);
-                        $message->to($site_email);
-                        $message->replyTo($request->order_email, $site_title);
-                        $message->subject("NEW Comment on :" . $tpc_title);
-
-                    });
-                }
-            }
-        }
-
-        return "OK";
+     public function aboutus(Request $request)
+    {
+        return view("frontEnd.aboutus"); 
+        exit;
+    }
+	
+    
+     public function HowitworkPage(Request $request)
+    {
+        return view("frontEnd.howitwork");
+        exit;
     }
 
+     public function login(Request $request)
+    {
+        return view("frontEnd.login");
+        
+    }
+      public function register(Request $request)
+    {
+        return view("frontEnd.register");
+    }
+    
+   public function Faq(Request $request)
+    {
+          return view("frontEnd.faq");
+    }
+
+    
+    public function AddUser(Request $request)
+    {
+         $this->validate($request, [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+            
+        ]);
+
+        $User = new User;
+        $email=$request->email;
+        $emailexist=User::where('email',$email)->first();
+        if(!$emailexist)
+        {
+        $User->name = $request->firstname;
+        $User->email = $request->email;
+        $User->password = bcrypt($request->password);
+        $User->status = 1;
+        //$User->created_by = Auth::user()->id;
+        $User->save();
+
+        echo 'data add successfully';
+        exit;
+    }
+    else
+    {
+        echo 'Email exist';
+        exit;
+    }
+    }
+    public function logincheck(Request $request)
+    {
+         $this->validate($request, [
+            'useremail' => 'required',
+            'password' => 'required'
+            
+        ]);
+
+          $email = $request->useremail;
+        $password = $request->password;
+ 
+         $checkauth=User::where('email',$email)->first();
+
+        
+
+         if($checkauth !='')
+         {
+            if (password_verify($password, $checkauth['password'])) {
+           echo "Login successfully";
+           return view("frontEnd.home");
+        }
+         else {
+           echo "Login failed";
+        }
+            
+         }
+     else
+     {
+        echo "Email id not match";
+     }
+    }
 }

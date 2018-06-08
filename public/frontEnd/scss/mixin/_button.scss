@@ -1,0 +1,6 @@
+@mixin button-red($bg: $color-red, $border-radius: 10px, $text: #fff, $transition: 0.4s ){	
+		border-radius: $border-radius;
+		background: $bg;
+		color: $text; 
+	    transition: $transition;
+}

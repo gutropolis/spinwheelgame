@@ -233,9 +233,11 @@ Route::Group(['prefix' => env('BACKEND_PATH')], function () {
     Route::get('/visitors', 'AnalyticsController@visitors')->name('visitors');
 
     // Users & Permissions
+    /*
     Route::get('/users', 'UsersController@index')->name('users');
     Route::get('/users/create/', 'UsersController@create')->name('usersCreate');
     Route::post('/users/store', 'UsersController@store')->name('usersStore');
+    Route::get('/users/store', 'UsersController@store')->name('usersStore');
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('usersEdit');
     Route::post('/users/{id}/update', 'UsersController@update')->name('usersUpdate');
     Route::get('/users/destroy/{id}', 'UsersController@destroy')->name('usersDestroy');
@@ -247,7 +249,7 @@ Route::Group(['prefix' => env('BACKEND_PATH')], function () {
     Route::post('/users/permissions/{id}/update', 'UsersController@permissions_update')->name('permissionsUpdate');
     Route::get('/users/permissions/destroy/{id}', 'UsersController@permissions_destroy')->name('permissionsDestroy');
 
-
+*/
     // Menus
     Route::post('/menus/store/parent', 'MenusController@storeMenu')->name('parentMenusStore');
     Route::get('/menus/parent/{id}/edit', 'MenusController@editMenu')->name('parentMenusEdit');
@@ -327,9 +329,11 @@ Route::get('/{lang?}/contact', 'FrontendHomeController@ContactPageByLang')->name
 // ../contact message submit  (ajax url)
 Route::post('/contact/submit', 'FrontendHomeController@ContactPageSubmit')->name('contactPageSubmit');
 // ..if page by name ( ex: www.site.com/about )
-Route::get('/topic/{id}', 'FrontendHomeController@topic')->name('FrontendPage');
+Route::get('/topic', 'FrontendHomeController@topic')->name('FrontendPage');
 // ..if page by user id ( ex: www.site.com/user )
 Route::get('/user/{id}', 'FrontendHomeController@userTopics')->name('FrontendUserTopics');
+
+/** iSSUE HERE **/
 Route::get('/{lang?}/user/{id}', 'FrontendHomeController@userTopicsByLang')->name('FrontendUserTopicsByLang');
 // ../search
 Route::post('/search', 'FrontendHomeController@searchTopics')->name('searchTopics');
@@ -343,16 +347,43 @@ Route::get('/{section}/{cat}', 'FrontendHomeController@topics')->name('FrontendT
 Route::get('/{lang?}/{section}/{cat}', 'FrontendHomeController@topicsByLang')->name('FrontendTopicsByCatWithLang');
 
 // ..Section url by name  ( ex: www.site.com/news )
-Route::get('/{section}', 'FrontendHomeController@topics')->name('FrontendTopics');
+//Route::get('/{section}', 'FrontendHomeController@topics')->name('FrontendTopics');
 Route::get('/{lang?}/{section}', 'FrontendHomeController@topicsByLang')->name('FrontendTopicsByLang');
 
 // ..SEO url  ( ex: www.site.com/title-here )
-Route::get('/{seo_url_slug}', 'FrontendHomeController@SEO')->name('FrontendSEO');
+//Route::get('/{seo_url_slug}', 'FrontendHomeController@SEO')->name('FrontendSEO');
 Route::get('/{lang?}/{seo_url_slug}', 'FrontendHomeController@SEOByLang')->name('FrontendSEOByLang');
+
+/** iSSue  eND HERE **/
 
 // ..if page by name and language( ex: www.site.com/ar/about )
 Route::get('/{lang?}/topic/{id}', 'FrontendHomeController@topicByLang')->name('FrontendPageByLang');
 
+
+Route::get('/aboutus', 'FrontendHomeController@aboutus')->name('aboutPage');
+
+//Route::get('/about', 'FrontendHomeController@AboutPage')->name('aboutPage');
+Route::get('/howitwork', 'FrontendHomeController@HowitworkPage')->name('howitworkPage');
+Route::get('/login', 'FrontendHomeController@login')->name('loginPage');
+Route::get('/faq', 'FrontendHomeController@Faq')->name('faqPage');
+
+
+Route::get('/signup', 'FrontendHomeController@register');
+
+
+//For store data
+
+//Route::post('/storedata', 'FrontendHomeController@AddUser');
+Route::get('/storedata', 'FrontendHomeController@AddUser');
+
+//check login
+
+Route::get('/checklogin', 'FrontendHomeController@Logincheck');
+
+
+//Route::get('/sandeep', 'FrontendHomeController@UserRegister');
+//Route::get('/aboutus', [ 'as' => 'aboutpage', 'uses' => 'HomeController@Aboutus']);
+//Route::resource('/aboutus', 'FrontendHomeController@aboutus');
 // .. End of Frontend Route
 /*
  !! Important note:

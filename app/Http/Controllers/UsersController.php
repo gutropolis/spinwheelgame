@@ -6,7 +6,6 @@ use App\Http\Requests;
 use App\Permissions;
 use App\User;
 use App\WebmasterSection;
-use Auth;
 use File;
 use Illuminate\Config;
 use Illuminate\Http\Request;
@@ -76,6 +75,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        echo 'Hello';
+        exit;
         //
         $this->validate($request, [
             'photo' => 'mimes:png,jpeg,jpg,gif|max:3000',
@@ -106,11 +107,20 @@ class UsersController extends Controller
         $User->connect_email = $request->connect_email;
         $User->connect_password = $request->connect_password;
         $User->status = 1;
-        $User->created_by = Auth::user()->id;
+      //  $User->created_by = Auth::user()->id;
         $User->save();
 
         return redirect()->action('UsersController@index')->with('doneMessage', trans('backLang.addDone'));
     }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+   
 
     public function getUploadPath()
     {
@@ -439,6 +449,12 @@ class UsersController extends Controller
         } else {
             return redirect()->action('UsersController@index');
         }
+    }
+
+     public function UserRegister(Request $request)
+    {
+           echo 'I am here';exit;
+        
     }
 
 

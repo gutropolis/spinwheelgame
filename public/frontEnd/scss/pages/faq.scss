@@ -1,0 +1,320 @@
+.wrapper-faq{
+	@include background('../assets/images/contact-bg.png');
+	padding-top: $space-l + $space-n + $space-vs + 2px;
+	padding-bottom: $space-l + $space-l + $space-vs + 1px;
+	background-position: right;
+	text-align: center;
+
+	@media (max-width: $break-md){
+		padding-top: $space-xl + $space-vs;
+	}
+	@media (max-width: $break-sm){
+		padding-top: $space-xl + $space-vs + $space-m;
+	}
+	@media (max-width: $break-xvs){
+		padding-bottom: $space-l + $space-s + $space-vs;;
+	}
+	.wrapper-title{
+		color: $color-white;
+		position: relative;
+		@media (max-width: $break-sm){
+			font-size: 40px;	
+		}
+		@media (max-width: 507px){
+			font-size: 30px;	
+		}
+
+		&:before{
+			content: '';
+			width: 47px;
+			height: 6px;
+			background: #eb373f;
+			top: 61px;
+			left: 48%;
+			position: absolute;
+			@media (max-width: $break-xvs){
+				width: 35px;
+				height: 4px;
+				top: 40px;
+				left: 45%;
+			}
+			@media (max-width: 507px){
+				top: 105%;
+			}
+		}
+	}
+}
+
+
+.accodion-section{
+	margin-top: $space-m + $space-vs + 2px;
+
+	@media (max-width: $break-xs){
+		margin-top: $space-none;
+	}
+
+	.accodion-block{
+		margin-bottom: 10px;
+
+		.accordion {
+			background: $color-white;
+		    color: $color-black;
+		    cursor: pointer;
+		    width: 100%;
+		    border: 1px solid #dfdede;
+		    outline: none;
+		    font-size: 15px;
+		    transition: 0.4s;
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    padding-top: $space-s + $space-vs + 1px;
+		    padding-bottom: $space-s + $space-vs - 1px;
+		    padding-left: $space-n + $space-vs + 1px;
+		    padding-right: $space-s + $space-vs;
+
+		    &:hover{
+		    	background: $primarycolor_hover;
+		    	color: $color-white;
+		    }
+
+		    &:after{
+		    	content: '\002B';
+		    	color: $color-black;
+		    	font-weight: bold;
+		    }
+
+		    &:focus{
+		    	background: $primarycolor_hover;
+		    	color: $color-white;
+		    }
+	    }
+
+		.panel {
+		    padding: 26px;
+		    background-color: white;
+		    overflow: hidden;
+		    transition: max-height 0.2s ease-out;
+		    border: 1px solid #dfdede;
+		    color: $color-silver;
+		    line-height: 24px;
+		    font-family: $font_family_hind;
+		    word-spacing: 1px;
+		    border-top: none;
+		}
+		
+	}
+
+	.accordion-rightblock{
+		margin-left: $space-l + $space-s;
+
+		@media (max-width: $break-md){
+			margin-left: $space-none;
+			margin-top: $space-m;			
+		}
+
+		.search-input{
+			width: 100%;
+			padding-left: $space-s + $space-vs + 1px;
+			padding-right: $space-s + $space-vs + 1px;
+			padding-top: $space-s + $space-vs - 1px;
+			padding-bottom: $space-s + $space-vs - 1px;
+			border: 1px solid #dfdede;
+			position: relative;
+
+			&::placeholder{
+				color: #dfdede;
+				font-family: hind;
+			}
+		}
+
+		.rightblock-title{
+			margin-top: $space-m + $space-n + 4px;
+			margin-bottom: $space-m + $space-n + 4px;
+		}
+
+		.categories{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: $space-n;
+
+			.categories-text{
+				margin: $space-none;
+				font-family: hind;
+			}
+
+			.box{
+				border: 1px solid $color-red;
+				width: 32px;
+				height: 31px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: $color-red;
+				font-family: hind;
+
+			}
+		}
+	}
+}
+
+
+
+
+.get-in-touch-faq{
+	@include background('../assets/images/get-in-touch-bg.png');
+	padding-top: $space-l;
+	padding-bottom: $space-l + $space-s;
+	margin-top: $space-xl + $space-vs + 2px;
+	@media (max-width: $break-sm){
+		background-size: cover;
+		margin-top: $space-m + $space-s;
+	}
+	@media (max-width: $break-xs){
+		padding-top: $space-m;
+	}
+
+
+
+	.head-get-in-touch{
+		text-align: center;
+		color: $color-white;
+		margin-bottom: $space-l + $space-n + $space-vs + 1px;
+		position: relative;
+
+		@media (max-width: $break-xs){
+			margin-bottom: $space-m + $space-s   ;
+		}
+
+		&:before{
+			content: '';
+			width: 55px;
+			height: 6px;
+			background: $color-red;
+			top: 66px;
+			left: 48%;
+			position: absolute;
+			@media (max-width: 577px){
+				top: 45px; 
+			}
+		}
+	}
+	.contact-us-block{
+		max-width: 713px;
+		margin: auto;
+		background: $color-white;
+		padding-top: $space-m + $space-s;
+		padding-bottom: $space-m + $space-s + 1px;
+		padding-left: $space-m +$space-s + $space-vs + 2px;
+		padding-right: $space-m +$space-s + $space-vs + 3px;
+
+		@media (max-width: $break-xvs){	
+			padding-left: $space-n;
+			padding-right: $space-n;			
+		}
+
+		.social-icons {
+		display: flex;
+		padding: $space-none;
+		.elipse {
+			border: 2px solid $color_red;
+			border-radius: 50%;
+			text-align: center;
+			width: 35px;
+			height: 35px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $color_light_white;
+			background: $color_red;
+			margin-right: $space-s + 3px;
+			&:hover {
+				background-color: $color_white;
+				color: $color_red;
+				cursor: pointer;
+				border: 1px solid $color-red;
+			}
+		}
+		.fa-icons {
+			font-size: $font-size-8;
+		}
+	    }
+	    .leftbar-contact-us {
+		    border-right: 1px solid $color_primary_silver;
+		    padding-right: $space-none;
+		    margin-bottom: $space-l;
+		    @media (max-width: $break-sm){
+		    	border-right: none;
+		    }
+		    @media (max-width: $break-xvs){
+		    	margin-bottom: $space-m;
+		    }
+
+		    .title-contactus{
+		    	margin-top: $space-n + $space-vs  + 1px;
+		    	margin-bottom: $space-s + $space-vs	  + 8px;
+		    }
+		    .contactus-text{
+		    	font-family: $font_family_hind;
+		    	color: $color_dark-silver;
+		    	line-height: 20px;
+		    	margin: $space-none;
+
+		    }
+	    }
+	    .contactus-form{
+	    	margin-left: $space-vs + 2px;
+	    	.contact-form-group{
+	    		margin-bottom: $space-s + $space-vs;
+	    		border-radius: 10px;
+	    		.contact-form-control{
+	    			border: 2px solid #e6e4e4;
+	    			border-radius: 10px;
+	    			padding-top: 2px;
+	    			padding-bottom: 2px;
+	    			padding-left: 10px;
+	    			padding-right: 10px;
+
+	    			&::placeholder{
+					font-size: 14px;
+					font-family: $font_family_hind;
+					}
+	    		}
+	    	}
+	    	.btn-submit{
+	    		@include button-red;
+	    		float: right;
+	    		border: 2px solid $color-red;
+	    		padding-top: $space-vs + 1px;
+	    		padding-bottom: $space-vs + 1px;
+	    		padding-left: $space-n + $space-vs - 1px;
+	    		padding-right: $space-n + $space-vs - 1px;
+	    		&:hover{
+	    			background: $color-white;
+	    			border: 2px solid $color-red;
+	    			curser: pointer;
+	    			color: $color-red;
+	    		}
+	    	}
+
+	    }
+	}	
+}
+
+
+
+.our-partners-faq{
+	padding-top: $space-l + $space-s;
+	padding-bottom: $space-l + $space-s + 4px;
+
+	.our-partners-block{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@media (max-width: $break-md){
+			margin-bottom: $space-m;
+		}
+	}
+}
+

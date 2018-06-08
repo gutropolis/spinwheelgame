@@ -1,64 +1,69 @@
-<header>
-    <div class="site-top">
+<!--header-->
+<header>    
+      <!--my-nav-->
+      <nav class="navbar navbar-expand-lg navbar-light  my-nav">
+        <!--container-->
         <div class="container">
-            <div>
-                <div class="pull-right">
-                    <strong>
-                        <a href="{{ route("adminHome") }}"><i class="fa fa-cog"></i> {{trans('frontLang.dashboard')}}
-                        </a>
-                    </strong>
-                    @if($WebmasterSettings->languages_count ==2)
-                        &nbsp; | &nbsp;
-                        <strong>
-                            @if(trans('backLang.code')=="ar")
-                                <a href="{{ URL::to('lang/en') }}"><i
-                                            class="fa fa-language "></i> {{ str_replace("[ ","",str_replace(" ]","",strip_tags(trans('backLang.englishBox')))) }}
-                                </a>
-                            @else
-                                <a href="{{ URL::to('lang/ar') }}"><i
-                                            class="fa fa-language "></i> {{ str_replace("[ ","",str_replace(" ]","",strip_tags(trans('backLang.arabicBox')))) }}
-                                </a>
-                            @endif
+            <!--navbar brand -->
+            <a class="navbar-brand" href="#">
+			
+              <img src="{{url::asset('frontEnd/images/logo.png') }}" alt="Raodeals logo"> 
+            </a>
+            <!-- End navbar brand -->
 
-                        </strong>
-                    @endif
-                </div>
-                <div class="pull-left">
-                    @if(Helper::GeneralSiteSettings("contact_t3") !="")
-                        <i class="fa fa-phone"></i> &nbsp;<a
-                                href="call:{{ Helper::GeneralSiteSettings("contact_t5") }}"><span
-                                    dir="ltr">{{ Helper::GeneralSiteSettings("contact_t5") }}</span></a>
-                    @endif
-                    @if(Helper::GeneralSiteSettings("contact_t6") !="")
-                        <span class="top-email">
-                        &nbsp; | &nbsp;
-                    <i class="fa fa-envelope"></i> &nbsp;<a
-                                    href="mailto:{{ Helper::GeneralSiteSettings("contact_t6") }}">{{ Helper::GeneralSiteSettings("contact_t6") }}</a>
-                    </span>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ route("Home") }}">
-                    @if(Helper::GeneralSiteSettings("style_logo_" . trans('backLang.boxCode')) !="")
-                        <img alt=""
-                             src="{{ URL::to('uploads/settings/'.Helper::GeneralSiteSettings("style_logo_" . trans('backLang.boxCode'))) }}">
-                    @else
-                        <img alt="" src="{{ URL::to('uploads/settings/nologo.png') }}">
-                    @endif
+            <!--togller button - menu icon-->
+            <button class="navbar-toggler menu-icon" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- End togller button - menu icon-->
 
-                </a>
+            <!--collapse navbar-->
+            <div class="collapse navbar-collapse my-navbar" id="navbarSupportedContent">
+                <!-- nav-menu-->
+                <ul class="navbar-nav ml-auto mr-auto nav-menu">
+                    <!-- menu-items-->
+                    <li class="nav-item menu-items">
+                        <a class="menu-items-in" href="{{ route("Home") }}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="menu-items-in" href="{{ route("howitworkPage") }}">How It Works</a>
+                    </li>                   
+                    <li class="nav-item menu-items">
+                        <a class="menu-items-in" href="{{ route("aboutPage") }}">About us</a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="menu-items-in" href="{{ route("contactPage") }}">Contact us</a>
+                    </li>
+                    <!-- End  menu-items-->   
+                </ul>
+                <!-- End  nav-menu--> 
+                <!--form inline-->               
+                <form class="form-inline header-right-part">
+                    <img src="{{url::asset('frontEnd/images/search.png') }}" class="search-icon">
+                    <a class="btn-login" type="login" href="{{ route("loginPage") }}">Login</a>
+                    <!--social-icons-->
+                    <div class="social-icons">
+                      <div class="elipse">
+                        <i class="fa fa-facebook fa-icons"></i>
+                      </div>
+                      <div class="elipse">
+                        <i class="fa fa-twitter fa-icons"></i>
+                      </div>
+                      <div class="elipse">
+                        <i class="fa fa-google-plus fa-icons"></i>
+                      </div>
+                      <div class="elipse">
+                        <i class="fa fa-instagram fa-icons"></i>
+                      </div>
+                    </div>
+                    <!-- End social-icons-->
+                </form>
+                <!--End form inline-->
             </div>
-            @include('frontEnd.includes.menu')
+            <!-- End collapse navbar-->
         </div>
-    </div>
+        <!-- End my-nav-->
+    </nav>
+    <!-- End container-->
 </header>
+<!-- End header-->

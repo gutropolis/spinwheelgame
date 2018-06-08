@@ -1,0 +1,350 @@
+.wrapper-aboutus{
+	@include background('../assets/images/aboutus-bg.png');
+	padding-top: $space-l + $space-n + $space-vs + 2px;
+	padding-bottom: $space-l + $space-l + $space-vs + 1px;
+	background-position: right;
+	text-align: center;
+
+	@media (max-width: $break-md){
+		padding-top: $space-xl + $space-vs;
+	}
+	@media (max-width: $break-sm){
+		padding-top: $space-xl + $space-vs + $space-m;
+	}
+	@media (max-width: $break-xvs){
+		padding-bottom: $space-l + $space-s + $space-vs;;
+	}
+	.wrapper-title{
+		color: $color-white;
+		position: relative;
+
+		&:before{
+			content: '';
+			width: 47px;
+			height: 6px;
+			background: #eb373f;
+			top: 61px;
+			left: 48%;
+			position: absolute;
+			@media (max-width: $break-xvs){
+				width: 35px;
+				height: 4px;
+				top: 40px;
+				left: 45%;
+			}
+		}
+	}
+}
+
+
+.welcome-section{
+	padding-top: $space-n + $space-vs;
+	padding-bottom: $space-l + $space-s;
+
+	@media (max-width: $break-md){
+		padding-top: $space-none;
+	}
+	@media (max-width: $break-xs){
+		padding-bottom: $space-m;
+	}
+	@media (max-width: $break-xvs){
+		padding-bottom: $space-s + $space-vs;
+	}
+
+	.heading-section{
+		text-align: center;
+		max-width: 660px;
+		margin: auto;
+
+		.heading-welcome{
+			margin-bottom: $space-s + 4px;
+		}
+
+		.welcome-text{
+			color: $color_silver;
+			font-family: $font_family_hind;
+			line-height: $space-n + 4px;
+		}
+	}
+	.welcome-block{
+		margin-top: $space-m + $space-s  + 4px;
+		.welcome-image{
+			width: 100%;
+		}
+
+		.welcome-title{
+			font-size: 26px;
+			color: $color-lightblack;
+			line-height: 36px;
+		}
+
+		.welocome-content{
+			font-family: $font_family_hind;
+			color: $color_silver;
+			line-height: 24px;
+			margin-top: $space-n - 3px;
+		}
+
+		.about-us-list{
+			display: block;			
+			display:  flex;
+			justify-content: flex-start;
+			align-items:  center;
+			margin-bottom: 3px;
+
+			.list-elements{
+				margin-left: 8px;
+				color: $color_silver;
+				font-family: $font_family_hind;				
+			}
+
+		}
+	}
+}
+
+.imformation-aboutus{
+	@include background('../assets/images/bg-freesection.png');
+	color: $color-white;
+	padding-top: $space-l + 2px;
+	padding-bottom: $space-l + $space-n + 7px;
+	@media (max-width: $break-md){
+		background-size: cover;
+	}
+	@media (max-width: $break-xs){
+		padding-bottom: $space-l;
+	}
+
+
+	.title{
+		font-size: 26px;
+		margin-bottom: 30px;
+	}
+	.about-us-list{
+		display: flex;
+		margin-bottom: 20px;
+		.list-elements{
+			margin-left: 8px;
+			line-height: 24px;
+			font-family: $font_family_hind;
+			color: $color_fafafa;
+		}
+	}
+	.aboutus-rightside-image{
+		padding-left: 70px;
+		@media (max-width: $break-md){
+			padding-left: $space-none;
+		}
+		@media (max-width: $break-xs){
+			margin-top: $space-m + $space-vs;
+			width: 100%;
+		}
+	}
+}
+
+.meet-our-agents{
+	padding-top: $space-m + $space-s + 1px;
+	padding-bottom: $space-l + $space-vs;
+
+	.heading-meet-agents{
+		margin-bottom: $space-l + $space-s;
+		text-align: center;
+	}
+	.meet-our-agents-section{
+		margin-bottom: $space-l;
+		.agents-block{
+			display: flex;
+			justify-content: flex-start;
+
+			@media (max-width: $break-xs){
+				display: inline;
+			}
+
+			.profile{
+				flex: 0 0 36%;
+				position: relative;
+
+				img{
+					@media (max-width: $break-xs){
+						width: 100%;
+					}
+				}
+
+				&:after{
+					content: '';
+					border: 2px solid $color_bg_silver;
+					position: absolute;
+					top: 33px;
+					left: -30px;
+					width: 100%;
+					height: 87%;
+					z-index: -22;
+					@media (max-width: $break-lg){
+						top: 21px;
+						left: -20px;
+						width: 100%;
+						height: 63%;
+					}
+					@media (max-width: $break-md){
+						top: 25px;
+						left: -28px;
+						width: 100%;
+						height: 100%;
+					}
+					@media (max-width: $break-sm){
+						height: 76%;
+						top: 24px;
+					}
+					@media (max-width: $break-xs){
+						display: none;
+					}
+				}
+			}
+			.profile-detail{
+				flex: 0 0 66%;
+				padding-left: $space-n + 2px;
+				padding-top: $space-s + 2px;
+				.name{
+					font-weight: bold;
+					color: $color-silver_3;
+					@media (max-width: $break-md){
+						font-size: 20px;
+					}
+				}
+				.designation{
+					font-family: $font_family_hind;
+					color: $color_bg_silver;
+					padding-top: 2px;
+				}
+				.about-agents{
+					font-family: $font_family_hind;
+					line-height: 24px;
+					letter-spacing: 1px;
+					word-spacing: 1px;
+					margin-top: $space-s + $space-vs;
+
+				}
+
+			.social-icons {
+				display: flex;
+				padding: $space-none;
+
+				.elipse {
+					border: 2px solid $color_bg_silver;
+					border-radius: 50%;
+					text-align: center;
+					width: 35px;
+					height: 35px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					color: $color_light_red;
+					margin-right: $space-s;
+			
+					&:hover {
+						background-color: $color_red;
+						color: $color_white;
+						cursor: pointer;
+						border: 1px solid $color-red;
+
+					}
+					.fa-icons {
+						font-size: $font-size-8;
+					}
+				}
+				}
+				
+			}
+		}
+	}
+}
+.testimonial{
+	@include background('../assets/images/testimonial-bg.jpg');
+	padding-top: $space-l + 4px;
+	padding-bottom: $space-l + $space-s;
+	background-size: cover;
+	.heading-testimonial{
+		text-align: center;
+		color:white;
+		margin-bottom: $space-l + $space-m;
+
+		@media (max-width: $break-sm){
+			font-size: 36px;
+		}
+		@media (max-width: $break-xvs){
+			font-size: 26px;
+		}
+	}
+	.card-carousel-elements{
+		position: relative;
+		.card-carousel {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			max-width: 454px;
+			margin: auto;
+			text-align: center;
+			background: white;
+			z-index: 3;
+
+			.testimonial-card{
+				padding-top: $space-l + $space-s;
+				padding-bottom: $space-m;
+				padding-left: $space-m;
+				padding-right: $space-l + $space-s - 1px;
+				text-align: center;
+
+				@media (max-width: $break-xs){
+					padding-left: $space-m - 2px;
+					padding-right: $space-m - 2px;
+				}
+
+				.testimonial-profile{
+					position: absolute;
+					top: -50px;
+					left: 36%;
+				}
+				.testimonial-name{
+					color: #252526;
+					font-weight: bold;
+					margin-top: $space-vs + 1px;
+					margin-bottom: $space-s + 4px;
+					font-size: $font-size-6;
+				}
+				.review{
+					line-height: 24px;
+					word-spacing: 2px;
+					font-family: $font_family_hind;
+					color: $color_silver;
+					position: relative;
+
+					.quote-left{
+						position: absolute;
+						top: -2px;
+						left: -7px;
+						color: $color-red;
+					}
+				}
+			}
+		}
+	}
+
+}
+
+
+
+
+
+.our-partners{
+	padding-top: $space-l + $space-s;
+	padding-bottom: $space-l + $space-s + 4px;
+	.our-partners-block{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@media (max-width: $break-md){
+			margin-bottom: $space-m;
+		}	
+	}
+}
+
