@@ -22,18 +22,52 @@
                 <!-- nav-menu-->
                 <ul class="navbar-nav ml-auto mr-auto nav-menu">
                     <!-- menu-items-->
+                   @if ($classactive == "home")
+                    <li class="nav-item menu-items active">
+                        <a class="menu-items-in " href="{{ route("Home") }}">Home <span class="sr-only">(current)</span></a>
+                    </li>  
+
+             
+             @else
                     <li class="nav-item menu-items">
-                        <a class="menu-items-in" href="{{ route("Home") }}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item menu-items">
+                        <a class="menu-items-in " href="{{ route("Home") }}">Home <span class="sr-only">(current)</span></a>
+                    </li>  
+                                
+             @endif
+
+             
+              @if ($classactive == "howitwork")
+               <li class="nav-item menu-items active">
                         <a class="menu-items-in" href="{{ route("howitworkPage") }}">How It Works</a>
-                    </li>                   
+                    </li> 
+                  @else
+               <li class="nav-item menu-items ">
+                        <a class="menu-items-in" href="{{ route("howitworkPage") }}">How It Works</a>
+                    </li> 
+                   @endif 
+
+
+                     @if ($classactive == "aboutus")          
+                    <li class="nav-item menu-items active">
+                        <a class="menu-items-in" href="{{ route("aboutPage") }}">About us</a>
+                    </li>
+                    @else          
                     <li class="nav-item menu-items">
                         <a class="menu-items-in" href="{{ route("aboutPage") }}">About us</a>
                     </li>
+                     @endif
+
+                      @if ($classactive == "contact") 
+
+                    <li class="nav-item menu-items active">
+                        <a class="menu-items-in" href="{{ route("contactPage") }}">Contact us</a>
+                    </li>
+                    @else
+
                     <li class="nav-item menu-items">
                         <a class="menu-items-in" href="{{ route("contactPage") }}">Contact us</a>
                     </li>
+                    @endif
                     <!-- End  menu-items-->   
                 </ul>
                 <!-- End  nav-menu--> 

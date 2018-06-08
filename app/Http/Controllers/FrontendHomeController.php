@@ -222,7 +222,7 @@ class FrontendHomeController extends Controller
         $PageTitle = ""; // will show default site Title
         $PageDescription = $WebsiteSettings->$site_desc_var;
         $PageKeywords = $WebsiteSettings->$site_keywords_var;
-
+        $classactive="home";
         return view("frontEnd.home",
             compact("WebsiteSettings",
                 "WebmasterSettings",
@@ -241,7 +241,7 @@ class FrontendHomeController extends Controller
                 "HomeTopics",
                 "HomePhotos",
                 "HomePartners",
-                "LatestNews"));
+                "LatestNews","classactive"));
 
     }
 
@@ -823,8 +823,8 @@ class FrontendHomeController extends Controller
                     $PageKeywords = $WebsiteSettings->$site_keywords_var;
                 }
                 // .. end of .. Page Title, Description, Keywords
-
-                return view("frontEnd.contact");
+                $classactive="howitwork";
+                return view("frontEnd.contact", compact("classactive"));
 
             } else {
                 return redirect()->action('FrontendHomeController@HomePage');
@@ -963,25 +963,29 @@ class FrontendHomeController extends Controller
 
      public function aboutus(Request $request)
     {
-        return view("frontEnd.aboutus"); 
+        $classactive="aboutus";
+        return view("frontEnd.aboutus", compact("classactive"));
         exit;
     }
 	
     
      public function HowitworkPage(Request $request)
     {
-        return view("frontEnd.howitwork");
+        $classactive="howitwork";
+        return view("frontEnd.howitwork", compact("classactive"));
         exit;
     }
 
      public function login(Request $request)
     {
-        return view("frontEnd.login");
+        $classactive="login";
+        return view("frontEnd.login", compact("classactive"));
         
     }
       public function register(Request $request)
     {
-        return view("frontEnd.register");
+        $classactive="register";
+        return view("frontEnd.register", compact("classactive"));
     }
     
    public function Faq(Request $request)
