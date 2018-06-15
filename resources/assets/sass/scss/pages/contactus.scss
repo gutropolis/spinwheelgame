@@ -1,0 +1,197 @@
+.wrapper-contactus{
+	@include background('../images/contact-bg.png');
+	padding-top: $space-l + $space-n + $space-vs + 2px;
+	padding-bottom: $space-l + $space-l + $space-vs + 1px;
+	background-position: right;
+	text-align: center;
+
+	@media (max-width: $break-md){
+		padding-top: $space-xl + $space-vs;
+	}
+	@media (max-width: $break-sm){
+		padding-top: $space-xl + $space-vs + $space-m;
+	}
+	@media (max-width: $break-xvs){
+		padding-bottom: $space-l + $space-s + $space-vs;;
+	}
+	.wrapper-title{
+		color: $color-white;
+		position: relative;
+
+		&:before{
+			content: '';
+			width: 47px;
+			height: 6px;
+			background: #eb373f;
+			top: 61px;
+			left: 48%;
+			position: absolute;
+			@media (max-width: $break-xvs){
+				width: 35px;
+				height: 4px;
+				top: 40px;
+				left: 45%;
+			}
+		}
+	}
+}
+
+
+.contactus{
+	margin-top: $space-n + $space-vs;
+	padding-bottom: $space-l + $space-s;
+
+	@media (max-width: $break-xs){
+		margin-top: $space-none;
+		padding-bottom: $space-l;	
+	}
+
+	.heading-contactus{
+		font-size: 36px;
+		margin-bottom: 50px;
+
+		@media (max-width: $break-xs){
+			margin-bottom: $space-m;
+		}
+	}
+	.contact-form-group{
+		display: flex;
+		margin-bottom: $space-n + 2px;
+
+		.contact-form-control{
+			border-radius: 10px;
+			&::placeholder{
+				color: #cccbcb;
+				font-family: $font_family_hind;
+				font-size: 14px;
+			}
+		}
+
+		.contact-form-control-2{
+			margin-left: 26px;
+			border-radius: 10px;
+			&::placeholder{
+				color: #cccbcb;
+				font-family: $font_family_hind;
+				font-size: 14px;
+			}
+		}
+	}
+	.btn-submit{
+		@include button-red;
+		padding-top: $space-vs + 2px;
+		padding-bottom: $space-vs + 2px;
+		padding-left: $space-l + $space-n + $space-vs  - 1px;
+		padding-right: $space-l + $space-n + $space-vs - 1px;
+		font-size: 18px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		border: 2px solid $color-red;
+		margin-top: $space-s + 2px;
+
+		&:hover{
+			color: $color-red;
+			border: 2px solid $color-red;
+			background: $color-white;
+		}
+	}
+
+	.address-section-rightbar{
+		@include background('../images/girl-baloon.png');
+		padding: 10px;
+		border-radius: 10px;
+		margin-top: $space-l + $space-l - 2px;
+		margin-left: $space-s + 1px;
+		background-size: cover;
+
+		@media (max-width: $break-xs){
+			margin-top: $space-m + $space-n;
+		}
+		@media (max-width: $break-sm-v){
+			margin-top: $space-m + $space-n;
+		}
+
+		.address-block{
+			border-radius: 10px;
+			border: 1px solid #6f858b;
+			padding-top: $space-m + $space-s + 2px;
+			padding-bottom: $space-m + $space-s + 2px;
+			padding-left: $space-m + 3px;
+			@media (max-width: $break-lg){
+				padding-left: $space-s + $space-vs;
+			}
+			.home-address-home{
+				margin-top: $space-m + $space-vs;
+				margin-bottom: $space-m + $space-vs;
+				}
+			.home-address-elements{
+				display: flex;
+				color: white;
+				font-family: hind;
+				line-height: 24px;
+
+				.circle-home{
+					width: 49px;
+					height: 41px;
+					border-radius: 24px;
+					border: 1px solid $color-white;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-right: 15px;
+					cursor: pointer;
+
+					@media (max-width: $break-lg){
+						width: 65px;
+						height: 43px;
+					}
+					@media (max-width: $break-md){
+						width: 44px;
+						height: 42px;
+					}
+					@media (max-width: $break-xvs){
+						width: 64px;
+						height: 42px;
+					}
+				}
+				.circle{
+					width: 41px;
+					height: 41px;
+					border-radius: 24px;
+					border: 1px solid $color-white;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-right: 15px;
+					cursor: pointer;
+
+					.address-icon{
+						font-size:24px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.map{
+	.map-image{
+		width: 100%;
+	}
+}
+
+
+
+.our-partners{
+	padding-top: $space-l + $space-s;
+	padding-bottom: $space-l + $space-s + 4px;
+	.our-partners-block{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		@media (max-width: $break-md){
+			margin-bottom: $space-m;
+		}
+	}
+}

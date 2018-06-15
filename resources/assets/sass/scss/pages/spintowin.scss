@@ -1,0 +1,132 @@
+#mr-top{
+	margin-top: $space-none;
+}
+
+.spinwheel-wrapper{
+	@include background('../images/cartoon-space-background-11.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+    .tophead{
+    	padding-top: $space-n + $space-vs;
+    }
+
+	.spinwin{
+		padding-top: $space-l + $space-s;
+		padding-bottom: $space-l + $space-s;
+
+		.the_wheel{
+			@include background('../images/spin-circle.png');	
+		    background-position: top center;
+		    background-repeat: no-repeat;
+		    padding: 29px;
+		    background-size: contain;
+		    width: 540px;
+		    height: 546px;
+		    position: relative;
+		    @media (max-width: $break-lg){
+		    	width: 450px;
+		    	height: 450px;
+		    	padding: 23px;
+		    }
+		    @media (max-width: $break-md){
+		    	margin: auto;
+		    }
+		    @media (max-width: 500PX){
+		    	width: 250px;
+		    	height: 250px;
+		    	padding: 13px;
+		    }
+
+		    &:after{
+		    	position: absolute;
+			    content: '';
+			    background-position: center;
+			    @include background('../images/spin-and-win-s.png');
+			    left: $space-xl + $space-l;
+			    top: $space-xl + $space-m;
+			    right: 0;
+			    bottom: 0;
+			    margin: auto;
+			    background-repeat: no-repeat;
+
+			    @media (max-width: $break-lg){
+		    	    left: 120px;
+					top: 96px;
+			    }	
+			    @media (max-width: 500px){
+			    	@include background('../images/small-wheel.png');
+			    	left: 30%;
+    				top: 26%;
+			    }		    
+		    }
+
+		    canvas{
+	    		position: absolute;
+			    width: 100%;
+			    height: 100%;
+			    left: 0;
+			    right: 0;
+			    top: 0;
+			    bottom: 0;
+			    margin: auto;
+	    	}
+		}
+
+	}
+
+	.try-luck {
+		padding-top: $space-l + $space-m + $space-s;
+		padding-bottom: $space-l + $space-m + $space-s;
+		@media (max-width: $break-md){
+    	    padding-top: $space-m + $space-s;
+			padding-bottom: $space-m + $space-s;
+	    }
+
+		.title {
+		    font-size: 75px;
+		    color: #d9ae00;
+		    font-family: 'Bebas Neue';
+
+		    @media (max-width: $break-lg){
+		    	font-size: 60px;
+		    }
+		    @media (max-width: $break-md){
+		    	font-size: 70px;
+		    }
+		    @media (max-width: 500PX){
+		    	font-size: 56px;
+		    }
+		    @media (max-width: $break-vs){
+		    	font-size: 40px;
+		    }
+		}
+
+		.reward-btn{
+			padding: 10px 40px;
+		    margin-top: 40px;
+		    background: #ed1c24;
+		    border: none;
+		    font-size: 30px;
+		    color: #fff;
+		    font-family: 'hind';
+		    border-radius: 15px;
+		    cursor: pointer;
+
+		  	@media (max-width: $break-lg){
+		    	font-size: 26px;
+		    	padding: 5px 30px;
+		    }
+		    @media (max-width: $break-md){
+		    	font-size: 30px;
+		    	padding: 10px 40px;
+		    } 
+		    @media (max-width: $break-vs){
+		    	font-size: 20px;
+    			padding: 5px 20px;
+		    }
+		}	
+	}
+}
+	    

@@ -1,0 +1,180 @@
+.joinus{
+	@include background('../images/joinus-bg.png');	
+	background-size: cover;
+	padding-bottom: 230px;
+	.joinus-logo {
+    	padding-top: 24px;
+	}
+	.joinus-block{
+		.title-joinus{	
+			text-align: center;
+			font-size: 36px;
+			font-family: 'ABeeZee';
+			color: #fff;
+			font-weight: bold;
+			margin-top: 58px;
+			margin-bottom: 20px;
+			word-spacing: 2px;
+			@media (max-width: $break-sm){
+				font-size: 30px;
+			}
+			@media (max-width: $break-vs){
+				font-size: 20px;
+			}
+		}
+		.joinus-block-in{
+		    max-width: 1015px;
+		    margin: auto;
+		    padding-top: 50px;
+		    padding-left: 45px;
+		    padding-right: 45px;
+		    padding-bottom: 105px;
+	        background: linear-gradient(to right, #ce7fc3c7, #cb6c56c7);
+	        border-radius: 24px;
+            box-shadow: 0 0 25px 5px #2b2f2b;
+            @media (max-width: $break-vs){
+            	padding-top: 15px;
+            	padding-left: 25px;
+            	padding-right: 25px;
+            	padding-bottom: 80px;
+            }
+
+		    .joinus-block-elements{
+		    	.elements-in{
+		    		padding-left: 15px;
+		    		padding-right: 60px;
+		    		@media (max-width: $break-lg){
+		    			padding-right: 30px;
+		    		}
+			    	.form-heading {
+					    color: #fff;
+					    font-size: 24px;
+					    font-family: 'ABeeZee';
+					    @media (max-width: $break-sm){
+					    	margin-top: $space-m;
+					    }
+					}
+
+					.form {
+						position: relative;
+						
+						.field {
+							display: flex;
+							flex-flow: column-reverse;
+						
+							.inbox-label {
+								transition: all 0.2s;
+								touch-action: manipulation;
+								text-transform: capitalize;
+								letter-spacing: 0.05em;
+								font-family: 'ABeeZee';
+							}
+							.inbox-box {
+								transition: all 0.2s;
+								touch-action: manipulation;
+								border: 0;
+								border-bottom: 1px solid #fff;
+								-webkit-appearance: none;
+								border-radius: 0;
+								padding: 0;
+								cursor: text;
+								background: none;
+								color: #fff;
+								font-size: 18px;
+								font-family: 'ABeeZee';
+								padding-bottom: 5px;
+								&:focus {
+									outline: 0;
+									border-bottom: 1px solid #fff;
+									font-family: 'ABeeZee';
+									::-webkit-input-placeholder {
+										opacity: 1;
+									}
+									& +.inbox-label {
+										transform: translate(0, 0) scale(1);
+										cursor: pointer;
+										font-family: 'ABeeZee';
+									}
+								}
+								&:placeholder-shown {
+			
+									& +.inbox-label {
+										cursor: text;
+										text-transform: capitalize;
+										white-space: nowrap;
+										overflow: hidden;
+										text-overflow: ellipsis;
+										transform-origin: left bottom;
+										transform: translate(0, 2.125rem) scale(1.5);
+										font-size: 11px;
+										color: #fff;
+										max-width: 66.66%;
+										font-family: 'ABeeZee';
+									}
+								}
+								&:not(:placeholder-shown) {
+									& +.inbox-label {
+										transform: translate(0, 0) scale(1);
+										cursor: pointer;
+										color:#fff;
+										font-family: 'ABeeZee';
+										margin-top: 10px;
+									}
+								}
+							}
+
+						}
+						 ::-webkit-input-placeholder {
+							opacity: 0;
+							transition: inherit;
+							color: #fff;
+							font-family: 'ABeeZee';
+						}
+						.title-Gender {
+						    font-size: 18px;
+						    color: #fff;
+						    font-family: 'ABeeZee';
+						    margin-top: 35px;
+						}
+						.gender-form{
+						    display: flex;
+						    justify-content: flex-start;
+						    color: #fff;
+						    font-size: 18px;
+						    font-family: 'ABeeZee';
+						    align-items: center;
+						    margin-left: 30px;
+						    margin-bottom: 20px;
+						    @media (max-width: $break-vs){
+						    	margin-bottom: 0px;
+						    }
+
+						    
+						}
+						.btn-join {
+						    
+							    font-size: 24px;
+							padding: 5px 27px;
+						    color: #211b16;
+						    border: none;
+						    border-radius: 4px;
+						    background: #fff008;
+						    margin-top: 50px;
+						    font-weight: 600;
+						    cursor: pointer;
+
+						    @media (max-width: $break-md){
+						    	padding: 5px 45px;
+						    	font-size: 26px;
+						    }
+
+						}
+					}
+				}	
+
+		    }
+
+		}
+	}
+}
+

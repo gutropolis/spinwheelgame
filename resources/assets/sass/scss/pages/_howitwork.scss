@@ -1,0 +1,212 @@
+.wrapper-work{
+	@include background('../images/how-it-work-bg.png');
+	padding-top: $space-l + $space-n + $space-vs + 2px;
+	padding-bottom: $space-l + $space-l + $space-vs + 1px;
+	background-position: right;
+	text-align: center;
+
+	@media (max-width: $break-md){
+		padding-top: $space-xl + $space-vs;
+	}
+	@media (max-width: $break-sm){
+		padding-top: $space-xl + $space-vs + $space-m;
+	}
+	@media (max-width: $break-xvs){
+		padding-bottom: $space-l + $space-s + $space-vs;;
+	}
+	.wrapper-title{
+		color: $color-white;
+		position: relative;
+
+		&:before{
+			content: '';
+			width: 47px;
+			height: 6px;
+			background: #eb373f;
+			top: 61px;
+			left: 48%;
+			position: absolute;
+			@media (max-width: $break-xvs){
+				width: 35px;
+				height: 4px;
+				top: 40px;
+				left: 45%;
+			}
+		}
+	}
+}
+
+
+
+.raodeals-work-section{
+	margin-top: $space-m + $space-s + 3px;
+
+	@media (max-width: $break-md){
+		margin-top: $space-none;	
+	}
+	.raodeals-title{
+		text-align: center;
+		font-size: $font-size-md;
+		font-weight: normal;
+    	font-family: $font_family_hind;
+    	line-height: $space-l + $space-s;
+		padding-top: $space-l + $space-l - 4px;
+		padding-bottom: $space-l + $space-n + 2px;
+		@media (max-width: $break-md){
+			padding-top: $space-none;
+			padding-bottom: $space-n;	
+			font-size: 50px;
+		}
+		@media (max-width: $break-xs){
+			font-size: 40px;
+		}
+		@media (max-width: $break-vs){
+			font-size: 30px;
+			line-height: 40px;
+		}
+
+		.raodeal-active{
+			color: $color-red;
+			font-family: $font_family_pt-sans;
+		}
+	}
+	.video-box{
+		width: 92%;
+		height: 372px;
+		float: right;
+		margin-right: $space-s + $space-vs + 1px;
+	}
+	.raodeals-work-elements{
+		max-width: 940px;
+		margin: auto;
+		border-top: 1px solid #d9d7d7;
+		padding-top: $space-l + $space-s - 3px;
+		margin-top: $space-l + $space-s - 1px;
+		padding-bottom:  $space-l + $space-s - 2px;
+
+		@media (max-width: $break-md){
+			padding-bottom:  $space-n + $space-vs;
+		}
+		
+		.elements-images{
+			width: 100%;
+			margin-bottom: $space-m;
+		}		
+
+		.leftbar-work-element{
+			padding-left: $space-none;
+			padding-right: $space-l + $space-n;
+		}
+		.elements-content{
+			margin-left: $space-m + $space-s ;	
+			@media (max-width: $break-md){
+				margin-left: $space-none;
+				margin-bottom: $space-n;
+			}
+			.elements-title{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				.title-heading{
+					margin-left: $space-n + 1px;
+					margin-right: $space-l;
+					font-family: $font_family_hind;
+					color: $color-silver_3;
+
+					@media (max-width: $break-xs){
+						margin-right: $space-none;
+					}
+				}
+				.title-heading-3{
+					font-size: 22px;
+				}
+			}
+			.elements-text{
+				font-family: hind;
+				color: $color-silver_3;
+				letter-spacing: 0.3px;
+				margin-top: $space-s;
+			}
+			.elements-text-2{
+				margin-right: $space-m + 1px;
+			}
+		}
+	}
+}
+
+.sign-up-section{
+	background: $color_fafafa;
+	margin-top: $space-l - 1px;
+	padding-top: $space-l - 1px;
+	padding-bottom: $space-l + $space-s;
+
+	@media (max-width: $break-xs){
+		margin-top: $space-s + $space-vs;
+		padding-top: $space-m;
+		padding-bottom: $space-m + $space-s;		
+	}
+
+	.raodeals-sign-up-block{
+		max-width: 768px;
+		margin: auto;
+		text-align: center;
+
+		.main-title{
+			font-weight: 500;
+			font-family: $font_family_hind;
+			margin-bottom: $space-s + 2px;
+			.raodeal-active{
+				color: $color-red;
+			}
+		}
+		.sign-up-content{
+			color: $color-silversharp;
+			font-family: $font_family_hind;
+			padding-left: $space-l + $space-s + 1px;
+			padding-right: $space-l + $space-s + 1px;
+			@media (max-width: $break-xs){				
+				padding-left: $space-n;
+				padding-right: $space-n;
+			}
+		}
+		.signup-button{
+	        	@include button-red;
+	        	border-radius: 10px;
+			    background: $color-red;
+			    color: #fff;
+			    border: 2px solid $color-red;
+			    padding-left: $space-m - $space-vs;
+			    padding-right: $space-m - $space-vs;
+			    padding-top: 1px + $space-vs;
+			    padding-bottom: 1px + $space-vs; 
+			    cursor: pointer;
+			    font-family: $font_family_hind;
+			    margin-top: $space-s + $space-vs;
+			
+			    &:hover {
+					background-color: $color_white;
+					color: $color_red;
+					cursor: pointer;
+					border: 2px solid $color_red;
+				}
+	        }
+	}
+}
+
+
+
+
+.our-partners-work{
+	padding-top: $space-l + $space-s;
+	padding-bottom: $space-l + $space-s + 4px;
+	.our-partners-block{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		@media (max-width: $break-md){
+			margin-bottom: $space-m;
+		}
+	}
+}
+
