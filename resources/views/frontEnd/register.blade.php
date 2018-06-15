@@ -25,28 +25,26 @@
                 </div>
                 <!--contactus-form-->
                 <div class="contactus-form">
-                    <form name="registerForm" id="registerForm" method="get" action="/storedata">
+                    <form name="registerForm" id="registerForm" method="post" action="/storedata">
+					 {{ csrf_field() }}
                         <label for="exampleFormControlInput1" class="title-signup">Personal Information</label>
                         <div class="form-group contact-form-group">                       
-                            <input type="text" name="firstname" class="form-control contact-form-control" aria-describedby="emailHelp" 
+                            <input type="text" name="first_name" class="form-control contact-form-control" aria-describedby="emailHelp" 
                             placeholder="First Name" required>
-                            <input type="text"  name="lastname" class="form-control contact-form-control-2" placeholder="Last Name" required>          
+                            <input type="text"  name="last_name" class="form-control contact-form-control-2" placeholder="Last Name" required>          
                         </div>
                         <div class="form-group contact-form-group">                       
                             <input type="Email" name="email" class="form-control contact-form-control" placeholder="Email" required>
-                            <input type="text" name="phonno" class="form-control contact-form-control-2" placeholder="Phone No."    required >
+                            <input type="text" name="mobile" class="form-control contact-form-control-2" placeholder="Phone No."    required >
                         </div> 
 
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label checkbox-text" for="exampleCheck1">Signup For Newsletter</label>
-                        </div>               
+                                    
 
                         <label for="exampleFormControlInput1" class="title-signup">Password</label>
                         <div class="form-group contact-form-group">                       
                             <input type="Password" name="password" class="form-control contact-form-control" aria-describedby="emailHelp" 
                             placeholder="Password" id="password" required>
-                            <input type="password" name="confirmpass" class="form-control contact-form-control-2" placeholder="Confirm Password" required>  
+                            <input type="password" name="password_confirmation" class="form-control contact-form-control-2" placeholder="Confirm Password" required>  
                         </div>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck2">
