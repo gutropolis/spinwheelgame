@@ -1,7 +1,7 @@
 # Hello
-We have received a new contact mail.<br />
+New Subscription Request are Come There<br />
 
-**Email : {{ $Subscribe->email }}<br />
+Subscriber Email : {{ $Subscribe->email }}<br />
 
 
 Thanks,
