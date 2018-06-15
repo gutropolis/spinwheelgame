@@ -1,5 +1,7 @@
 @extends('frontEnd.layout')
 
+@section('title', 'About Us | Raodeals')    
+
 @section('content')
 
 
