@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use pierresilva\Sentinel\Traits\SentinelTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -22,15 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'photo',
-        'permissions_id',
-        'status',
-        'permissions',
-        'connect_email',
-        'connect_password',
+       
     ];
 
     /**
