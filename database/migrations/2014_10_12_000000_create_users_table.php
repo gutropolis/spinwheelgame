@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('permissions_id')->nullable();
             $table->tinyInteger('status');
             $table->string('connect_email')->nullable();
+			$table->string('last_login')->nullable();
             $table->string('connect_password')->nullable();
             $table->rememberToken();
             $table->integer('created_by')->nullable();
