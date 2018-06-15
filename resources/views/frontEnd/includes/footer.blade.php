@@ -39,5 +39,7 @@
         <!-- End footer-navbar-->
     </div>
     <!-- End container-->
+	
+	
 </footer>
 <!-- End footer-->
