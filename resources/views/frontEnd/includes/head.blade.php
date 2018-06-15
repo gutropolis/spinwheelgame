@@ -1,19 +1,22 @@
-
-
+<meta charset="utf-8">
+ <title>@yield('title') </title>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name="author" content="{{ URL::to('') }}"/>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link <!--title-->
-    <title>Raodeals </title>
+<link href="{{ URL::asset('frontEnd/css/bootstrap.min.css') }}" rel="stylesheet"/>
+<link href="{{ URL::asset('frontEnd/css/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('frontEnd/css/jcarousel.css') }}" rel="stylesheet"/>
+<link href="{{ URL::asset('frontEnd/css/flexslider.css') }}" rel="stylesheet"/>
+<!--link href="{{ URL::asset('frontEnd/css/style.css') }}" rel="stylesheet"/-->
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
+<link href="{{ URL::asset('frontEnd/css/color.css') }}" rel="stylesheet"/>
 
+ 
    
-   
-    <!--google font-->
+ <!--google font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--font-awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,5 +26,4 @@
 <link href="{{ URL::asset('frontEnd/css/style.css') }}" rel="stylesheet"/>
  <!--custom css-->
 <link href="{{ URL::asset('frontEnd/fonts/stylesheet.css') }}" rel="stylesheet"/>
-
-
+<link rel="stylesheet" type="text/css" href="{{ URL::to('css/app.css')}}">
