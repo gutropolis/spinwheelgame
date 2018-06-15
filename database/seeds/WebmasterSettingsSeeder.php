@@ -47,7 +47,7 @@ class WebmasterSettingsSeeder extends Seeder
         $settings->register_status = false;
         $settings->permission_group = "3";
         $settings->api_status = false;
-        $settings->api_key = rand(000000000000000, 999999999999999);
+        $settings->api_key = rand(1000000000, getrandmax());
         $settings->created_by = 1;
 
         $settings->save();
