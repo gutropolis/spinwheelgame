@@ -42,34 +42,38 @@ h2 {
   @media (max-width: 600px) {
     h2 {
       font-size: 36px; } }
-  h2 h3 {
-    font-size: 30px;
-    font-weight: bold; }
-  h2 h4 {
-    font-size: 25.27px;
-    font-weight: bold; }
-    @media (max-width: 420px) {
-      h2 h4 {
-        font-size: 18px; } }
-  h2 h5 {
+
+h3 {
+  font-size: 30px;
+  font-weight: bold; }
+
+h4 {
+  font-size: 25.27px;
+  font-weight: bold; }
+  @media (max-width: 420px) {
+    h4 {
+      font-size: 18px; } }
+  h4 h5 {
     font-size: 24px;
     font-weight: bold; }
-  h2 h6 {
+  h4 h6 {
     font-size: 18px;
     font-weight: bold; }
-  h2 ul {
+  h4 ul {
     margin: 0;
     padding: 0; }
-    h2 ul li {
+    h4 ul li {
       list-style: none; }
-  h2 a {
+  h4 a {
     text-decoration: none; }
-  h2 a:hover,
-  h2 a:focus {
+  h4 a:hover,
+  h4 a:focus {
     text-decoration: none; }
-  h2 img {
+  h4 img {
     max-width: 100%;
     border: none; }
+  h4 .break {
+    display: block; }
 
 /* component */
 header {
@@ -97,7 +101,7 @@ header {
       padding-right: 20px;
       padding-left: 15px;
       color: #180102;
-      font-family: "Hind";
+      font-family: "PT Sans";
       font-size: 16px; }
       @media (max-width: 1199px) {
         .navbar.navbar-expand-lg.navbar-light.my-nav .my-navbar .nav-menu .menu-items .menu-items-in {
@@ -112,7 +116,8 @@ header {
       flex-direction: column; } }
   .navbar.navbar-expand-lg.navbar-light.my-nav .header-right-part .search-icon {
     margin-left: 43px;
-    margin-right: 7px; }
+    margin-right: 7px;
+    cursor: pointer; }
     @media (max-width: 1199px) {
       .navbar.navbar-expand-lg.navbar-light.my-nav .header-right-part .search-icon {
         margin-left: 0px;
@@ -133,14 +138,15 @@ header {
     align-items: center;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 24px;
+    padding-right: 24px;
     margin-left: 25px;
     margin-right: 25px;
     border-radius: 7px; }
     @media (max-width: 1199px) {
       .navbar.navbar-expand-lg.navbar-light.my-nav .header-right-part .btn-login {
-        margin-left: 0px; } }
+        margin-left: 0px;
+        margin-right: 8px; } }
     @media (max-width: 991px) {
       .navbar.navbar-expand-lg.navbar-light.my-nav .header-right-part .btn-login {
         margin-top: 20px;
@@ -209,7 +215,8 @@ header {
       justify-content: space-evenly; }
       .footer .footer-navbar .footer-nav-menu .footer-menu-items {
         font-size: 18px;
-        font-family: "Hind"; }
+        font-family: "Hind";
+        list-style: none; }
         @media (max-width: 600px) {
           .footer .footer-navbar .footer-nav-menu .footer-menu-items {
             font-size: 16px; } }
@@ -241,7 +248,7 @@ header {
   background-position: 0 0;
   background-repeat: no-repeat;
   background-position: center;
-  padding-top: 200px;
+  padding-top: 207px;
   padding-bottom: 240px; }
   @media (max-width: 1199px) {
     .banner {
@@ -284,7 +291,9 @@ header {
     .banner .banner-content .input-group .input-group-btn.group-btn-subscribe .btn.btn-default.btn-subscribe {
       background: #eb373f;
       color: #fff;
-      border: 2px solid #eb373f; }
+      border: 2px solid #eb373f;
+padding: 3px 24px;
+    font-size: 14px;	  }
       .banner .banner-content .input-group .input-group-btn.group-btn-subscribe .btn.btn-default.btn-subscribe:hover {
         background-color: #fff;
         color: #eb373f;
@@ -796,8 +805,10 @@ header {
     .leader-block .rightbar {
       margin-bottom: 0px; } }
   .leader-block .rightbar .clik-to-win-img {
-    border: 1px solid #e0e0e0;
-    width: 100%; }
+    border: 1px solid #e0e0e0; }
+    @media (max-width: 991px) {
+      .leader-block .rightbar .clik-to-win-img {
+        width: 100%; } }
 
 .get-in-touch {
   background-image: url("../images/get-in-touch-bg.png");
@@ -1436,7 +1447,8 @@ header {
         font-size: 14px; }
     .contactus .contact-form-group .contact-form-control-2 {
       margin-left: 26px;
-      border-radius: 10px; }
+      border-radius: 10px;
+      padding: 10px; }
       .contactus .contact-form-group .contact-form-control-2::placeholder {
         color: #cccbcb;
         font-family: "Hind";
@@ -1465,7 +1477,7 @@ header {
     background-repeat: no-repeat;
     padding: 10px;
     border-radius: 10px;
-    margin-top: 98px;
+    margin-top: 57px;
     margin-left: 11px;
     background-size: cover; }
     @media (max-width: 600px) {
@@ -1820,7 +1832,7 @@ header {
       height: 6px;
       background: #eb373f;
       top: 61px;
-      left: 48%;
+      left: 50%;
       position: absolute; }
       @media (max-width: 420px) {
         .wrapper-signup .wrapper-title:before {
@@ -1830,45 +1842,128 @@ header {
           left: 45%; } }
 
 .contactus {
-  margin-top: 37px; }
+  margin-top: 31px; }
+  @media (max-width: 991px) {
+    .contactus {
+      margin-top: 0px; } }
   .contactus .heading-contactus {
-    font-size: 24px;
-    margin-bottom: 25px; }
-  .contactus .contactus-form {
-    padding-left: 18px; }
-    .contactus .contactus-form .title-signup {
-      padding-left: 7px;
-      color: #383535;
-      margin-bottom: 25px;
-      font-family: "Hind";
-      font-size: 20px; }
-    .contactus .contactus-form .checkbox-text {
-      color: #484747;
-      font-family: "Hind"; }
-    .contactus .contactus-form .btn btn-submit {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #1f0f04;
+    font-family: hind;
+    letter-spacing: 1px; }
+    @media (max-width: 450px) {
+      .contactus .heading-contactus {
+        margin-bottom: 0px; } }
+  .contactus .contactus-text {
+    color: #5f5e5e;
+    font-family: hind;
+    letter-spacing: 1px;
+    margin-bottom: 30px; }
+    @media (max-width: 450px) {
+      .contactus .contactus-text {
+        margin-bottom: 5px; } }
+  .contactus .contactus-form .title-signup {
+    color: #383535;
+    margin-bottom: 25px;
+    font-family: "Hind";
+    font-size: 20px; }
+  .contactus .contactus-form .contact-form-group {
+    display: flex;
+    align-items: center; }
+    @media (max-width: 767px) {
+      .contactus .contactus-form .contact-form-group {
+        display: flex; } }
+    .contactus .contactus-form .contact-form-group .contact-form-control {
+      padding: 10px; }
+    .contactus .contactus-form .contact-form-group .contact-form-control-user {
+      width: 50%;
+      margin-right: 40px;
       border-radius: 10px;
-      background: #eb373f;
-      color: #fff;
-      transition: 0.4s;
-      padding-top: 11px;
-      padding-bottom: 11px;
-      padding-left: 37px;
-      padding-right: 37px;
-      font-size: 18px;
-      font-weight: bold;
-      letter-spacing: 1px;
+      padding: 10px; }
+      .contactus .contactus-form .contact-form-group .contact-form-control-user::placeholder {
+        color: #cccbcb;
+        font-family: "Hind";
+        font-size: 14px; }
+    .contactus .contactus-form .contact-form-group .checkpost {
+      color: #eb373f;
+      font-family: "Hind";
+      text-decoration: underline; }
+      @media (max-width: 350px) {
+        .contactus .contactus-form .contact-form-group .checkpost {
+          font-size: 12px; } }
+  .contactus .contactus-form .checkbox-text {
+    color: #484747;
+    font-family: "Hind"; }
+  .contactus .contactus-form .btn btn-submit {
+    border-radius: 10px;
+    background: #eb373f;
+    color: #fff;
+    transition: 0.4s;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 37px;
+    padding-right: 37px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 2px solid #eb373f;
+    margin-top: 12px; }
+    .contactus .contactus-form .btn btn-submit:hover {
+      color: #eb373f;
       border: 2px solid #eb373f;
-      margin-top: 12px; }
-      .contactus .contactus-form .btn btn-submit:hover {
-        color: #eb373f;
-        border: 2px solid #eb373f;
-        background: #fff; }
-		
+      background: #fff; }
+  .contactus .ourmember {
+    margin-left: 56px; }
+    @media (max-width: 991px) {
+      .contactus .ourmember {
+        margin-left: 0px;
+        margin-top: 40px; } }
+    .contactus .ourmember .members-title {
+      font-size: 30px;
+      color: #1f0f04;
+      font-family: "Hind";
+      letter-spacing: 1px; }
+      @media (max-width: 1199px) {
+        .contactus .ourmember .members-title {
+          font-size: 26px; } }
+    .contactus .ourmember .members-text {
+      color: #5f5e5e;
+      font-family: hind;
+      letter-spacing: 0px; }
+      @media (max-width: 1199px) {
+        .contactus .ourmember .members-text {
+          font-size: 14px; } }
+    .contactus .ourmember .Benefits-block {
+      margin-bottom: 25px; }
+      .contactus .ourmember .Benefits-block .Benefits-title {
+        color: #404040;
+        font-family: hind;
+        font-size: 20px;
+        letter-spacing: 1px; }
+      .contactus .ourmember .Benefits-block .Benefits-elements {
+        display: flex;
+        margin-top: 10px;
+        justify-content: flex-start;
+        align-items: flex-start; }
+        @media (max-width: 450px) {
+          .contactus .ourmember .Benefits-block .Benefits-elements {
+            display: inline; } }
+        @media (max-width: 450px) {
+          .contactus .ourmember .Benefits-block .Benefits-elements .Benefits-icons {
+            width: 30%; } }
+        .contactus .ourmember .Benefits-block .Benefits-elements .Benefits-content {
+          color: #5f5e5e;
+          line-height: 24px;
+          letter-spacing: 0px;
+          font-family: hind;
+          margin-left: 10px; }
+          @media (max-width: 450px) {
+            .contactus .ourmember .Benefits-block .Benefits-elements .Benefits-content {
+              margin-left: 0px; } }
 
 .our-partners-signup {
-  padding-top: 60px;
-  padding-bottom: 64px;
-  margin-top: 50px; }
+  padding-bottom: 64px; }
   .our-partners-signup .our-partners-block {
     display: flex;
     justify-content: center;
@@ -1876,10 +1971,257 @@ header {
     @media (max-width: 991px) {
       .our-partners-signup .our-partners-block {
         margin-bottom: 30px; } }
-		
-		.error {
-  color: #F00;
-  
-}
+
+.login-modal {
+  margin-top: 64px; }
+  .login-modal .login-page {
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background: #fff;
+    width: 100%;
+    padding: 20px; }
+    .login-modal .login-page .head-login {
+      color: #eb373f;
+      font-size: 22px;
+      border-bottom: 2px solid #e8e5e5;
+      padding-bottom: 7px; }
+    .login-modal .login-page .login-form {
+      margin-top: 40px;
+      margin-bottom: 14px; }
+      .login-modal .login-page .login-form .title {
+        color: #383535;
+        font-family: hind;
+        margin-bottom: -2px; }
+      .login-modal .login-page .login-form .login-form-control {
+        border-radius: 10px; }
+    .login-modal .login-page .login-form-password {
+      margin-top: 10px; }
+      .login-modal .login-page .login-form-password .title {
+        color: #383535;
+        font-family: hind;
+        margin-bottom: -2px; }
+      .login-modal .login-page .login-form-password .login-form-control {
+        border-radius: 10px; }
+    .login-modal .login-page .btn-sign-in {
+      border-radius: 10px;
+      background: #eb373f;
+      color: #fff;
+      transition: 0.4s;
+      border: 2px solid #eb373f;
+      width: 100%;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      font-size: 24px;
+      font-family: hind;
+      font-weight: bold;
+      margin-top: 7px; }
+      .login-modal .login-page .btn-sign-in:hover {
+        color: #eb373f;
+        background: #fff;
+        border: 2px solid #eb373f; }
+    .login-modal .login-page .forget-block {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 18px; }
+      @media (max-width: 450px) {
+        .login-modal .login-page .forget-block {
+          display: inline;
+          text-align: center; } }
+      .login-modal .login-page .forget-block .forget {
+        font-family: hind;
+        color: #383535;
+        border-right: 1px solid darkgray;
+        padding-right: 7px;
+        font-size: 14px; }
+      .login-modal .login-page .forget-block .clik {
+        color: #eb373f;
+        font-size: 14px;
+        font-family: hind;
+        font-weight: bold; }
+      .login-modal .login-page .forget-block .remember-checkbox {
+        font-family: hind;
+        color: #383535;
+        font-size: 14px; }
+    .login-modal .login-page .or {
+      color: #eb373f;
+      font-size: 18px;
+      text-align: center;
+      font-family: hind;
+      position: relative; }
+      .login-modal .login-page .or:after {
+        width: 46%;
+        height: 2px;
+        content: '';
+        position: absolute;
+        background: #e8e5e5;
+        top: 13px;
+        right: 3px; }
+      .login-modal .login-page .or:before {
+        width: 46%;
+        height: 2px;
+        content: '';
+        position: absolute;
+        background: #e8e5e5;
+        top: 13px;
+        left: 3px; }
+    .login-modal .login-page .fb-button {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px; }
+      .login-modal .login-page .fb-button .facebook-btn {
+        border-radius: 15px;
+        border: 2px solid #445c8e;
+        background: #445c8e;
+        padding-top: 8px;
+        padding-bottom: 9px;
+        padding-left: 34px;
+        padding-right: 34px;
+        font-size: 18px;
+        color: #fff;
+        font-family: hind; }
+        .login-modal .login-page .fb-button .facebook-btn:hover {
+          cursor: pointer;
+          box-shadow: 0px 1px 2px #445c8e; }
+        .login-modal .login-page .fb-button .facebook-btn .fb-icon {
+          padding-right: 14px;
+          border-right: 2px solid #3d5482; }
+        .login-modal .login-page .fb-button .facebook-btn .btn-text {
+          margin-left: 25px; }
+          @media (max-width: 450px) {
+            .login-modal .login-page .fb-button .facebook-btn .btn-text {
+              margin-left: 5px; } }
+    .login-modal .login-page .not-member {
+      text-align: center; }
+      .login-modal .login-page .not-member .not-member-text {
+        font-family: hind;
+        font-size: 14px;
+        color: #383535; }
+      .login-modal .login-page .not-member .Signup-title {
+        font-family: hind;
+        font-size: 14px;
+        color: #eb373f; }
+
+#mr-top {
+  margin-top: 0px; }
+
+.spinwheel-wrapper {
+  background-image: url("../images/cartoon-space-background-11.jpg");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; }
+  .spinwheel-wrapper .tophead {
+    padding-top: 25px; }
+  .spinwheel-wrapper .spinwin {
+    padding-top: 60px;
+    padding-bottom: 60px; }
+    .spinwheel-wrapper .spinwin .the_wheel {
+      background-image: url("../images/spin-circle.png");
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-repeat: no-repeat;
+      padding: 29px;
+      background-size: contain;
+      width: 540px;
+      height: 546px;
+      position: relative; }
+      @media (max-width: 1199px) {
+        .spinwheel-wrapper .spinwin .the_wheel {
+          width: 450px;
+          height: 450px;
+          padding: 23px; } }
+      @media (max-width: 991px) {
+        .spinwheel-wrapper .spinwin .the_wheel {
+          margin: auto; } }
+      .spinwheel-wrapper .spinwin .the_wheel:after {
+        position: absolute;
+        content: '';
+        background-position: center;
+        background-image: url("../images/spin-and-win-s.png");
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        left: 160px;
+        top: 140px;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-repeat: no-repeat; }
+        @media (max-width: 1199px) {
+          .spinwheel-wrapper .spinwin .the_wheel:after {
+            left: 120px;
+            top: 96px; } }
+      .spinwheel-wrapper .spinwin .the_wheel canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto; }
+  .spinwheel-wrapper .try-luck {
+    padding-top: 90px;
+    padding-bottom: 90px; }
+    @media (max-width: 991px) {
+      .spinwheel-wrapper .try-luck {
+        padding-top: 40px;
+        padding-bottom: 40px; } }
+    .spinwheel-wrapper .try-luck .title {
+      font-size: 75px;
+      color: #d9ae00;
+      font-family: 'Bebas Neue'; }
+      @media (max-width: 1199px) {
+        .spinwheel-wrapper .try-luck .title {
+          font-size: 60px; } }
+      @media (max-width: 991px) {
+        .spinwheel-wrapper .try-luck .title {
+          font-size: 70px; } }
+    .spinwheel-wrapper .try-luck .reward-btn {
+      padding: 10px 40px;
+      margin-top: 40px;
+      background: #ba1d22;
+      border: none;
+      font-size: 30px;
+      color: #fff;
+      font-family: 'Bebas Neue';
+      border-radius: 15px;
+      cursor: pointer; }
+      @media (max-width: 1199px) {
+        .spinwheel-wrapper .try-luck .reward-btn {
+          font-size: 26px;
+          padding: 5px 30px; } }
+      @media (max-width: 991px) {
+        .spinwheel-wrapper .try-luck .reward-btn {
+          font-size: 30px;
+          padding: 10px 40px; } }
+
+#mr-top {
+  margin-top: 0px; }
+
+.subscribe-popup {
+  background-image: url("../images/sidebar-bg.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-width: 990px !important; }
+  .subscribe-popup .modal-content {
+    background: none; }
+    .subscribe-popup .modal-content .modal-header {
+      border: none; }
+    .subscribe-popup .modal-content .spin2wheel-block {
+      padding-top: 50px;
+      padding-bottom: 50px; }
+      .subscribe-popup .modal-content .spin2wheel-block .spinwheel-img {
+        width: 50%; }
+      .subscribe-popup .modal-content .spin2wheel-block .heading-spinwheel {
+        font-size: 38px;
+        color: #fff;
+        text-shadow: 1px 1px 3px; }
+        .subscribe-popup .modal-content .spin2wheel-block .heading-spinwheel .blue-clr {
+          color: #02285a; }
 
 /*# sourceMappingURL=style.css.map */
