@@ -20,7 +20,7 @@
 @import 'scss/component/footer';
 
 /* pages */
-
+@import 'scss/pages/loginpage';
 @import 'scss/pages/index';
 @import 'scss/pages/howitwork';
 @import 'scss/pages/Aboutus';
@@ -30,6 +30,7 @@
 @import 'scss/pages/joinus';
 @import 'scss/pages/subscribepopeup';
 @import 'scss/pages/spintowin';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
