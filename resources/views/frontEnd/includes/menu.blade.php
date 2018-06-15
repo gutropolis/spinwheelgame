@@ -11,8 +11,17 @@ $category_title_var = "title_" . trans('backLang.boxCode');
 $slug_var = "seo_url_slug_" . trans('backLang.boxCode');
 $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
 ?>
-<div class="navbar-collapse collapse ">
-    <ul class="nav navbar-nav">
+
+ <nav class="navbar navbar-expand-lg navbar-light  my-nav">
+ <div class="container">
+
+	 <a class="navbar-brand" href="#">
+			
+              <img src="{{url::asset('frontEnd/images/logo.png') }}" alt="Raodeals logo"> 
+            </a>
+	
+ <div class="collapse navbar-collapse my-navbar" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto mr-auto nav-menu">
         <?php
         $link_title_var = "title_" . trans('backLang.boxCode');
         ?>
@@ -31,7 +40,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                         <ul class="dropdown-menu">
                             @foreach($HeaderMenuLink->webmasterSection->sections as $MnuCategory)
                                 @if($MnuCategory->father_id ==0)
-                                    <li>
+                                    <li class="nav-item menu-items ">
                                         <?php
                                         if ($MnuCategory->$slug_var != "" && Helper::GeneralWebmasterSettings("links_status")) {
                                         if (trans('backLang.code') != env('DEFAULT_LANGUAGE')) {
@@ -48,7 +57,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                         }
                                         ?>
 
-                                        <a href="{{ $Category_link_url }}">
+                                        <a class="menu-items-in " href="{{ $Category_link_url }}">
                                             @if($MnuCategory->icon !=="")
                                                 <i class="fa {{$MnuCategory->icon}}"></i> &nbsp;
                                             @endif
@@ -62,7 +71,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                         <ul class="dropdown-menu">
                             @foreach($HeaderMenuLink->webmasterSection->topics as $MnuTopic)
                                 @if($MnuTopic->expire_date =='' || ($MnuTopic->expire_date !='' && $MnuTopic->expire_date >= date("Y-m-d")))
-                                    <li>
+                                    <li class="nav-item menu-items >
                                         <?php
                                         if ($MnuTopic->$slug_var != "" && Helper::GeneralWebmasterSettings("links_status")) {
                                         if (trans('backLang.code') != env('DEFAULT_LANGUAGE')) {
@@ -78,7 +87,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                         }
                                         }
                                         ?>
-                                        <a href="{{ $topic_link_url }}">
+                                        <a  class="menu-items-in " href="{{ $topic_link_url }}">
                                             @if($MnuTopic->icon !=="")
                                                 <i class="fa {{$MnuTopic->icon}}"></i> &nbsp;
                                             @endif
@@ -94,7 +103,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                 <?php
                 // Section Link
                 ?>
-                <li>
+                <li class="nav-item menu-items >
                     <?php
                     if ($HeaderMenuLink->webmasterSection->$slug_var != "" && Helper::GeneralWebmasterSettings("links_status")) {
                     if (trans('backLang.code') != env('DEFAULT_LANGUAGE')) {
@@ -110,7 +119,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                     }
                     }
                     ?>
-                    <a href="{{ $mmnnuu_link }}">{{ $HeaderMenuLink->$link_title_var }}</a>
+                    <a  class="menu-items-in " href="{{ $mmnnuu_link }}">{{ $HeaderMenuLink->$link_title_var }}</a>
                 </li>
             @elseif($HeaderMenuLink->type==1)
                 <?php
@@ -121,7 +130,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                 $this_link_url = url($HeaderMenuLink->link);
                 }
                 ?>
-                <li><a href="{{ $this_link_url }}">{{ $HeaderMenuLink->$link_title_var }}</a></li>
+                <li class="nav-item menu-items" ><a class= "menu-items-in"  href="{{ $this_link_url }}">{{ $HeaderMenuLink->$link_title_var }}</a></li>
             @else
                 <?php
                 // Main title ( have drop down menu )
@@ -136,7 +145,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                     <?php
                                     // sub menu - Section will drop list
                                     ?>
-                                    <li><a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown"
+                                    <li class="nav-item menu-items"><a class="menu-items-in" href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown"
                                            data-hover="dropdown" data-delay="0"
                                            data-close-others="true">{{ $subMenu->$link_title_var }}</a>
                                         <?php
@@ -150,7 +159,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                             <ul class="dropdown-menu">
                                                 @foreach($subMenu->webmasterSection->sections as $SubMnuCategory)
                                                     @if($SubMnuCategory->father_id ==0)
-                                                        <li>
+                                                       <li class="nav-item menu-items">
                                                             <?php
                                                             if ($SubMnuCategory->$slug_var != "" && Helper::GeneralWebmasterSettings("links_status")) {
                                                             if (trans('backLang.code') != env('DEFAULT_LANGUAGE')) {
@@ -167,7 +176,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                                             }
                                                             ?>
 
-                                                            <a href="{{ $Category_link_url }}">
+                                                            <a class="menu-items-in" href="{{ $Category_link_url }}">
                                                                 @if($SubMnuCategory->icon !=="")
                                                                     <i class="fa {{$SubMnuCategory->icon}}"></i> &nbsp;
                                                                 @endif
@@ -181,7 +190,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                             <ul class="dropdown-menu">
                                                 @foreach($subMenu->webmasterSection->topics as $SubMnuTopic)
                                                     @if($SubMnuTopic->expire_date =='' || ($SubMnuTopic->expire_date !='' && $SubMnuTopic->expire_date >= date("Y-m-d")))
-                                                        <li>
+                                                        <li class="nav-item menu-items">
                                                             <?php
                                                             if ($SubMnuTopic->$slug_var != "" && Helper::GeneralWebmasterSettings("links_status")) {
                                                             if (trans('backLang.code') != env('DEFAULT_LANGUAGE')) {
@@ -209,7 +218,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                     <?php
                                     // sub menu - Section Link
                                     ?>
-                                    <li>
+                                   <li class="nav-item menu-items">
                                         <?php
                                         if ($subMenu->webmasterSection->$slug_var != "" && Helper::GeneralWebmasterSettings("links_status")) {
                                         if (trans('backLang.code') != env('DEFAULT_LANGUAGE')) {
@@ -225,19 +234,19 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
                                         }
                                         }
                                         ?>
-                                        <a href="{{ $mmnnuu_link }}">{{ $subMenu->$link_title_var }}</a>
+                                        <a class="menu-items-in"  href="{{ $mmnnuu_link }}">{{ $subMenu->$link_title_var }}</a>
                                     </li>
                                 @elseif($subMenu->type==1)
                                     <?php
                                     // sub menu - Direct Link
                                     ?>
-                                    <li><a href="{{ url($subMenu->link) }}">{{ $subMenu->$link_title_var }}</a>
+                                    <li class="nav-item menu-items"><a class="menu-items-in" href="{{ url($subMenu->link) }}">{{ $subMenu->$link_title_var }}</a>
                                     </li>
                                 @else
                                     <?php
                                     // sub menu - Main title ( have drop down menu )
                                     ?>
-                                    <li><a href="javascript:void(0)">{{ $subMenu->$link_title_var }}</a>
+                                     <li class="nav-item menu-items"><a class="menu-items-in" href="javascript:void(0)">{{ $subMenu->$link_title_var }}</a>
                                     </li>
                                 @endif
                             @endforeach
@@ -248,4 +257,50 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
         @endforeach
 
     </ul>
-</div>
+	  <form class="form-inline header-right-part">
+       @if(Sentinel::getUser())
+       <div class="dropdown">
+                      <a  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         @if(Sentinel::getUser()->photo)
+                                <img src="{!! url('/').'/uploads/users/'.Sentinel::getUser()->photo !!}" alt="img" height="35px" width="35px"
+                                     class="img-circle img-responsive pull-left"/>
+          @else
+                               <img src="{!! url('/').'/uploads/users/avatar.png'!!}" alt="img" height="35px" width="35px"
+                                     class="img-circle img-responsive pull-left"/>
+
+                           
+          @endif
+                      </a>
+                      <div class="dropdown-menu users-dropbox" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item users-dropbox-items"  href="{{ route('profileEdit', Sentinel::getUser()->id) }}">Accounts Settings</a>
+                        <a class="dropdown-item users-dropbox-items" href = "{{ route('getLogout') }}">Logout</a>
+                      </div>
+                    </div>
+       
+       
+       @else
+          
+     <a class="btn-sign" type="signup" href = "{{ route('signup') }}">Signup</a>
+                    <a class="btn-login" type="login" href = "{{ route('loginpage') }}">Login</a>
+     @endif
+                    <!--social-icons-->
+                    <div class="social-icons">
+                      <div class="elipse">
+                        <i class="fa fa-facebook fa-icons"></i>
+                      </div>
+                      <div class="elipse">
+                        <i class="fa fa-twitter fa-icons"></i>
+                      </div>
+                      <div class="elipse">
+                        <i class="fa fa-google-plus fa-icons"></i>
+                      </div>
+                      <div class="elipse">
+                        <i class="fa fa-instagram fa-icons"></i>
+                      </div>
+                    </div>
+                    <!-- End social-icons-->
+                </form>
+	</div>
+
+  </div>
+</nav>
