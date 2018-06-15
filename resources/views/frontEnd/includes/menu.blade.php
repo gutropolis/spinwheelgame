@@ -281,7 +281,7 @@ $slug_var2 = "seo_url_slug_" . trans('backLang.boxCodeOther');
        @else
           
      <a class="btn-sign" type="signup" href = "{{ route('signup') }}">Signup</a>
-                    <a class="btn-login" type="login" href = "{{ route('loginpage') }}">Login</a>
+                    <a class="btn-login" type="login" data-toggle="modal" data-target="#mymodal">Login</a>
      @endif
                     <!--social-icons-->
                     <div class="social-icons">
