@@ -370,7 +370,7 @@
                         <input type="text" name="name" class="form-control contact-form-control" placeholder="Full Name">
                       </div> 
                       <div class="form-group contact-form-group">                       
-                        <textarea class="form-control contact-form-control" name="messsage" rows="4" placeholder="Message"></textarea>
+                        <textarea class="form-control contact-form-control" name="message" rows="4" placeholder="Message"></textarea>
                       </div>                      
                       <button type="submit" class="btn btn-submit" >Submit</button>
                     </form>
