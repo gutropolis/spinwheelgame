@@ -363,6 +363,208 @@ header {
   font-size: 20px;
 }
 
+.login-modal {
+  margin-top: 64px;
+}
+
+.login-modal .close-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border: none;
+}
+
+.login-modal .login-page {
+  border-radius: 10px;
+  border: 1px solid #fff;
+  background: #fff;
+  width: 100%;
+  padding: 20px;
+}
+
+.login-modal .login-page .head-login {
+  color: #eb373f;
+  font-size: 22px;
+  border-bottom: 2px solid #e8e5e5;
+  padding-bottom: 7px;
+}
+
+.login-modal .login-page .login-form {
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+
+.login-modal .login-page .login-form .title {
+  color: #383535;
+  font-family: hind;
+  margin-bottom: -2px;
+}
+
+.login-modal .login-page .login-form .login-form-control {
+  border-radius: 10px;
+}
+
+.login-modal .login-page .login-form-password {
+  margin-top: 10px;
+}
+
+.login-modal .login-page .login-form-password .title {
+  color: #383535;
+  font-family: hind;
+  margin-bottom: -2px;
+}
+
+.login-modal .login-page .login-form-password .login-form-control {
+  border-radius: 10px;
+}
+
+.login-modal .login-page .btn-sign-in {
+  border-radius: 10px;
+  background: #eb373f;
+  color: #fff;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border: 2px solid #eb373f;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 24px;
+  font-family: hind;
+  font-weight: bold;
+  margin-top: 7px;
+}
+
+.login-modal .login-page .btn-sign-in:hover {
+  color: #eb373f;
+  background: #fff;
+  border: 2px solid #eb373f;
+}
+
+.login-modal .login-page .forget-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 18px;
+}
+
+@media (max-width: 450px) {
+  .login-modal .login-page .forget-block {
+    display: inline;
+    text-align: center;
+  }
+}
+
+.login-modal .login-page .forget-block .forget {
+  font-family: hind;
+  color: #383535;
+  border-right: 1px solid darkgray;
+  padding-right: 7px;
+  font-size: 14px;
+}
+
+.login-modal .login-page .forget-block .clik {
+  color: #eb373f;
+  font-size: 14px;
+  font-family: hind;
+  font-weight: bold;
+}
+
+.login-modal .login-page .forget-block .remember-checkbox {
+  font-family: hind;
+  color: #383535;
+  font-size: 14px;
+}
+
+.login-modal .login-page .or {
+  color: #eb373f;
+  font-size: 18px;
+  text-align: center;
+  font-family: hind;
+  position: relative;
+}
+
+.login-modal .login-page .or:after {
+  width: 46%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background: #e8e5e5;
+  top: 13px;
+  right: 3px;
+}
+
+.login-modal .login-page .or:before {
+  width: 46%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background: #e8e5e5;
+  top: 13px;
+  left: 3px;
+}
+
+.login-modal .login-page .fb-button {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login-modal .login-page .fb-button .facebook-btn {
+  border-radius: 15px;
+  border: 2px solid #445c8e;
+  background: #445c8e;
+  padding-top: 8px;
+  padding-bottom: 9px;
+  padding-left: 34px;
+  padding-right: 34px;
+  font-size: 18px;
+  color: #fff;
+  font-family: hind;
+}
+
+.login-modal .login-page .fb-button .facebook-btn:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0px 1px 2px #445c8e;
+          box-shadow: 0px 1px 2px #445c8e;
+}
+
+.login-modal .login-page .fb-button .facebook-btn .fb-icon {
+  padding-right: 14px;
+  border-right: 2px solid #3d5482;
+}
+
+.login-modal .login-page .fb-button .facebook-btn .btn-text {
+  margin-left: 25px;
+}
+
+@media (max-width: 450px) {
+  .login-modal .login-page .fb-button .facebook-btn .btn-text {
+    margin-left: 5px;
+  }
+}
+
+.login-modal .login-page .not-member {
+  text-align: center;
+}
+
+.login-modal .login-page .not-member .not-member-text {
+  font-family: hind;
+  font-size: 14px;
+  color: #383535;
+}
+
+.login-modal .login-page .not-member .Signup-title {
+  font-family: hind;
+  font-size: 14px;
+  color: #eb373f;
+}
+
 .footer {
   background-image: url(/images/footer-bg.jpg?2694e2e920ddbc412eec12ba3da54c81);
   background-position: 0 0;
