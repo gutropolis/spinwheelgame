@@ -24,15 +24,15 @@
                 </div>
                 <!--contactus-form-->
                 <div class="contactus-form">
-                    <form>
+                     <form name="contactus" id="contactus" method="get" action="">
                       <div class="form-group contact-form-group">                       
-                        <input type="email" class="form-control contact-form-control" aria-describedby="emailHelp" 
+                        <input type="text" class="form-control contact-form-control" aria-describedby="emailHelp" 
                         placeholder="Name">
-                        <input type="password" class="form-control contact-form-control-2" placeholder="Email">          
+                        <input type="email" class="form-control contact-form-control-2" placeholder="Email">          
                       </div>
                       <div class="form-group contact-form-group">                       
-                        <input type="password" class="form-control contact-form-control" placeholder="Subject">
-                        <input type="password" class="form-control contact-form-control-2" placeholder="Phone No.">
+                        <input type="text" class="form-control contact-form-control" placeholder="Subject">
+                        <input type="text" class="form-control contact-form-control-2" placeholder="Phone No.">
                       </div> 
                       <div class="form-group contact-form-group">                       
                         <textarea class="form-control contact-form-control" rows="7" placeholder="Message"></textarea>
