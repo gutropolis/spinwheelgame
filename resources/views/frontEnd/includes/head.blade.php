@@ -9,7 +9,7 @@
 <link href="{{ URL::asset('frontEnd/css/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('frontEnd/css/jcarousel.css') }}" rel="stylesheet"/>
 <link href="{{ URL::asset('frontEnd/css/flexslider.css') }}" rel="stylesheet"/>
-<!--link href="{{ URL::asset('frontEnd/css/style.css') }}" rel="stylesheet"/-->
+
 
 
 <link href="{{ URL::asset('frontEnd/css/color.css') }}" rel="stylesheet"/>
