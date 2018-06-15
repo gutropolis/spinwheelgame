@@ -233,11 +233,9 @@ Route::Group(['prefix' => env('BACKEND_PATH')], function () {
     Route::get('/visitors', 'AnalyticsController@visitors')->name('visitors');
 
     // Users & Permissions
-    /*
     Route::get('/users', 'UsersController@index')->name('users');
     Route::get('/users/create/', 'UsersController@create')->name('usersCreate');
     Route::post('/users/store', 'UsersController@store')->name('usersStore');
-    Route::get('/users/store', 'UsersController@store')->name('usersStore');
     Route::get('/users/{id}/edit', 'UsersController@edit')->name('usersEdit');
     Route::post('/users/{id}/update', 'UsersController@update')->name('usersUpdate');
     Route::get('/users/destroy/{id}', 'UsersController@destroy')->name('usersDestroy');
@@ -249,7 +247,7 @@ Route::Group(['prefix' => env('BACKEND_PATH')], function () {
     Route::post('/users/permissions/{id}/update', 'UsersController@permissions_update')->name('permissionsUpdate');
     Route::get('/users/permissions/destroy/{id}', 'UsersController@permissions_destroy')->name('permissionsDestroy');
 
-*/
+
     // Menus
     Route::post('/menus/store/parent', 'MenusController@storeMenu')->name('parentMenusStore');
     Route::get('/menus/parent/{id}/edit', 'MenusController@editMenu')->name('parentMenusEdit');
@@ -314,26 +312,54 @@ Route::get('/sitemap.xml', 'SiteMapController@siteMap')->name('siteMap');
 Route::get('/{lang}/sitemap', 'SiteMapController@siteMap')->name('siteMapByLang');
 
 Route::get('/', 'FrontendHomeController@HomePage')->name('Home');
+Route::get('/howitwork', 'FrontendHomeController@Howitwork')->name('howitwork');
+Route::get('/faq', 'FrontendHomeController@faq')->name('faq');
+
+Route::get('/aboutus', 'FrontendHomeController@aboutus')->name('aboutus');
+Route::get('/contactsus', 'FrontendHomeController@contactsus')->name('contactsus'); 
+
+//Register
+Route::get('/signup', 'FrontendHomeController@signup')->name('signup');
+Route::post('/storedata', 'FrontendHomeController@AddUser');
+
+Route::get('/loginpage', 'FrontendHomeController@loginpage')->name('loginpage');
+Route::post('/checklogin', 'FrontendHomeController@checklogin');
+Route::get('/subscribepopeup', 'FrontendHomeController@subscribepopeup');
+Route::post('/subscribeform','FrontendHomeController@subscribeform');
+
+//userEdit
+Route::group(['namespace'=>'frontEnd'], function () {
+ Route::get('/users/{id}/edit', 'UsersController@edit_profile')->name('profileEdit');
+ Route::post('/users/{id}/update', 'UsersController@update')->name('profileUpdate');
+});
+//Spinner
+Route::get('/spinerwheel', 'FrontendHomeController@spinerwheel')->name('spinerwheel');
+Route::get('/addspinner', 'FrontendHomeController@addspinner')->name('addspinner');
+
+Route::post('/contactus', 'FrontendHomeController@contactus');
+//logout
+
+ Route::get('getLogout', 'FrontendhomeController@getLogout')->name('getLogout');
+
+
 // ../home url
 Route::get('/home', 'FrontendHomeController@HomePage')->name('HomePage');
 Route::get('/{lang?}/home', 'FrontendHomeController@HomePageByLang')->name('HomePageByLang');
 // ../subscribe to newsletter submit  (ajax url)
-Route::post('/subscribe', 'FrontendHomeController@subscribeSubmit')->name('subscribeSubmit');
+Route::post('/subscribeSubmit', 'FrontendHomeController@subscribeSubmit')->name('subscribeSubmit');
 // ../Comment submit  (ajax url)
 Route::post('/comment', 'FrontendHomeController@commentSubmit')->name('commentSubmit');
 // ../Order submit  (ajax url)
 Route::post('/order', 'FrontendHomeController@orderSubmit')->name('orderSubmit');
 // ..Custom URL for contact us page ( www.site.com/contact )
-Route::get('/contact', 'FrontendHomeController@ContactPage')->name('contactPage');
+Route::get('/contact', 'FrontendHomeController@contactPage')->name('contactPage');
 Route::get('/{lang?}/contact', 'FrontendHomeController@ContactPageByLang')->name('contactPageByLang');
 // ../contact message submit  (ajax url)
 Route::post('/contact/submit', 'FrontendHomeController@ContactPageSubmit')->name('contactPageSubmit');
 // ..if page by name ( ex: www.site.com/about )
-Route::get('/topic', 'FrontendHomeController@topic')->name('FrontendPage');
+Route::get('/topic/{id}', 'FrontendHomeController@topic')->name('FrontendPage');
 // ..if page by user id ( ex: www.site.com/user )
 Route::get('/user/{id}', 'FrontendHomeController@userTopics')->name('FrontendUserTopics');
-
-/** iSSUE HERE **/
 Route::get('/{lang?}/user/{id}', 'FrontendHomeController@userTopicsByLang')->name('FrontendUserTopicsByLang');
 // ../search
 Route::post('/search', 'FrontendHomeController@searchTopics')->name('searchTopics');
@@ -347,43 +373,16 @@ Route::get('/{section}/{cat}', 'FrontendHomeController@topics')->name('FrontendT
 Route::get('/{lang?}/{section}/{cat}', 'FrontendHomeController@topicsByLang')->name('FrontendTopicsByCatWithLang');
 
 // ..Section url by name  ( ex: www.site.com/news )
-//Route::get('/{section}', 'FrontendHomeController@topics')->name('FrontendTopics');
+Route::get('/{section}', 'FrontendHomeController@topics')->name('FrontendTopics');
 Route::get('/{lang?}/{section}', 'FrontendHomeController@topicsByLang')->name('FrontendTopicsByLang');
 
 // ..SEO url  ( ex: www.site.com/title-here )
-//Route::get('/{seo_url_slug}', 'FrontendHomeController@SEO')->name('FrontendSEO');
+Route::get('/{seo_url_slug}', 'FrontendHomeController@SEO')->name('FrontendSEO');
 Route::get('/{lang?}/{seo_url_slug}', 'FrontendHomeController@SEOByLang')->name('FrontendSEOByLang');
-
-/** iSSue  eND HERE **/
 
 // ..if page by name and language( ex: www.site.com/ar/about )
 Route::get('/{lang?}/topic/{id}', 'FrontendHomeController@topicByLang')->name('FrontendPageByLang');
 
-
-Route::get('/aboutus', 'FrontendHomeController@aboutus')->name('aboutPage');
-
-//Route::get('/about', 'FrontendHomeController@AboutPage')->name('aboutPage');
-Route::get('/howitwork', 'FrontendHomeController@HowitworkPage')->name('howitworkPage');
-Route::get('/login', 'FrontendHomeController@login')->name('loginPage');
-Route::get('/faq', 'FrontendHomeController@Faq')->name('faqPage');
-
-
-Route::get('/signup', 'FrontendHomeController@register')->name('signupPage');
-
-
-//For store data
-
-//Route::post('/storedata', 'FrontendHomeController@AddUser');
-Route::get('/storedata', 'FrontendHomeController@AddUser');
-
-//check login
-
-Route::get('/checklogin', 'FrontendHomeController@Logincheck');
-
-
-//Route::get('/sandeep', 'FrontendHomeController@UserRegister');
-//Route::get('/aboutus', [ 'as' => 'aboutpage', 'uses' => 'HomeController@Aboutus']);
-//Route::resource('/aboutus', 'FrontendHomeController@aboutus');
 // .. End of Frontend Route
 /*
  !! Important note:
