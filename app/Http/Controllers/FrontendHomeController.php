@@ -653,7 +653,7 @@ class FrontendHomeController extends Controller
         $PageDescription = $WebsiteSettings->$site_desc_var;
         $PageKeywords = $WebsiteSettings->$site_keywords_var;
 
-        return view("frontEnd.loginpage",
+        return view("frontEnd.home",
             compact("WebsiteSettings",
                 "WebmasterSettings",
                 "HeaderMenuLinks",
