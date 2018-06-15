@@ -1,10 +1,35 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+ 
 
-// Variables
-@import "variables";
+/* variables */
 
+@import 'scss/variable/variable';
+@import 'scss/variable/space';
+
+/* mixins */
+
+@import 'scss/mixin/mixin';
+@import 'scss/mixin/button';
+@import 'scss/mixin/reset';
+
+/* component */
+
+@import 'scss/component/header';
+@import 'scss/component/footer';
+
+/* pages */
+
+@import 'scss/pages/index';
+@import 'scss/pages/howitwork';
+@import 'scss/pages/Aboutus';
+@import 'scss/pages/contactus';
+@import 'scss/pages/faq';
+@import 'scss/pages/ragisterpage';
+@import 'scss/pages/joinus';
+@import 'scss/pages/subscribepopeup';
+@import 'scss/pages/spintowin';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
