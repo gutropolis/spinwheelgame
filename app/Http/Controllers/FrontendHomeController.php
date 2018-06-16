@@ -163,7 +163,7 @@ class FrontendHomeController extends Controller
 		   return view("frontEnd.aboutus");
 	}
 	
-  
+	
 		
 	 public function signup()
     {
