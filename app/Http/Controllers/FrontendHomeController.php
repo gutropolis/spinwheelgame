@@ -8,8 +8,10 @@ use App\Comment;
 use App\Subscribe;
 use App\Contact;
 use App\Http\Requests;
+use App\Http\Requests\UserRequest;
 use App\Menu;
 use Sentinel;
+use Helper;
 use App\Country;
 use App\Section;
 use App\Prize;
@@ -17,6 +19,8 @@ use App\Setting;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
+use App\Notifications\PasswordReset;
+use App\Notifications\PasswordResetted;
 use App\Topic;
 use Validator;
 use App\TopicCategory;
@@ -30,43 +34,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class FrontendHomeController extends Controller
 {
-    public function __construct()
-    {
-        // Check the website Status
-        $WebsiteSettings = Setting::find(1);
-        $lang = trans('backLang.boxCode');
-
-        $site_status = $WebsiteSettings->site_status;
-        $site_msg = $WebsiteSettings->close_msg;
-        if ($site_status == 0) {
-            // close the website
-            if ($lang == "ar") {
-                $site_title = $WebsiteSettings->site_title_ar;
-                $site_desc = $WebsiteSettings->site_desc_ar;
-                $site_keywords = $WebsiteSettings->site_keywords_ar;
-            } else {
-                $site_title = $WebsiteSettings->site_title_en;
-                $site_desc = $WebsiteSettings->site_desc_en;
-                $site_keywords = $WebsiteSettings->site_keywords_en;
-            }
-            echo "<!DOCTYPE html>
-<html lang=\"en\">
-<head>
-<meta charset=\"utf-8\">
-<title>$site_title</title>
-<meta name=\"description\" content=\"$site_desc\"/>
-<meta name=\"keywords\" content=\"$site_keywords\"/>
-<body>
-<br>
-<div style='text-align: center;'>
-<p>$site_msg</p>
-</div>
-</body>
-</html>
-        ";
-            exit();
-        }
-    }
+   
 
 
     /**
@@ -75,111 +43,7 @@ class FrontendHomeController extends Controller
      * @param  int /string $seo_url_slug
      * @return \Illuminate\Http\Response
      */
-    public function SEO($seo_url_slug = 0)
-    {
-        return $this->SEOByLang("", $seo_url_slug);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int /string $seo_url_slug
-     * @return \Illuminate\Http\Response
-     */
-    public function SEOByLang($lang = "", $seo_url_slug = 0)
-    {
-        if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        $seo_url_slug = str_slug($seo_url_slug, '-');
-
-        switch ($seo_url_slug) {
-            case "home" :
-                return $this->HomePage();
-                break;
-				case "howitwork" :
-				return $this->howitwork();
-				break;
-			case "contactsus" :
-				return $this->contactsus();
-				break;
-				case "aboutus" :
-				return $this->aboutus();
-				break;
-				case "signup" :
-                return $this->signup();
-                break;
-			case "loginpage" :
-				return $this->loginpage();
-				break;
-            case "about" :
-                $id = 1;
-                $section = 1;
-                return $this->topic($section, $id);
-                break;
-				 case "spinerwheel" :
-                $id = 1;
-                $section = 1;
-                return $this->spinerwheel($section, $id);
-                break;
-            case "addspinner" :
-                $id = 3;
-                $section = 1;
-                return $this->addspinner($section, $id);
-                break;
-            case "privacy" :
-                $id = 3;
-                $section = 1;
-                return $this->topic($section, $id);
-                break;
-            case "terms" :
-                $id = 4;
-                $section = 1;
-                return $this->topic($section, $id);
-                break;
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-        $URL_Title = "seo_url_slug_" . trans('backLang.boxCode');
-
-        $WebmasterSection1 = WebmasterSection::where("seo_url_slug_ar", $seo_url_slug)->orwhere("seo_url_slug_en", $seo_url_slug)->first();
-        if (count($WebmasterSection1) > 0) {
-            // MAIN SITE SECTION
-            $section = $WebmasterSection1->id;
-            return $this->topics($section, 0);
-        } else {
-            $WebmasterSection2 = WebmasterSection::where('name', $seo_url_slug)->first();
-            if (count($WebmasterSection2) > 0) {
-                // MAIN SITE SECTION
-                $section = $WebmasterSection2->id;
-                return $this->topics($section, 0);
-            } else {
-                $Section = Section::where('status', 1)->where("seo_url_slug_ar", $seo_url_slug)->orwhere("seo_url_slug_en", $seo_url_slug)->first();
-                if (count($Section) > 0) {
-                    // SITE Category
-                    $section = $Section->webmaster_id;
-                    $cat = $Section->id;
-                    return $this->topics($section, $cat);
-                } else {
-                    $Topic = Topic::where('status', 1)->where("seo_url_slug_ar", $seo_url_slug)->orwhere("seo_url_slug_en", $seo_url_slug)->first();
-                    if (count($Topic) > 0) {
-                        // SITE Topic
-                        $section_id = $Topic->webmaster_id;
-                        $WebmasterSection = WebmasterSection::find($section_id);
-                        $section = $WebmasterSection->name;
-                        $id = $Topic->id;
-                        return $this->topic($section, $id);
-                    } else {
-                        // Not found
-                        return redirect()->route("HomePage");
-                    }
-                }
-            }
-        }
-
-    }
+    
 
     /**
      * Display a listing of the resource.
@@ -190,329 +54,7 @@ class FrontendHomeController extends Controller
     {
         return $this->HomePageByLang("");
     }
-
-	 public function howitwork()
-    {
-        return $this->HowitworkPage("");
-    }
-	 
-	 
-	 public function faq( $lang="" )
-    {
-        // return $this->FAQ("");
-		
-		if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
-		 
-        return view("frontEnd.faq",
-            compact("WebsiteSettings",
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle", 
-                "PageKeywords", 
-                "PageDescription", 
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews","maximumPoint","userdetails"));
-		
-		 
-    }
-	
-	 
-	
-	
-	public function HowitworkPage($lang="")
-	{
-		 if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
-		
-		
-		
-		
-		
-
-        return view("frontEnd.howitwork",
-            compact("WebsiteSettings",
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews"));
-
-    }
-	
-	
-	 public function contactsus()
-    {
-        return $this->ContactusPage("");
-    }
-	public function ContactusPage($lang="")
-	{
-		 if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
-
-        return view("frontEnd.contact",
-            compact("WebsiteSettings",
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews"));
-
-    }
-
-		public function aboutus()
-	{
-		return $this->AboutPage("");
-	}
-	public function AboutPage($lang="")
-	{
-		 if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
-
-        return view("frontEnd.aboutus",
-            compact("WebsiteSettings",
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews"));
-
-    }
-	
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function HomePageByLang($lang = "")
+	    public function HomePageByLang($lang = "")
     {
 
         if ($lang != "") {
@@ -596,166 +138,40 @@ class FrontendHomeController extends Controller
                 "LatestNews","maximumPoint","userdetails"));
 
     }
-		//Login Authentication
-		 public function loginpage()
+
+	 public function howitwork()
     {
-        return $this->loginbyLang("");
+        return $this->HowitworkPage("");
     }
-	 public function loginbyLang($lang = "")
-    {
+	
+	public function HowitworkPage()
+	{
 
-        if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
-
-        return view("frontEnd.home",
-            compact("WebsiteSettings",
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews"));
+        return view("frontEnd.howitwork");
 
     }
+	
+	
+	 public function contactsus()
+    {
+       return view("frontEnd.contact");
+    }
+	
+
+		public function aboutus()
+	{
+		   return view("frontEnd.aboutus");
+	}
+	
+  
+		
 	 public function signup()
     {
-        return $this->SignupByLang("");
-    }
-	 public function SignupByLang($lang = "")
-    {
-
-        if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
+       $countries= Country::pluck('title_en');
 			
-		$countries= Country::pluck('title_en');
-			
-        return view("frontEnd.register_1",
-            compact("WebsiteSettings",
-					'countries',
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews"));
-
+        return view("frontEnd.register_1",compact('countries'));
     }
-	
-	
+	 
 	
 		public function checklogin(Request $request)
 	 {
@@ -763,21 +179,20 @@ class FrontendHomeController extends Controller
 	   try {
 	   if ($user = Sentinel::authenticate($request->only(['email', 'password'])))
 		{
-	   return Redirect::route("spinerwheel")->with('success', trans('auth/message.signin.success')); 
+	     return Redirect::route("spinerwheel")->with('success', trans('Login Successfully'));
 		}
-	 return Redirect::route("loginpage")->with('error', trans('Email And Password Not Exist')); 
+		$this->messageBag->add('email', trans('Account is not found'));
 	   } 
 	   
 	   catch (NotActivatedException $e) {
-			  return Redirect::route("loginpage")->with('error', trans('Your Account Is not Activated'));
+			$this->messageBag->add('email', trans('Your Account is Not Activated'));
 			}
     	catch (ThrottlingException $e) {
-			 return Redirect::route("loginpage")->with('error', trans('Account is Suspeneded'));
+			$delay = $e->getDelay();
+            $this->messageBag->add('email', trans('Your account_suspended', compact('delay')));
 			}
+			 return Redirect::back()->withInput()->withErrors($this->messageBag);
 	  
-	  
-	 
-		
 	 }
 	  public function getLogout()
     {
@@ -794,159 +209,53 @@ class FrontendHomeController extends Controller
         return redirect('admin/signin')->with('success', 'You have successfully logged out!');
     }
 	
-	  public function AddUser(Request $request)
+	  public function AddUser(UserRequest $request)
 	  {
-		  
-		  $email=$request->get('email');
-        $emailexist=User::where('email',$email)->first();
-			if(Sentinel::check()){
-            // Register the user
-             $user = new \App\User;
-                $user->first_name = $request->get('first_name');
-                $user->last_name = $request->get('last_name');
-                $user->email = $request->get('email');
-                $user->password = bcrypt($request->get('password'));
-				$user->address = $request->get('address');
-				$user->gender = $request->get('gender');
-				$user->photo = $request->get('image');
-				$user->country = $request->get('country');
-				$user->phone = $request->get('PhoneNo');
-				$user->post_code = $request->get('post_code');
-				$user->status =  '1';
-           $user->save();
+		  try {
+		    $user = Sentinel::registerAndActivate([
+                'first_name' => $request->get('first_name'),
+                'last_name' => $request->get('last_name'),
+                'email' => $request->get('email'),
+                'password' => $request->get('password'),
+				'address' => $request->get('address'),
+				'gender' => $request->get('gender'),
+				'country' => $request->get('country'),
+				'phone' => $request->get('PhoneNo'),
+				'post_code' => $request->get('post_code'),
+            ]);
+			$user->remember_token = Helper::generateUuid();
+		
+			$user->save();
+           return Redirect::route("Home")->with('success', trans('auth/message.signup.success'));
 
-            // Redirect to Login Page
-             return $this->loginpage("");
-          
-		  //If Already emailExist
-        } else{
-			return redirect('signup')->with('error', 'Email already exist!');
-		}
+        } catch (UserExistsException $e) {
+            $this->messageBag->add('email', trans('auth/message.account_already_exists'));
+        }
+
+        // Ooops.. something went wrong
+        return Redirect::back()->withInput()->withErrors($this->messageBag);
+    }
           
 		
 
-	  }
-	  
+
 	  //Spinner
 	  
 	   public function spinerwheel()
     {
-        return $this->spinerwheelByLang("");
+       return view("frontEnd.spinner");
     }
-	 public function spinerwheelByLang($lang = "")
+	 public function subscribepopeup($lang = "")
     {
 
-        if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        $id = $WebmasterSettings->contact_page_id;
-        $Topic = Topic::where('status', 1)->find($id);
-
-
-        if (count($Topic) > 0 && ($Topic->expire_date == '' || ($Topic->expire_date != '' && $Topic->expire_date >= date("Y-m-d")))) {
-
-            // update visits
-            $Topic->visits = $Topic->visits + 1;
-            $Topic->save();
-
-            // get Webmaster section settings by ID
-            $WebmasterSection = WebmasterSection::find($Topic->webmaster_id);
-
-            if (count($WebmasterSection) > 0) {
-
-                // Get current Category Section details
-                $CurrentCategory = Section::find($Topic->section_id);
-                // Get a list of all Category ( for side bar )
-                $Categories = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=',
-                    '0')->where('status', 1)->orderby('row_no', 'asc')->get();
-
-                // Get Most Viewed
-                $TopicsMostViewed = Topic::where([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])->orderby('visits', 'desc')->limit(3)->get();
-
-                // General for all pages
-
-                $WebsiteSettings = Setting::find(1);
-                $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-                    1)->orderby('row_no', 'asc')->get();
-                $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-                    1)->orderby('row_no', 'asc')->get();
-                $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-                $FooterMenuLinks_name_ar = "";
-                $FooterMenuLinks_name_en = "";
-                if (count($FooterMenuLinks_father) > 0) {
-                    $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-                    $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-                }
-                $SideBanners = Banner::where('section_id', $WebmasterSettings->side_banners_section_id)->where('status',
-                    1)->orderby('row_no', 'asc')->get();
-
-                // Get Latest News
-                $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-                // Page Title, Description, Keywords
-                $seo_title_var = "seo_title_" . trans('backLang.boxCode');
-                $seo_description_var = "seo_description_" . trans('backLang.boxCode');
-                $seo_keywords_var = "seo_keywords_" . trans('backLang.boxCode');
-                $tpc_title_var = "title_" . trans('backLang.boxCode');
-                $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-                $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-                if ($Topic->$seo_title_var != "") {
-                    $PageTitle = $Topic->$seo_title_var;
-                } else {
-                    $PageTitle = $Topic->$tpc_title_var;
-                }
-                if ($Topic->$seo_description_var != "") {
-                    $PageDescription = $Topic->$seo_description_var;
-                } else {
-                    $PageDescription = $WebsiteSettings->$site_desc_var;
-                }
-                if ($Topic->$seo_keywords_var != "") {
-                    $PageKeywords = $Topic->$seo_keywords_var;
-                } else {
-                    $PageKeywords = $WebsiteSettings->$site_keywords_var;
-                }
-                // .. end of .. Page Title, Description, Keywords
-
-                return view("frontEnd.spinner",
-                    compact("WebsiteSettings",
-                        "WebmasterSettings",
-                        "HeaderMenuLinks",
-                        "FooterMenuLinks",
-                        "FooterMenuLinks_name_ar",
-                        "FooterMenuLinks_name_en",
-                        "LatestNews",
-                        "Topic",
-                        "SideBanners",
-                        "WebmasterSection",
-                        "Categories",
-                        "CurrentCategory",
-                        "PageTitle",
-                        "PageDescription",
-                        "PageKeywords",
-                        "TopicsMostViewed"));
-
-            } else {
-                return redirect()->action('FrontendHomeController@HomePage');
-            }
-        } else {
-            return redirect()->action('FrontendHomeController@HomePage');
-        }
+        
+        return view("frontEnd.spinner_1");
 
     }
 	
+	
 	 public function addspinner()
     {
-        return $this->addspinnerByLang("");
-    }
-	 public function addspinnerByLang($lang = "")
-    {
-		//$prize="prize 10";
-		
 		$prize=$_GET['prize'];
 		
 		$user_id=Sentinel::getUser()->id;
@@ -959,141 +268,96 @@ class FrontendHomeController extends Controller
 	    $addPrize->point = $point;
 	 
     $addPrize->save(); 
-
-        if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        $id = $WebmasterSettings->contact_page_id;
-        $Topic = Topic::where('status', 1)->find($id);
-
-
-        if (count($Topic) > 0 && ($Topic->expire_date == '' || ($Topic->expire_date != '' && $Topic->expire_date >= date("Y-m-d")))) {
-
-            // update visits
-            $Topic->visits = $Topic->visits + 1;
-            $Topic->save();
-
-            // get Webmaster section settings by ID
-            $WebmasterSection = WebmasterSection::find($Topic->webmaster_id);
-
-            if (count($WebmasterSection) > 0) {
-
-                // Get current Category Section details
-                $CurrentCategory = Section::find($Topic->section_id);
-                // Get a list of all Category ( for side bar )
-                $Categories = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=',
-                    '0')->where('status', 1)->orderby('row_no', 'asc')->get();
-
-                // Get Most Viewed
-                $TopicsMostViewed = Topic::where([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])->orderby('visits', 'desc')->limit(3)->get();
-
-                // General for all pages
-
-                $WebsiteSettings = Setting::find(1);
-                $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-                    1)->orderby('row_no', 'asc')->get();
-                $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-                    1)->orderby('row_no', 'asc')->get();
-                $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-                $FooterMenuLinks_name_ar = "";
-                $FooterMenuLinks_name_en = "";
-                if (count($FooterMenuLinks_father) > 0) {
-                    $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-                    $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-                }
-                $SideBanners = Banner::where('section_id', $WebmasterSettings->side_banners_section_id)->where('status',
-                    1)->orderby('row_no', 'asc')->get();
-
-                // Get Latest News
-                $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-                // Page Title, Description, Keywords
-                $seo_title_var = "seo_title_" . trans('backLang.boxCode');
-                $seo_description_var = "seo_description_" . trans('backLang.boxCode');
-                $seo_keywords_var = "seo_keywords_" . trans('backLang.boxCode');
-                $tpc_title_var = "title_" . trans('backLang.boxCode');
-                $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-                $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-                if ($Topic->$seo_title_var != "") {
-                    $PageTitle = $Topic->$seo_title_var;
-                } else {
-                    $PageTitle = $Topic->$tpc_title_var;
-                }
-                if ($Topic->$seo_description_var != "") {
-                    $PageDescription = $Topic->$seo_description_var;
-                } else {
-                    $PageDescription = $WebsiteSettings->$site_desc_var;
-                }
-                if ($Topic->$seo_keywords_var != "") {
-                    $PageKeywords = $Topic->$seo_keywords_var;
-                } else {
-                    $PageKeywords = $WebsiteSettings->$site_keywords_var;
-                }
-                // .. end of .. Page Title, Description, Keywords
-
-                return view("frontEnd.winprize",
-                    compact("WebsiteSettings",
-                        "WebmasterSettings",
-                        "HeaderMenuLinks",
-                        "FooterMenuLinks",
-                        "FooterMenuLinks_name_ar",
-                        "FooterMenuLinks_name_en",
-                        "LatestNews",
-                        "Topic",
-                        "SideBanners",
-                        "WebmasterSection",
-                        "Categories",
-                        "CurrentCategory",
-                        "PageTitle",
-                        "PageDescription",
-                        "PageKeywords",
-                        "TopicsMostViewed","prize"));
-
-            } else {
-                return redirect()->action('FrontendHomeController@HomePage');
-            }
-        } else {
-            return redirect()->action('FrontendHomeController@HomePage');
-        }
-
+	 return view("frontEnd.winprize",  compact("prize"));
+        
     }
+	 
+	 
+	 public function contactus(Request $request)  {
+	
+		// Data to be used on the email view
+		$name = $request->get('name');
+		$contact_email = $request->get('email');
+		$contact_msg = $request->get('message');
+		$WebmasterSettings = Setting::find(1);
+		$data = array('name'=>$name,'contact_email'=>$contact_email, 'contact_msg'=> $contact_msg );
+	  
+			// Send the activation code through email
+		   Mail::send('emails.contactmail',$data , function($message) use($WebmasterSettings)
+	  {
+	   $message->to($WebmasterSettings->site_webmails)->subject('Contact Us');
+	  });
+	  return redirect('HomePage');
+	   }
+	   
+	   public function resetpassword()
+    {
+		
+        return view("frontEnd.auth.reset");
+		
+		//return $user;
+       //return view("frontEnd.users.edit_profile",compact('user'));
+    }
+	  public function forgotpassword($id,$lang="")
+    {
+	
+        return view("frontEnd.auth.forgotpassword");
+
+		
+		//return $user;
+       //return view("frontEnd.users.edit_profile",compact('user'));
+    }
+	 public function password(Request $request){
+
+        $validation = Validator::make($request->all(), [
+            'email' => 'required|email'
+        ]);
+
+        if($validation->fails())
+            return back()->with('error', trans('Email Not Found'));
+
+        $user = \App\User::whereEmail(request('email'))->first();
+
+        if(!$user)
+       return back()->with('error', trans('Account Not Found'));
+        $token = Helper::generateUuid();
+        \DB::table('password_resets')->insert([
+            'email' => request('email'),
+            'token' => $token
+        ]);
+        $user->notify(new PasswordReset($user,$token));
+		return Redirect::route("forgotpassword")->with('success', trans('Check Your Email To Reset Password'));
+	 }
+	   
+	    public function reset(Request $request){
+
+        
+
+        $user = \App\User::whereEmail(request('email'))->first();
+
+        if(!$user)
+          return back()->with('error', trans('Account Not Found'));
+
+        $validate_password_request = \DB::table('password_resets')->where('email','=',request('email'))->where('token','=',request('token'))->first();
+
+       
+        $user->password = bcrypt(request('password'));
+        $user->save();
+
+        $user->notify(new PasswordResetted($user));
+
+      return Redirect::route("Home")->with('success', trans('Check Your Email To Reset Password'));
+    }
+	   
+	   
+	   
+	   
+	   
+	   
+	   
 	  
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $section
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function topic($section = 0, $id = 0)
     {
         $lang_dirs = array_filter(glob(App::langPath() . '/*'), 'is_dir');
@@ -2037,96 +1301,12 @@ class FrontendHomeController extends Controller
 	
 	/*!---------Mail functionality for home subscribe page STARTS HERE----------------------------------------------------------------------->*/
 	
-	 public function subscribepopeup($lang = "")
-    {
-
-        if ($lang != "") {
-            // Set Language
-            App::setLocale($lang);
-            \Session::put('locale', $lang);
-        }
-        // General Webmaster Settings
-        $WebmasterSettings = WebmasterSetting::find(1);
-
-        // General for all pages
-        $WebsiteSettings = Setting::find(1);
-        $HeaderMenuLinks = Menu::where('father_id', $WebmasterSettings->header_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks = Menu::where('father_id', $WebmasterSettings->footer_menu_id)->where('status',
-            1)->orderby('row_no',
-            'asc')->get();
-        $FooterMenuLinks_father = Menu::find($WebmasterSettings->footer_menu_id);
-        $FooterMenuLinks_name_ar = "";
-        $FooterMenuLinks_name_en = "";
-        if (count($FooterMenuLinks_father) > 0) {
-            $FooterMenuLinks_name_ar = $FooterMenuLinks_father->title_ar;
-            $FooterMenuLinks_name_en = $FooterMenuLinks_father->title_en;
-        }
-
-        // Home topics
-        $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-        // Home photos
-        $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
-        $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
-
-        // Get Latest News
-        $LatestNews = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->latest_news_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
-
-        // Get Home page slider banners
-        $SliderBanners = Banner::where('section_id', $WebmasterSettings->home_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        // Get Home page Test banners
-        $TextBanners = Banner::where('section_id', $WebmasterSettings->home_text_banners_section_id)->where('status',
-            1)->orderby('row_no', 'asc')->get();
-
-        $site_desc_var = "site_desc_" . trans('backLang.boxCode');
-        $site_keywords_var = "site_keywords_" . trans('backLang.boxCode');
-
-        $PageTitle = ""; // will show default site Title
-        $PageDescription = $WebsiteSettings->$site_desc_var;
-        $PageKeywords = $WebsiteSettings->$site_keywords_var;
-
-        return view("frontEnd.spinner_1",
-            compact("WebsiteSettings",
-                "WebmasterSettings",
-                "HeaderMenuLinks",
-                "FooterMenuLinks",
-                "SliderBanners",
-                "TextBanners",
-                "FooterMenuLinks_name_ar",
-                "FooterMenuLinks_name_en",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "PageTitle",
-                "PageDescription",
-                "PageKeywords",
-                "HomeTopics",
-                "HomePhotos",
-                "HomePartners",
-                "LatestNews"));
-
-    }
 	
-	public function contactus(Request $request)  {
 	
-		// Data to be used on the email view
-		$name = $request->get('name');
-		$contact_email = $request->get('email');
-		$contact_msg = $request->get('message');
-	$WebmasterSettings = Setting::find(1);
-	 $data = array('name'=>$name,'contact_email'=>$contact_email, 'contact_msg'=> $contact_msg );
-	  
-			// Send the activation code through email
-		   Mail::send('emails.contactmail',$data , function($message) use($WebmasterSettings)
-	  {
-	   $message->to($WebmasterSettings->site_webmails)->subject('Contact Us');
-	  });
-	  return redirect('HomePage');
-	   }
+	
+	    
+	 
+	 
 	
 	/*!---------Mail functionality for home subscribe page ENDS HERE----------------------------------------------------------------------->*/
 
