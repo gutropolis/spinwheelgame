@@ -128,6 +128,9 @@ class UsersController extends FrontendHomeController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+	 
+	
+	 
     public function edit_profile($id,$lang="")
     {
 		
