@@ -23,7 +23,7 @@
 			}
 		}
 		.joinus-block-in{
-		    max-width: 1015px;
+		    max-width: 850px;
 		    margin: auto;
 		    padding-top: 50px;
 		    padding-left: 45px;
@@ -61,7 +61,7 @@
 						.field {
 							display: flex;
 							flex-flow: column-reverse;
-						
+							margin-top: 20px;
 							.inbox-label {
 								transition: all 0.2s;
 								touch-action: manipulation;
@@ -90,12 +90,9 @@
 									::-webkit-input-placeholder {
 										opacity: 1;
 									}
-									& +.inbox-label {
-										transform: translate(0, 0) scale(1);
-										cursor: pointer;
-										font-family: 'ABeeZee';
-									}
+
 								}
+
 								&:placeholder-shown {
 			
 									& +.inbox-label {
@@ -121,7 +118,17 @@
 										margin-top: 10px;
 									}
 								}
+
+								&:focus + .inbox-label,
+								&:placeholder-shown:focus + .inbox-label {
+									transform: translate(0, 0) scale(1);
+									cursor: pointer;
+									font-family: 'ABeeZee'; 
+										
+								 }
+								
 							}
+
 
 						}
 						 ::-webkit-input-placeholder {
@@ -143,8 +150,7 @@
 						    font-size: 18px;
 						    font-family: 'ABeeZee';
 						    align-items: center;
-						    margin-left: 30px;
-						    margin-bottom: 20px;
+						    
 						    @media (max-width: $break-vs){
 						    	margin-bottom: 0px;
 						    }
@@ -152,9 +158,8 @@
 						    
 						}
 						.btn-join {
-						    
-							    font-size: 24px;
-							padding: 5px 27px;
+						    font-size: 30px;
+						    padding: 5px 76px;
 						    color: #211b16;
 						    border: none;
 						    border-radius: 4px;
@@ -169,6 +174,14 @@
 						    }
 
 						}
+						.file-upload-block{
+							color: #fff;
+							font-size: 18px;
+							font-family: 'ABeeZee';
+							margin-top: 20px;
+							margin-bottom: 20px;
+						}
+						
 					}
 				}	
 
