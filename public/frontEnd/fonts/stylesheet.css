@@ -223,8 +223,20 @@
     font-weight: 500;
     font-style: normal;
 }
+@font-face {
+    font-family: 'ABeeZee';
+    src: url('ABeeZee-Italic.eot');
+    src: url('ABeeZee-Italic.eot?#iefix') format('embedded-opentype'),
+        url('ABeeZee-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
 
-
-
-
-
+@font-face {
+    font-family: 'ABeeZee';
+    src: url('ABeeZee-Regular.eot');
+    src: url('ABeeZee-Regular.eot?#iefix') format('embedded-opentype'),
+        url('ABeeZee-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
