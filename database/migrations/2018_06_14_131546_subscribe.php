@@ -12,12 +12,14 @@ class Subscribe extends Migration
      * @return void
      */
     public function up()
-    {
+    { 
+			 Schema::create('subscribe', function (Blueprint $table) {
               $table->increments('id');
             $table->string('email');
             $table->string('status')->default(1);
 			
 			 $table->timestamps();
+			 });
     }
 
     /**
