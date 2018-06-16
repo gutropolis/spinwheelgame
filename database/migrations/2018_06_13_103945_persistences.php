@@ -13,10 +13,12 @@ class Persistences extends Migration
      */
     public function up()
     {
+		  Schema::create('persistences', function (Blueprint $table) {
           $table->increments('id');
             $table->string('user_id');
             $table->string('code');
 			 $table->timestamps();
+		  });
     }
 
     /**
