@@ -1,10 +1,15 @@
 <?php
 
+
+
+
 // This class file to define all general functions
 
 namespace App\Helpers;
-
+ 
+use UUID ;
 use App\AnalyticsPage;
+
 use App\AnalyticsVisitor;
 use App\Country;
 use App\Event;
@@ -19,6 +24,9 @@ use Auth;
 class Helper
 {
 
+static function generateUuid(){
+  return \App\Helpers\UUID::uuid4();
+}
 
     static function GeneralWebmasterSettings($var)
     {
