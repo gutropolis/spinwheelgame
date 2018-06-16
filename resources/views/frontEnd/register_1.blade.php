@@ -54,6 +54,7 @@
                         
 
                           <button type="submit" class="btn-join">Join Raodeals!</button>
+						  <p class="backtosignup">Already have an account ? <a class="btn-login signagain" type="login" data-toggle="modal" data-target="#mymodal">Sign in</a></p>
                           <!--End field-->
 						  </div>
                       </form>
