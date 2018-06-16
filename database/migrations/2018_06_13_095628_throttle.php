@@ -19,6 +19,8 @@ class Throttle extends Migration
 			 $table->string('ip');
 			 $table->string('user_id');
               $table->timestamps();
+		 });
+			  
     }
 
     /**
