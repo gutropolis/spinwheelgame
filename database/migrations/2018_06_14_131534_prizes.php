@@ -13,11 +13,13 @@ class Prizes extends Migration
      */
       public function up()
     {
+		  Schema::create('prizes', function (Blueprint $table) {
           $table->increments('id');
             $table->string('user_id');
             $table->string('prize');
-			 $table->int('point');
+			 $table->string('point');
 			 $table->timestamps();
+		 });
     }
 
 
