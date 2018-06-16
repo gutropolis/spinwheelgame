@@ -46,6 +46,13 @@ header {
 		justify-content: center;
 		flex-direction: column;
 	}
+	.user-img{
+  width: 30px;
+  cursor: pointer;
+        border: 1px solid #eb373f;
+        border-radius: 51%;
+  margin-right: $space-n;
+ }
 	.search-icon{
 		margin-left: $space-m + $space-s + 3px;
 		margin-right: $space-vs + 2px;
