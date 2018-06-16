@@ -38,32 +38,49 @@
 <div class="contactus">
     <div class="container">
 		<div class="row">
-            <div class="col-md-12 col-lg-8">
-                <div class="heading-contactus">
-                    Login Here
-                </div>
-                <!--contactus-form-->
-                <div class="contactus-form">
-                    <form name="loginform" id="loginform" method="post" action="/reset">
-					 {{ csrf_field() }}
-                        <label for="exampleFormControlInput1" class="title-signup">Forgot Password Here</label>
-                        <div class="form-group contact-form-group {{ $errors->first('errro', 'has-error') }}">                
-                            <input type="Email" name="email" class="form-control contact-form-control" placeholder="Email" >
-							<input type="password" name="password" class="form-control contact-form-control" placeholder="password" >
-							<input type="password" name="confirm_password" class="form-control contact-form-control" placeholder="confirm_password" >
-
-                        </div>   
-						 <div class="col-sm-12">
-                            {!! $errors->first('error', '<span class="help-block">:message</span>') !!}
-                                    </div>
-                        <button type="submit" class="btn btn-submit" >Reset</button>
-                    </form>
-                </div>
-				
-                <!-- End contactus-form-->
-            </div>
-        </div>
-
+           <div class="forgetpwd-modelblock" role="document">
+			  <div class="modal-forgetpwd">
+				<div class="head-forgetpwd">
+				  <h5 class="title-forgetpwd" id="exampleModalLabel">
+				  
+					<img src="/frontEnd/images/reset-key.png" class="forget-img">
+				  </h5>
+				</div>
+				<div class="body-forgetpwd">
+					<div class="forgetpwd-content">
+					  <h4 class="content-head">
+						Reset Password ?
+					  </h4>
+					  <p class="content-text">
+						We just need your registered Email Id to sent you password reset instruction. 
+					  </p>
+					</div>
+					  <form class="resetform" name="loginform" id="loginform" method="post" action="/reset">
+					   {{ csrf_field() }}
+						<div class="form-group text-center"> 
+						  <label for="exampleFormControlInput1" class="label-text">Email address</label>
+						  <input type="email" name="email" class="form-control emailinput text-center" id="exampleFormControlInput1" placeholder="name@example.com">
+						</div>
+						<div class="form-group text-center"> 
+						  <label for="exampleFormControlInput1" class="label-text">Password</label>
+						  <input type="Password" name="password" class="form-control emailinput text-center" id="exampleFormControlInput1" placeholder="********">
+						</div>
+						<div class="form-group text-center"> 
+						  <label for="exampleFormControlInput1" class="label-text">Confirm Password</label>
+						  <input type="Confirm Password" name="confirm_password" class="form-control emailinput text-center" id="exampleFormControlInput1" placeholder="**********">
+						</div>
+						<div class="form-group text-center">
+							<button type="submit" class="btn-resetpwd">Reset Password</button>
+						</div>
+						<div class="form-group text-center">
+							<p class="backtologin">Back to Login ?<a href="{{ route('loginpage')}}" class="sign">Sign in</a></p>
+						</div>
+					  </form>
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
 </div>
 </div>
 
