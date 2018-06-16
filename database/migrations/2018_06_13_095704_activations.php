@@ -13,12 +13,13 @@ class Activations extends Migration
      */
     public function up()
     {
-          Schema::create('users', function (Blueprint $table) {
+          Schema::create('activations', function (Blueprint $table) {
             $table->increments('id');
 			 $table->string('code');
-			 $table->string('completed')->default(1);;
+			 $table->string('completed')->default(1);
 			 $table->string('user_id');
               $table->timestamps();
+		  });
     }
 
     /**
