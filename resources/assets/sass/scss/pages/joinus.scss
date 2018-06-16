@@ -1,7 +1,7 @@
 .joinus{
 	@include background('../images/joinus-bg.png');	
 	background-size: cover;
-	padding-bottom: 230px;
+	padding-bottom: 70px;
 	.joinus-logo {
     	padding-top: 24px;
 	}
@@ -23,7 +23,7 @@
 			}
 		}
 		.joinus-block-in{
-		    max-width: 850px;
+		    max-width: 420px;
 		    margin: auto;
 		    padding-top: 50px;
 		    padding-left: 45px;
@@ -41,8 +41,7 @@
 
 		    .joinus-block-elements{
 		    	.elements-in{
-		    		padding-left: 15px;
-		    		padding-right: 60px;
+		    		
 		    		@media (max-width: $break-lg){
 		    			padding-right: 30px;
 		    		}
@@ -159,7 +158,7 @@
 						}
 						.btn-join {
 						    font-size: 30px;
-						    padding: 5px 76px;
+						    padding: 5px 30px;
 						    color: #211b16;
 						    border: none;
 						    border-radius: 4px;
@@ -173,6 +172,19 @@
 						    	font-size: 26px;
 						    }
 
+						}
+						.backtosignup{
+							font-size: 16px;
+							color: #fff;
+							font-family: Abeezee;
+							margin-top: 20px;
+							.signagain{
+								color: #fff;
+								cursor: pointer;
+								margin-left: 15px;
+								text-decoration: none;
+							}
+							
 						}
 						.file-upload-block{
 							color: #fff;
