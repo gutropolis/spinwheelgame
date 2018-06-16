@@ -324,6 +324,7 @@ Route::post('/storedata', 'FrontendHomeController@AddUser');
 
 Route::get('/loginpage', 'FrontendHomeController@loginpage')->name('loginpage');
 Route::post('/checklogin', 'FrontendHomeController@checklogin');
+Route::post('/password', 'FrontendHomeController@password');
 Route::get('/subscribepopeup', 'FrontendHomeController@subscribepopeup');
 Route::post('/subscribeform','FrontendHomeController@subscribeform');
 
@@ -338,7 +339,9 @@ Route::get('/addspinner', 'FrontendHomeController@addspinner')->name('addspinner
 
 Route::post('/contactus', 'FrontendHomeController@contactus');
 //logout
-
+Route::get('/resetpassword/{token}','FrontendHomeController@resetpassword')->name('resetpassword');
+Route::post('/reset','FrontendHomeController@reset');
+Route::get('forgotpassword','FrontendHomeController@forgotpassword')->name('forgotpassword');
  Route::get('getLogout', 'FrontendhomeController@getLogout')->name('getLogout');
 
 
