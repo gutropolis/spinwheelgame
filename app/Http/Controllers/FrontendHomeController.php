@@ -211,6 +211,8 @@ class FrontendHomeController extends Controller
 	
 	  public function AddUser(UserRequest $request)
 	  {
+		  
+		  
 		  try {
 		    $user = Sentinel::registerAndActivate([
                 'first_name' => $request->get('first_name'),
@@ -224,12 +226,14 @@ class FrontendHomeController extends Controller
 				'post_code' => $request->get('post_code'),
             ]);
 			$user->remember_token = Helper::generateUuid();
+			$user->status="1";
+			$user->permissions_id="3";
 		
 			$user->save();
-           return Redirect::route("Home")->with('success', trans('auth/message.signup.success'));
+           return Redirect::route("Home")->with('success', trans('You Are Succesfully Registered.'));
 
         } catch (UserExistsException $e) {
-            $this->messageBag->add('email', trans('auth/message.account_already_exists'));
+            $this->messageBag->add('email', trans('Your Email Already Exist'));
         }
 
         // Ooops.. something went wrong
