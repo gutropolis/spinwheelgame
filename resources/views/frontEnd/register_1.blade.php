@@ -46,10 +46,10 @@
                           </div>
                           <!--End field-->
                            <!--field-->
-                          <div class="field  {{ $errors->first('password_confirm', 'has-error') }}">
+                          <div class="field  {{ $errors->first('confirm_password', 'has-error') }}">
                             <input type="password" class="inbox-box" name="confirm_password" required id="Confirm Password" placeholder="Confirm Password">
                             <label for="Confirm Password" class="inbox-label">Confirm Password *</label>
-							 {!! $errors->first('password_confirm', '<span class="help-block">:message</span>') !!}
+							 {!! $errors->first('confirm_password', '<span class="help-block">:message</span>') !!}
                           </div>
                         
 
