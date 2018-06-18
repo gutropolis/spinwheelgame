@@ -18,7 +18,7 @@ class UsersSeeder extends Seeder
         //  - All webmaster settings
 
         $newuser = new User();
-        $newuser->name = "admin";
+        $newuser->first_name = "admin";
         $newuser->email = "admin@site.com";
         $newuser->password = bcrypt("admin");
         $newuser->permissions_id = "1";
@@ -31,7 +31,7 @@ class UsersSeeder extends Seeder
         //  - All site settings
 
         $newuser = new User();
-        $newuser->name = "manager";
+        $newuser->first_name = "manager";
         $newuser->email = "manager@site.com";
         $newuser->password = bcrypt("manager");
         $newuser->permissions_id = "2";
@@ -44,7 +44,7 @@ class UsersSeeder extends Seeder
         //  - No site settings & no delete
 
         $newuser = new User();
-        $newuser->name = "user";
+        $newuser->first_name = "user";
         $newuser->email = "user@site.com";
         $newuser->password = bcrypt("user");
         $newuser->permissions_id = "3";
