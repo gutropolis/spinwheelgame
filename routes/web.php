@@ -231,6 +231,17 @@ Route::Group(['prefix' => env('BACKEND_PATH')], function () {
     Route::post('/analytics/{stat}', 'AnalyticsController@filter')->name('analyticsFilter');
     Route::get('/analytics/{stat?}', 'AnalyticsController@index')->name('analytics');
     Route::get('/visitors', 'AnalyticsController@visitors')->name('visitors');
+	
+	//User Management
+    Route::get('/user', 'UsersController@Userindex')->name('user');
+    Route::get('/users/create/', 'UsersController@create')->name('usersCreate');
+    Route::post('/users/store', 'UsersController@store')->name('usersStore');
+    Route::get('/user/{id}/edit', 'UsersController@useredit')->name('userEdit');
+    Route::post('/user/{id}/update', 'UsersController@userupdate')->name('userUpdate');
+    Route::get('/user/destroy/{id}', 'UsersController@userdestroy')->name('userDestroy');
+    Route::post('/users/updateAll', 'UsersController@updateAll')->name('usersUpdateAll');
+	
+	
 
     // Users & Permissions
     Route::get('/users', 'UsersController@index')->name('users');
