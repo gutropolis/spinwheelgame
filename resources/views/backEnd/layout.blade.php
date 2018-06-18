@@ -11,7 +11,7 @@
     <!-- ############ LAYOUT START-->
 
     <!-- aside -->
-   
+    @include('backEnd.includes.menu')
             <!-- / aside -->
 
     <!-- content -->
