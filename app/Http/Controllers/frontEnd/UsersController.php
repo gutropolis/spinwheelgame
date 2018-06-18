@@ -251,6 +251,9 @@ class UsersController extends FrontendHomeController
 			$user->post_code = $request->post_code;
 			$user->gender = $request->gender;
 			$user->dob = $request->dob;
+			$user->country = $request->country;
+			$user->phone = $request->phone_number;	
+			$user->post_code = $request->post_code;				
             if ($request->password != "") {
                 $user->password = bcrypt($request->password);
             }
