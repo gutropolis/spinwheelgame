@@ -17,7 +17,7 @@ class Prize extends Authenticatable
      *
      * @var array
      */
-	 //protected $table = 'gsend_prize';
+	 protected $table = 'prizes';
     protected $fillable = [
         'user_id',
         'prize',
@@ -33,4 +33,7 @@ class Prize extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	public function user() {
+  return $this->belongsTo('App\User');
+ }
 }
