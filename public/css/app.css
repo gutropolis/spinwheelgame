@@ -3503,7 +3503,7 @@ header {
 }
 
 .forgetpwd-modelblock .modal-forgetpwd .head-forgetpwd .title-forgetpwd .forget-img {
-  width: 400px;
+  width: 100%;
 }
 
 @media (max-width: 450px) {
