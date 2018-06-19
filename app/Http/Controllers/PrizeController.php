@@ -6,8 +6,9 @@ use App\AnalyticsPage;
 use App\AnalyticsVisitor;
 use App\Contact;
 use App\Event;
+use App\User;
 use App\Prizelist;
-use Prize;
+use App\Prize;
 use App\Http\Requests;
 use App\Section;
 use App\Topic;
@@ -95,6 +96,54 @@ class PrizeController extends Controller
             return redirect()->action('PrizeController@prizelist');
         }
     }
+	 public function winprizeedit($id)
+    {
+        //
+        // General for all pages
+        $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+       
+            $prizelists = Prize::find($id);
+			$users=User::select('users.created_at','users.first_name','users.id','users.last_name')->join('prizes','prizes.user_id','=','users.id')->get();
+			
+			
+        
+        if (count($prizelists) > 0) {
+            return view("backEnd.prizelist.winedit", compact("prizelists","users","GeneralWebmasterSections"));
+        } else {
+            return redirect()->action('PrizeController@winprize');
+        }
+    }
+	
+	
+	 public function winupdate(Request $request, $id)
+    {   
+
+      
+        $prizelist = Prize::find($id);
+		$point=$request->point;
+		$list=Prize::where('user_id',$prizelist->user_id)->first();
+		//return $list;
+		if(!$list)
+		{
+		
+		
+		$prizelist->user_id=$request->user_name;
+		$prizelist->prize = $request->prize;
+		
+		$prizelist->point = $request->point;
+		
+		$prizelist->save();
+		}else{
+			
+			$update=Prize::where('user_id',$prizelist->user_id)->update(array('point' => $list->point + $point));	
+		}
+		
+		 return redirect()->action('PrizeController@winprizeedit', $id)->with('doneMessage', trans('backLang.saveDone'));
+       
+
+	}
+	
+	
 	 public function update(Request $request, $id)
     {   
       
@@ -110,11 +159,7 @@ class PrizeController extends Controller
         } else {
             return redirect()->action('PrizeController@prizelist');
         }
-		
-		
-		
-		
-		
+
 	}
 	 public function updateAll(Request $request)
     {
@@ -149,15 +194,22 @@ class PrizeController extends Controller
      */
     public function prizedestroy($id)
     {
-        //
-        
-            $prizelist = Prizelist::find($id);
-        
+       $prizelist = Prizelist::find($id);
+        $prizelist->delete();
+       return redirect()->action('PrizeController@prizelist')->with('doneMessage', trans('backLang.deleteDone')); 
+    }
+	 public function windestroy($id)
+    {
+		   $prizelist = Prize::find($id);
+			$prizelist->delete();
+		   return redirect()->action('PrizeController@winprize')->with('doneMessage', trans('backLang.deleteDone')); 
+    }
+	 public function winprize()
+    {
       
-
-            $prizelist->delete();
-            return redirect()->action('PrizeController@prizelist')->with('doneMessage', trans('backLang.deleteDone'));
-        
+		  $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+		  $winlist=Prize::select('prizes.created_at','prizes.id','prizes.prize','prizes.point','users.first_name','users.last_name')->join('users','users.id','=','prizes.user_id')->paginate(env('BACKEND_PAGINATION'));
+		   return view('backEnd.prizelist.winprize',compact('winlist','GeneralWebmasterSections'));
     }
 	 
 	 
