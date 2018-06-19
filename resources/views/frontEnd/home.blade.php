@@ -311,7 +311,7 @@
                                                   <span class="scores">{{$data1->point}} Scores</span>
                                               </div>
                                               <div class="myprogress">
-                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data->progress  }}%"> 
+                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data1->progress  }}%"> 
                                                   </div>
                                               </div>
                                           </div>
@@ -358,7 +358,7 @@
                                                   <span class="scores">{{$data3->point}} Scores</span>
                                               </div>
                                               <div class="myprogress">
-                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data->progress  }}%"> 
+                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data3->progress  }}%"> 
                                                   </div>
                                               </div>
                                           </div>
