@@ -246,7 +246,16 @@ class FrontendHomeController extends Controller
 			$user->permissions_id="3";
 		
 			$user->save();
-           return Redirect::route("Home")->with('success', trans('You Are Succesfully Registered.'));
+		$WebmasterSettings = Setting::find(1);
+		$data = array('user'=>$user);
+	  
+			// Send the activation code through email
+		   Mail::send('emails.register',$data , function($message) use($WebmasterSettings)
+	  {
+	   $message->to($WebmasterSettings->site_webmails)->subject('Register New User');
+	  });
+			
+           return Redirect::back()->with('success_reg', trans('You Are Succesfully Registered.'));
 
         } catch (UserExistsException $e) {
             $this->messageBag->add('email', trans('Your Email Already Exist'));
@@ -278,23 +287,42 @@ class FrontendHomeController extends Controller
     {
 		$prize=$_GET['prize'];
 		//return($prize);
+		$user=Sentinel::getUser();
 		$user_id=Sentinel::getUser()->id;
+		$email=Sentinel::getUser()->email;
+	
 		$get_points=Prizelist::where('prize_name',$prize)->pluck('points');
 		//return($get_points);
 		$point=$get_points[0];
 		
-		$addPrize = new Prize();
+		
 		$userexist = Prize::where('user_id',$user_id)->first();
 		if(!$userexist)
 		{
-		
+		$addPrize = new \App\Prize;
 		$addPrize->user_id = $user_id;
 		$addPrize->prize = $prize;
 	    $addPrize->point = $point;
-	 
-    $addPrize->save(); 
+		
+		$addPrize->save(); 
+		//return $addPrize;
+			$data = array('addPrize'=>$addPrize,'user'=>$user);
+		
+		   Mail::send('emails.spinner', $data , function($message) use($user)
+	  {
+		  
+	   $message->to($user->email)->subject('Won Prize');
+	  });
+	
 		}else{
-				$update=Prize::where('user_id',$user_id)->update(array('point' => $userexist->point + $point));	
+				$update=Prize::where('user_id',$user_id)->update(array('point' => $userexist->point + $point));
+					$addPrize=Prize::where('user_id',$user_id)->first();
+			$data = array('addPrize'=>$addPrize,'user'=>$user);
+		  Mail::send('emails.spinner', $data , function($message) use($user)
+	  {
+		  
+	   $message->to($user->email)->subject('Won Prize');
+	  });
 		}
 	 return view("frontEnd.winprize",  compact("prize"));
         
