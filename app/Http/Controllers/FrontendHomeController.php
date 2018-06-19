@@ -15,6 +15,7 @@ use Helper;
 use App\Country;
 use App\Section;
 use App\Prize;
+use Carbon\Carbon;
 use App\Setting;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
@@ -23,6 +24,7 @@ use App\Notifications\PasswordReset;
 use App\Notifications\PasswordResetted;
 use App\Topic;
 use Validator;
+use App\Prizelist;
 use App\TopicCategory;
 use App\User;
 use App\Webmail;
@@ -116,9 +118,23 @@ class FrontendHomeController extends Controller
                      ->get();  
 		  
 		$userdetails=User::all(); 
+		$yesterday = date("Y-m-d", strtotime( '-1 days' ) );
+		
+		$get_yesterday = Prize::whereDate('created_at', $yesterday )->orderBy('created_at', 'desc')->take(5)->get();
+	
 
+			$currentMonth = date('m');
+      $get_month = Prize::whereRaw('MONTH(created_at) = ?',[$currentMonth])->orderBy('created_at', 'desc')->take(5)->get();
+	  
+		$get_all = Prize::orderBy('created_at', 'desc')->take(5)->get();
+
+//		return ($get_all);
+//return ($get_month);
         return view("frontEnd.home",
             compact("WebsiteSettings",
+				"get_yesterday",
+				"get_month",
+				"get_all",
                 "WebmasterSettings",
                 "HeaderMenuLinks",
                 "FooterMenuLinks",
@@ -261,17 +277,27 @@ class FrontendHomeController extends Controller
 	 public function addspinner()
     {
 		$prize=$_GET['prize'];
-		
+		//return($prize);
 		$user_id=Sentinel::getUser()->id;
-		$point=2;
+		$get_points=Prizelist::where('prize_name',$prize)->pluck('points');
+		//return($get_points);
+		$point=$get_points[0];
 		
 		$addPrize = new Prize();
-		//On left field name in DB and on right field name in Form/view
+		$userexist = Prize::where('user_id',$user_id)->first();
+		if(!$userexist)
+		{
+		
 		$addPrize->user_id = $user_id;
 		$addPrize->prize = $prize;
 	    $addPrize->point = $point;
 	 
     $addPrize->save(); 
+		}else{
+				$update=Prize::where('user_id',$user_id)->update(array('point' => $userexist->point + $point));
+			
+			
+		}
 	 return view("frontEnd.winprize",  compact("prize"));
         
     }
@@ -1152,6 +1178,85 @@ class FrontendHomeController extends Controller
 	 return Redirect::route("HomePage")->with('success', trans('subscription Completed')); 
 	   }			
         }
+	
+	
+	/*public function add_prize(Request $request)
+    {   
+ 
+  $prize=$_REQUEST['prize'];
+  $point=$_REQUEST['point'];
+  //$point=2;
+  
+  $user_id=Sentinel::getUser()->id;  
+  $addPrize = new Prize();   
+  $addPrize->user_id = $user_id;
+  $addPrize->prize = $prize;
+     $addPrize->point = $point;  
+  $addPrize->save();  
+  
+    } */
+ /*<!--------------- Add prize Points ENDS HERE---------------------------------------------------->*/
+ 
+ /*<!-------------Get leaderboard listing STARTS HERE----------------------------------------------->*/
+ 
+  public function leaderboard(Request $request)
+  {   
+   
+   $type = $_GET['type'];
+   
+   switch ($type) {
+    case "yesterday":
+    
+     $yesterday = date("Y-m-d", strtotime( '-1 days' ) );  
+     $get_yesterday = Prize::with('user')->whereDate('created_at', $yesterday )->get();  
+      
+     return $get_yesterday;
+      
+     //return $get_yesterday;
+     break;
+     
+    case "this_month":
+    
+      $this_month = date("m" );
+      $get_month = Prize::whereRaw('MONTH(created_at) = ?',[$this_month])->get();  
+      return $get_month;       
+      break;
+     
+    case "all_time":
+    
+      $get_all = Prize::All();  
+      return $get_all;
+      break;
+      
+    default:
+    
+       $get_all = Prize::All(); 
+       return $get_all;
+   } 
+   
+  } 
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
