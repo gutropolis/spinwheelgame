@@ -8,6 +8,11 @@ use App\User;
 use App\WebmasterSection;
 use Auth;
 use File;
+use Sentinel;
+use Helper;
+use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
+use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Config;
 use Illuminate\Http\Request;
 use Redirect;
@@ -51,6 +56,16 @@ class UsersController extends Controller
         }
         return view("backEnd.users", compact("Users", "Permissions", "GeneralWebmasterSections"));
     }
+	
+	public function Userindex()
+	{
+		 $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+		 $Users = User::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+		   return view("backEnd.user", compact("Users", "GeneralWebmasterSections"));
+    
+		
+	}
+	
 
     /**
      * Show the form for creating a new resource.
@@ -87,29 +102,55 @@ class UsersController extends Controller
 
 
         // Start of Upload Files
-        $formFileName = "photo";
-        $fileFinalName_ar = "";
-        if ($request->$formFileName != "") {
-            $fileFinalName_ar = time() . rand(1111,
-                    9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
-            $path = base_path() . "/public/" . $this->getUploadPath();
-            $request->file($formFileName)->move($path, $fileFinalName_ar);
-        }
+       $formFileName = "photo";
+            $fileFinalName_ar = "";
+            if ($request->$formFileName != "") {
+                $fileFinalName_ar = time() . rand(1111,
+                        9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                $path = base_path() . "/public/" . $this->getUploadPath();
+                $request->file($formFileName)->move($path, $fileFinalName_ar);
+            }
+            
         // End of Upload Files
 
-        $User = new User;
-        $User->name = $request->name;
-        $User->email = $request->email;
-        $User->password = bcrypt($request->password);
-        $User->permissions_id = $request->permissions_id;
-        $User->photo = $fileFinalName_ar;
-        $User->connect_email = $request->connect_email;
-        $User->connect_password = $request->connect_password;
-        $User->status = 1;
-        $User->created_by = Auth::user()->id;
-        $User->save();
+       try {
+		    $user = Sentinel::registerAndActivate([
+		'first_name' => $request->get('first_name'),
+		'last_name' => $request->get('last_name'),
+        'email' => $request->get('email'),
+        'password' => $request->get('password'),
+       
+ ]);
+	$user->permissions_id = $request->permissions_id;
+         if ($request->photo_delete == 1) {
+                // Delete a User file
+                if ($user->photo != "") {
+                    File::delete($this->getUploadPath() . $user->photo);
+                }
 
+                $user->photo = "";
+            }
+            if ($fileFinalName_ar != "") {
+                // Delete a User file
+                if ($user->photo != "") {
+                    File::delete($this->getUploadPath() . $user->photo);
+                }
+
+                $user->photo = $fileFinalName_ar;
+            }
+		$user->remember_token = Helper::generateUuid();
+        $user->connect_email = $request->connect_email;
+        $user->connect_password = $request->connect_password;
+        $user->status = 1;
+        $user->created_by = Auth::user()->id;
+		$user->save();
         return redirect()->action('UsersController@index')->with('doneMessage', trans('backLang.addDone'));
+     } catch (UserExistsException $e) {
+            $this->messageBag->add('email', trans('Your Email Already Exist'));
+        }
+
+        // Ooops.. something went wrong
+        return Redirect::back()->withInput()->withErrors($this->messageBag);
     }
 
     public function getUploadPath()
@@ -147,6 +188,30 @@ class UsersController extends Controller
             return redirect()->action('UsersController@index');
         }
     }
+	
+	
+	
+	 public function useredit($id)
+    {
+        //
+        // General for all pages
+        $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+        // General END
+        $Permissions = Permissions::orderby('id', 'asc')->get();
+
+        if (@Auth::user()->permissionsGroup->view_status) {
+            $Users = User::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->find($id);
+        } else {
+            $Users = User::find($id);
+        }
+        if (count($Users) > 0) {
+            return view("backEnd.user.edit", compact("Users", "Permissions", "GeneralWebmasterSections"));
+        } else {
+            return redirect()->action('UsersController@Userindex');
+        }
+    }
+	
+	
 
     /**
      * Update the specified resource in storage.
@@ -155,7 +220,85 @@ class UsersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function userupdate(Request $request, $id)
+    {   
+      
+        $User = User::find($id);
+        if (count($User) > 0) { 
+		
+            $this->validate($request, [
+                'photo' => 'mimes:png,jpeg,jpg,gif|max:3000',
+                'first_name' => 'required',
+                'permissions_id' => 'required'
+            ]);
+
+            if ($request->email != $User->email) {
+                $this->validate($request, [
+                    'email' => 'required|email|unique:users',
+                ]);
+            }
+            // Start of Upload Files
+            $formFileName = "photo";
+            $fileFinalName_ar = "";
+            if ($request->$formFileName != "") {
+                $fileFinalName_ar = time() . rand(1111,
+                        9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                $path = base_path() . "/public/" . $this->getUploadPath();
+                $request->file($formFileName)->move($path, $fileFinalName_ar);
+            }
+            // End of Upload Files
+
+            //if ($id != 1) {
+            $User->first_name = $request->first_name;
+			$User->last_name = $request->last_name;
+			$User->address = $request->address;
+			$User->country = $request->country;
+            $User->email = $request->email;	
+			$User->post_code = $request->post_code;
+			$User->gender = $request->gender;
+			$User->dob = $request->dob;
+			$User->country = $request->country;
+			$User->phone = $request->phone_number;	
+			$User->post_code = $request->post_code;	
+            if ($request->password != "") {
+                $User->password = bcrypt($request->password);
+            }
+            $User->permissions_id = $request->permissions_id;
+            //}
+            if ($request->photo_delete == 1) {
+                // Delete a User file
+                if ($User->photo != "") {
+                    File::delete($this->getUploadPath() . $User->photo);
+                }
+
+                $User->photo = "";
+            }
+            if ($fileFinalName_ar != "") {
+                // Delete a User file
+                if ($User->photo != "") {
+                    File::delete($this->getUploadPath() . $User->photo);
+                }
+
+                $User->photo = $fileFinalName_ar;
+            }
+
+            $User->connect_email = $request->connect_email;
+            if ($request->connect_password != "") {
+                $User->connect_password = $request->connect_password;
+            }
+
+            $User->status = "1";
+            $User->updated_by = Auth::user()->id;
+            $User->save();
+            return redirect()->action('UsersController@useredit', $id)->with('doneMessage', trans('backLang.saveDone'));
+        } else {
+            return redirect()->action('UsersController@Userindex');
+        }
+    }
+
+	
+	//User Update
+	 public function update(Request $request, $id)
     {   
         //
         $User = User::find($id);
@@ -222,12 +365,38 @@ class UsersController extends Controller
         }
     }
 
+	
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+	 
+	  public function userdestroy($id)
+    {
+        //
+        if (@Auth::user()->permissionsGroup->view_status) {
+            $User = User::where('created_by', '=', Auth::user()->id)->find($id);
+        } else {
+            $User = User::find($id);
+        }
+        if (count($User) > 0 && $id != 1) {
+            // Delete a User photo
+            if ($User->photo != "") {
+                File::delete($this->getUploadPath() . $User->photo);
+            }
+
+            $User->delete();
+            return redirect()->action('UsersController@Userindex')->with('doneMessage', trans('backLang.deleteDone'));
+        } else {
+            return redirect()->action('UsersController@Userindex');
+        }
+    }
+	 
+	 
+	 
+	 
     public function destroy($id)
     {
         //
