@@ -27,11 +27,11 @@
                       <a  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          @if(Sentinel::getUser()->photo)
                                 <img src="{!! url('/').'/uploads/users/'.Sentinel::getUser()->photo !!}" alt="img" height="35px" width="35px"
-                                     class="img-circle img-responsive pull-left"/>
+                                     class="img-circle img-responsive pull-left user-img"/>
           @else
                                <img src="frontEnd/images/user.png" class="user-img" alt="img" height="35px" width="35px"
                                      class="img-circle img-responsive pull-left"/>
-
+									
                            
           @endif
                       </a>
@@ -45,7 +45,7 @@
        @else
           
      <a class="btn-sign" type="signup" href = "{{ route('signup') }}">Signup</a>
-                    <a class="btn-login" type="login" data-toggle="modal" data-target="#mymodal">Login</a>
+      <a class="btn-login" type="login" data-toggle="modal" data-target="#mymodal">Login</a>
      @endif
                     <!--social-icons-->
                     <div class="social-icons">
