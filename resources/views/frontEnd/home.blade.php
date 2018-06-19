@@ -2,12 +2,13 @@
 
 @section('title', 'Home | Raodeals')  
 
-@section('content')
-
+@section('content')  
+	
+	
+	
     <div class="banner">
     <!--container-->
     <div class="container">
-	
         <!--row-->
         <div class="row">
             <!--banner-content-->
@@ -16,18 +17,15 @@
                 <h1 class="banner-heading">Get <span>Big Deals Today</span> By Raodeals</h1>
                 <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
                 <!--input-group input-mail-->
-				<form name="subscribeforms" id="subscribeforms" method="post" action="/subscribeform">
-				 {{ csrf_field() }}
                 <div class="input-group input-mail">
                    <!--form control--> 
-                   <input type="email" name="subscribe_email" class="form-control btn-form-control" placeholder="Enter Your Email">
+                   <input type="text" class="form-control btn-form-control" placeholder="Enter Your Email">
                    <!--input-group subscribe-btn-->
                    <span class="input-group-btn group-btn-subscribe">
-                        <button class="btn btn-default btn-subscribe" >Subscribe</button>
+                        <a href="" class="btn btn-default btn-subscribe" type="button">Subscribe</a>
                    </span>
                    <!--End input-group-->
                 </div>
-				</form>
                 <!--End input-group input-mail-->
             </div>
             <!--End banner-content-->
@@ -84,7 +82,7 @@
                         <!--End video-block-->
 
                         <!--btn for sign up-->
-                        <a href="{{ route('signup')}}" class="signup-btn" type="button"><h3 class="m-0 p-0" style="font-size: 20px">SIGN UP NOW, IT’S FREE</h3></a >
+                        <button class="signup-btn"><h3 class="m-0 p-0" style="font-size: 20px">SIGN UP NOW, IT’S FREE</h3></button>
                     </div>
                     <!--end working-data-list-->
                 </div>
@@ -215,31 +213,30 @@
                 <div class="row">
 
                       <!--col-md-3-->
-                      <div class="col-md-3 pr-0">
-                          <div class="leadership-detail">
-                              <p class="prev">Yesterday</p>
-                              <p class="active">This Month</p>
-                              <p class="next">All Time</p>
+                     <div class="col-md-3 pr-0">
+                          <div class="" >
+							<ul class="leadership-detail nav nav-tabs">
+                             <li class="prev"><a data-toggle="tab" href="#yesterday">Yesterday</a></li>
+							<li class="active-element active"><a  data-toggle="tab" href="#month">This Month</a></li>
+							<li class="next"><a data-toggle="tab" href="#all_time">All Time</a></li>
+						  </ul>
                           </div>
-                      </div>
+						  </div>
+                     
                       <!--end col-md-3-->
 
                       <!--col-md-9-->
                       <div class="col-md-9 p-0">
                           <!--leftbar-->
-                          <div class="leftbar">
-
-							@php
+						 
+                          <div class="leftbar tab-content">
+					  <div id="yesterday" class="tab-pane fade ">
+					  @php
 								$i = 1
-							@endphp
-							
-                            @foreach ($maximumPoint as $mxpoint)
-                            @foreach ($userdetails as $user)
-		
-                              @if ($user->id == $mxpoint->user_id)							  
-   
-                                <!--leader-ship-chart-->
-                                <div class="leadership-chart">
+							@endphp 
+						 
+							@foreach( $get_yesterday  as $data )  
+							<div class="leadership-chart">
                                     <!---leadership-block-->
                                     <div class="leadership-block">
                                       <!--serial no-->
@@ -247,18 +244,26 @@
                                       <!--leadership-chart-record-->
                                       <div class="leadership-chart-record">
                                           <!--circle-->
+										  @if($data->user->photo)
                                           <div class="circle"> 
-                                              <img src="{{ URL::asset('/uploads/users/'.$user->photo) }}">
+                                              <img src="{{ URL::asset('/uploads/users/'.$data->user->photo) }}" alt="img" height="35px" width="35px"
+													 class="img-circle img-responsive pull-left"/>  
                                           </div>
+										  @else
+										  <div class="circle"> 
+											   <img src="{{ URL::asset('/uploads/users/avatar.png') }}" alt="img" height="35px" width="35px"
+													 class="img-circle img-responsive pull-left"/>  
+										  </div>
+										 @endif
                                           <!--circle-->
                                           <!--leader-ship- bar-->
                                           <div class="leader-bar">
                                               <div class="leader-name">
-                                                  <span class="name">{{$user->first_name}}</span>
-                                                  <span class="scores">{{$mxpoint->maxcount}} Scores</span>
+                                                  <span class="name">{{$data->user->first_name}}</span>
+                                                  <span class="scores">{{$data->point}} Scores</span>
                                               </div>
                                               <div class="myprogress">
-                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $mxpoint->progress  }}%"> 
+                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data->progress  }}%"> 
                                                   </div>
                                               </div>
                                           </div>
@@ -268,18 +273,108 @@
                                     </div>
                                     <!---End leadership-block-->
                                 </div>
-                                <!--End leader-ship-chart-->
-								@php
+									@php
 									$i++
 								@endphp
-                                 @endif
-                               @endforeach
-                               @endforeach
-                                
-                               
-                          </div>
-                          <!--End leftbar-->
-                      </div>
+								@endforeach
+					  </div>
+					  <div id="month" class="tab-pane active">
+					 @php
+								$i = 1
+							@endphp 
+						 
+							@foreach( $get_month  as $data1 )  
+							<div class="leadership-chart">
+                                    <!---leadership-block-->
+                                    <div class="leadership-block">
+                                      <!--serial no-->
+                                      <span class="serial-no-active">{{ $i }}</span>
+                                      <!--leadership-chart-record-->
+                                      <div class="leadership-chart-record">
+                                          <!--circle-->
+										  @if($data1->user->photo)
+                                          <div class="circle"> 
+                                              <img src="{{ URL::asset('/uploads/users/'.$data1->user->photo) }}" alt="img" height="35px" width="35px"
+													 class="img-circle img-responsive pull-left"/>  
+                                          </div>
+										  @else
+										  <div class="circle"> 
+											   <img src="{{ URL::asset('/uploads/users/avatar.png') }}" alt="img" height="35px" width="35px"
+													 class="img-circle img-responsive pull-left"/>  
+										  </div>
+										 @endif
+                                          <!--circle-->
+                                          <!--leader-ship- bar-->
+                                          <div class="leader-bar">
+                                              <div class="leader-name">
+                                                  <span class="name">{{$data1->user->first_name}}</span>
+                                                  <span class="scores">{{$data1->point}} Scores</span>
+                                              </div>
+                                              <div class="myprogress">
+                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data->progress  }}%"> 
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!--End leader-ship- bar-->
+                                      </div>
+                                      <!--End leadership-chart-record-->
+                                    </div>
+                                    <!---End leadership-block-->
+                                </div>	@php
+									$i++
+								@endphp
+								@endforeach
+					</div>
+					  <div id="all_time" class="tab-pane fade">
+						 @php
+								$i = 1
+							@endphp 
+						 
+							@foreach( $get_all  as $data3 )  
+							<div class="leadership-chart">
+                                    <!---leadership-block-->
+                                    <div class="leadership-block">
+                                      <!--serial no-->
+                                      <span class="serial-no-active">{{ $i }}</span>
+                                      <!--leadership-chart-record-->
+                                      <div class="leadership-chart-record">
+                                          <!--circle-->
+										  @if($data3->user->photo)
+                                          <div class="circle"> 
+                                              <img src="{{ URL::asset('/uploads/users/'.$data3->user->photo) }}" alt="img" height="35px" width="35px"
+													 class="img-circle img-responsive pull-left"/>  
+                                          </div>
+										  @else
+										  <div class="circle"> 
+											   <img src="{{ URL::asset('/uploads/users/avatar.png') }}" alt="img" height="35px" width="35px"
+													 class="img-circle img-responsive pull-left"/>  
+										  </div>
+										 @endif
+                                          <!--circle-->
+                                          <!--leader-ship- bar-->
+                                          <div class="leader-bar">
+                                              <div class="leader-name">
+                                                  <span class="name">{{$data3->user->first_name}}</span>
+                                                  <span class="scores">{{$data3->point}} Scores</span>
+                                              </div>
+                                              <div class="myprogress">
+                                                  <div class="progress-bar mybar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:{{ $data->progress  }}%"> 
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!--End leader-ship- bar-->
+                                      </div>
+                                      <!--End leadership-chart-record-->
+                                    </div>
+                                    <!---End leadership-block-->
+                                </div>	@php
+									$i++
+								@endphp
+								@endforeach
+					  </div>
+						</div>
+					   </div>
+					  
                       <!--End col-md-9-->
                 </div>
                 <!--End row-->
@@ -353,7 +448,7 @@
                         <input type="text" name="name" class="form-control contact-form-control" placeholder="Full Name">
                       </div> 
                       <div class="form-group contact-form-group">                       
-                        <textarea class="form-control contact-form-control" name="message" rows="4" placeholder="Message"></textarea>
+                        <textarea class="form-control contact-form-control" name="messsage" rows="4" placeholder="Message"></textarea>
                       </div>                      
                       <button type="submit" class="btn btn-submit" >Submit</button>
                     </form>
