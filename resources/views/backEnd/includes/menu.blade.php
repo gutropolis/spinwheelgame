@@ -163,9 +163,9 @@ $urlAfterRoot = substr($fullPagePath, strpos($fullPagePath, env('BACKEND_PATH'))
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="{{ route('contacts') }}">
-<span class="nav-icon">
-<i class="material-icons">&#xe7ef;</i>
-</span>
+							<span class="nav-icon">
+							<i class="material-icons">&#xe7ef;</i>
+							</span>
                                     <span class="nav-text">{{ trans('backLang.newsletter') }}</span>
                                 </a>
                             </li>
@@ -234,9 +234,14 @@ $urlAfterRoot = substr($fullPagePath, strpos($fullPagePath, env('BACKEND_PATH'))
 							<li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                         <a onclick="location.href='{{ route('prizelist') }}'">
                                             <span class="nav-text">Prize Setting</span>
-						 </ul>
+						 
                     </li>
-					
+					<li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
+                                        <a onclick="location.href='{{ route('winprize') }}'">
+                                            <span class="nav-text">Win Prize List</span>
+						 
+                    </li>
+					</ul>
 					
 					
 					
