@@ -18,8 +18,8 @@
                             <th>First Name</th>
 							<th>Last Name</th>
                             <th>Email</th> 
-                            <th>Status</th>
-							 <th ">Action</th>
+                            <th class="text-center">Status</th>
+							 <th class="text-center">Action</th>
                           
                         </tr>
                         </thead>
