@@ -210,6 +210,36 @@ $urlAfterRoot = substr($fullPagePath, strpos($fullPagePath, env('BACKEND_PATH'))
                             </li>
                         @endif
                     @endif
+					
+					
+					   <li>
+                        <a href="{{ route('user') }}" onclick="location.href='{{ route('user') }}'">
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe3fc;</i>
+                  </span>
+                            <span class="nav-text">User Management</span>
+                        </a>
+                    </li>
+					 <li>
+                       <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                                    <span class="nav-icon">
+                    <i class="material-icons">&#xe1b8;</i>
+                  </span>
+                                    <span class="nav-text">Prize Management</span>
+                                </a>
+						 <ul class="nav-sub">
+							<li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
+                                        <a onclick="location.href='{{ route('prizelist') }}'">
+                                            <span class="nav-text">Prize Setting</span>
+						 </ul>
+                    </li>
+					
+					
+					
+					
                     <li class="nav-header hidden-folded">
                         <small class="text-muted">{{ trans('backLang.siteData') }}</small>
                     </li>
