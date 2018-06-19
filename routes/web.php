@@ -344,6 +344,26 @@ Route::group(['namespace'=>'frontEnd'], function () {
  Route::get('/users/{id}/edit', 'UsersController@edit_profile')->name('profileEdit');
  Route::post('/users/{id}/update', 'UsersController@update')->name('profileUpdate');
 });
+
+//add points
+Route::get('/add_prize', 'FrontendHomeController@add_prize')->name('add_prize');
+//Show detail
+Route::get('/leaderboard', 'FrontendHomeController@leaderboard')->name('leaderboard');
+
+//Prize Management
+Route::get('prizelist','PrizeController@prizelist')->name('prizelist');
+Route::post('/prize/updateAll', 'PrizeController@updateAll')->name('prizeUpdateAll');
+Route::get('/prize/destroy/{id}', 'PrizeController@prizeDestroy')->name('prizeDestroy');
+Route::get('/prize/create/', 'PrizeController@create')->name('prizeCreate');
+Route::post('/prize/store', 'PrizeController@store')->name('prizeStore');
+Route::get('/prize/{id}/edit', 'PrizeController@edit')->name('prizeEdit');
+Route::post('/prize/{id}/update', 'PrizeController@update')->name('prizeUpdate');
+Route::get('winprize','PrizeController@winprize')->name('winprize');
+Route::post('/winlist/updateAll', 'PrizeController@winlistupdateAll')->name('winlistUpdateAll');
+Route::get('/winlist/destroy/{id}', 'PrizeController@Destroy')->name('winDestroy');
+Route::get('/winlist/{id}/edit', 'PrizeController@winprizeedit')->name('winprizeEdit');
+Route::post('/win/{id}/update', 'PrizeController@winupdate')->name('winprizeUpdate');
+
 //Spinner
 Route::get('/spinerwheel', 'FrontendHomeController@spinerwheel')->name('spinerwheel');
 Route::get('/addspinner', 'FrontendHomeController@addspinner')->name('addspinner');
