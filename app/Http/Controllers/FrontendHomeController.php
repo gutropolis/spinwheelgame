@@ -294,9 +294,7 @@ class FrontendHomeController extends Controller
 	 
     $addPrize->save(); 
 		}else{
-				$update=Prize::where('user_id',$user_id)->update(array('point' => $userexist->point + $point));
-			
-			
+				$update=Prize::where('user_id',$user_id)->update(array('point' => $userexist->point + $point));	
 		}
 	 return view("frontEnd.winprize",  compact("prize"));
         
