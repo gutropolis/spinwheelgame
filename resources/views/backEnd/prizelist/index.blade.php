@@ -34,7 +34,7 @@
                             <th>Prize Name</th>
 							<th>Points</th>
                             <th>Created On</th> 
-                            <th>Action</th>
+                            <th class="text-center">Action</th>
                           
                         </tr>
                         </thead>
