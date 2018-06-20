@@ -38,7 +38,7 @@ class PrizeController extends Controller
     public function prizelist()
     {
 			  $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
-		 $prizelist = Prizelist::paginate(env('BACKEND_PAGINATION'));
+		 $prizelist = Prizelist::paginate('5');
 		return view('backEnd.prizelist.index',compact('prizelist','GeneralWebmasterSections'));
     }
 	public function create()
