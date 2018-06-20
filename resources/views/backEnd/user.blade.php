@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                             <!-- / .modal -->
-                          
+							
                                 <select name="action" id="action" class="input-sm form-control w-sm inline v-middle"
                                         required>
                                     <option value="">{{ trans('backLang.bulkAction') }}</option>
