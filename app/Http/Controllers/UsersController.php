@@ -60,7 +60,7 @@ class UsersController extends Controller
 	public function Userindex()
 	{
 		 $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
-		 $Users = User::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+		 $Users = User::orderby('id', 'asc')->paginate('5');
 		   return view("backEnd.user", compact("Users", "GeneralWebmasterSections"));
     
 		
