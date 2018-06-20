@@ -28,8 +28,9 @@
                          @if(Sentinel::getUser()->photo)
                                 <img src="{!! url('/').'/uploads/users/'.Sentinel::getUser()->photo !!}" alt="img" height="35px" width="35px"
                                      class="img-circle img-responsive pull-left user-img"/>
+									 
           @else
-                               <img src="frontEnd/images/user.png" class="user-img" alt="img" height="35px" width="35px"
+                               <img src="{!! url('/').'/uploads/users/user.png'!!}" class="user-img" alt="img" height="35px" width="35px"
                                      class="img-circle img-responsive pull-left"/>
 									
                            
