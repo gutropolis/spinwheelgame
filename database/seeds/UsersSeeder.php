@@ -19,6 +19,7 @@ class UsersSeeder extends Seeder
 
         $newuser = new User();
         $newuser->first_name = "admin";
+		$newuser->last_name = "admin";
         $newuser->email = "admin@site.com";
         $newuser->password = bcrypt("admin");
         $newuser->permissions_id = "1";
@@ -32,6 +33,7 @@ class UsersSeeder extends Seeder
 
         $newuser = new User();
         $newuser->first_name = "manager";
+		$newuser->last_name = "manager";
         $newuser->email = "manager@site.com";
         $newuser->password = bcrypt("manager");
         $newuser->permissions_id = "2";
@@ -45,6 +47,7 @@ class UsersSeeder extends Seeder
 
         $newuser = new User();
         $newuser->first_name = "user";
+		$newuser->last_name = "user";
         $newuser->email = "user@site.com";
         $newuser->password = bcrypt("user");
         $newuser->permissions_id = "3";
