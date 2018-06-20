@@ -172,7 +172,7 @@
                           </div>
                         
 
-                          <button type="submit" class="btn-join">Join LuckyWheel!</button>
+                          <button type="submit" class="btn-join">Join Raodeal!</button>
                           <!--End field-->
 						  </div>
                       </form>
