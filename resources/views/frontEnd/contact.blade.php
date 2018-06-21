@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-8">
                 <div class="heading-contactus">
-                    Contact us
+                     Get in touch with us by filling contact form below
                 </div>
                 <!--contactus-form-->
                 <div class="contactus-form">
@@ -43,42 +43,60 @@
                 <!-- End contactus-form-->
             </div>
             <div class="col-md-12 col-lg-4">
-                <div class="address-section-rightbar">
-                    <div class="address-block">
-                        <div class="home-address">
-                            <div class="home-address-elements">
-                                <div class="circle-home">
-                                    <i class="material-icons address-icon">home</i>
-                                </div>
-                                <div class="content">01 Design Street, Coupon, Janua, America.</div>
-                            </div>
-                        </div>
+              
+                    
+			<div class="p20">
 
-                        <div class="home-address home-address-home">
-                            <div class="home-address-elements">
-                                <div class="circle ">
-                                    <i class="fa fa-phone address-icon"></i>
-                                </div>
-                                <div class="content">
-                                    <p class="m-0">(+555) 583-243-982</p> 
-                                    <p class="m-0">(+555) 200-243-657</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="home-address">
-                            <div class="home-address-elements">
-                                <div class="circle">
-                                    <i class="fa fa-envelope-o address-icon"></i>
-                                </div>
-                                <div class="content">
-                                    <p class="m-0">Email@address.com</p>
-                                    <p class="m-0">info@address.com</p>
-                                </div>
-                            </div>
-                        </div>
+                        <h4><i class="fa fa-envelope"></i> {{ trans('frontLang.contactDetails') }}</h4>
+                        @if(Helper::GeneralSiteSettings("contact_t1_" . trans('backLang.boxCode')) !="")
+                            <address>
+                                <i class="fa fa-map-marker"></i>
+                                <strong>{{ trans('frontLang.address') }}:</strong><br>
+                                {{ Helper::GeneralSiteSettings("contact_t1_" . trans('backLang.boxCode')) }}
+                            </address>
+                        @endif
+                        @if(Helper::GeneralSiteSettings("contact_t3") !="")
+                            <p>
+                                <i class="fa fa-phone"></i>
+                                <strong>{{ trans('frontLang.callPhone') }}:</strong><br>
+                                <span
+                                        dir="ltr">{{ Helper::GeneralSiteSettings("contact_t3") }}</span>
+                            </p>
+                        @endif
+                        @if(Helper::GeneralSiteSettings("contact_t5") !="")
+                            <p>
+                                <i class="fa fa-phone"></i>
+                                <strong>{{ trans('frontLang.callMobile') }}:</strong><br>
+                                <span
+                                        dir="ltr">{{ Helper::GeneralSiteSettings("contact_t5") }}</span>
+                            </p>
+                        @endif
+                        @if(Helper::GeneralSiteSettings("contact_t4") !="")
+                            <p>
+                                <i class="fa fa-fax"></i>
+                                <strong>{{ trans('frontLang.callFax') }}:</strong><br>
+                                <span
+                                        dir="ltr">{{ Helper::GeneralSiteSettings("contact_t4") }}</span>
+                            </p>
+                        @endif
+                        @if(Helper::GeneralSiteSettings("contact_t6") !="")
+                            <p>
+                                <i class="fa fa-envelope"></i>
+                                <strong>{{ trans('frontLang.email') }}:</strong><br>
+                                {{ Helper::GeneralSiteSettings("contact_t6") }}
+                            </p>
+                        @endif
+                        @if(Helper::GeneralSiteSettings("contact_t7_" . trans('backLang.boxCode')) !="")
+                            <p>
+                                <i class="fa fa-clock-o"></i>
+                                <strong>{{ trans('frontLang.callTimes') }}:</strong><br>
+                                {{ Helper::GeneralSiteSettings("contact_t7_" . trans('backLang.boxCode')) }}
+                            </p>
+                        @endif
                     </div>
-                </div>
+
+                  
+             
             </div>
         </div>
     </div>
