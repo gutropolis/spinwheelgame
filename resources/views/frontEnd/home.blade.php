@@ -82,7 +82,7 @@
                         <!--End video-block-->
 
                         <!--btn for sign up-->
-                        <button class="signup-btn"><h3 class="m-0 p-0" style="font-size: 20px">SIGN UP NOW, IT’S FREE</h3></button>
+                        <a href="{{route('signup')}}" type="button" class="signup-btn"><h3 class="m-0 p-0" style="font-size: 20px">SIGN UP NOW, IT’S FREE</h3></a>
                     </div>
                     <!--end working-data-list-->
                 </div>
