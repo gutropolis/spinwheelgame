@@ -109,7 +109,7 @@
                 <p class="sign-up-content">
                 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
                 </p>
-                <a class="signup-button btn btn-default"" href=""><h3 class="m-0 p-0">Sign Up Now, It's Free</h3></a>
+                <a class="signup-button btn btn-default"" href="{{route('signup')}}"><h3 class="m-0 p-0">Sign Up Now, It's Free</h3></a>
             </div>
         </div>
         <!--end blocks-->
