@@ -19,9 +19,7 @@ class Prizelist extends Authenticatable
      */
 	 protected $table = 'prizelist';
     protected $fillable = [
-        'user_id',
-        'prize',
-        'point',
+        
         
     ];
 
