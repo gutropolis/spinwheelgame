@@ -167,6 +167,10 @@ class FrontendHomeController extends Controller
 
     }
 	
+	 public function faq()
+    {
+        return view('frontEnd.faq');
+    }
 	
 	 public function contactsus()
     {
