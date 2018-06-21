@@ -97,10 +97,10 @@
 	}
 
 	.address-section-rightbar{
-		@include background('../images/girl-baloon.png');
+		
 		padding: 10px;
 		border-radius: 10px;
-		margin-top: $space-l + $space-l - 2px;
+	
 		margin-left: $space-s + 1px;
 		background-size: cover;
 
