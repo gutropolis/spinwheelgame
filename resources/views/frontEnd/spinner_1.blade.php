@@ -29,7 +29,7 @@
                               <div class="form-group">
                                   <input type="email" class="form-control mail-input" placeholder="Enter Your Email">
                               </div>
-                              <button type="submit" class="lucky-btn ">Try Your Luck</button>
+                              <a href="{{route('signup')}}" type="submit" class="lucky-btn ">Try Your Luck</a>
                             </form>
                           </div>
                       </div>
