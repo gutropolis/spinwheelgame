@@ -27,9 +27,9 @@
                                   lucky winner! Your email
                               </P>
                               <div class="form-group">
-                                  <input type="email" class="form-control mail-input" placeholder="Enter Your Email">
+                                  <input type="email" class="form-control mail-input"  required placeholder="Enter Your Email">
                               </div>
-                              <a href="{{route('signup')}}" type="submit" class="lucky-btn ">Try Your Luck</a>
+                              <a href="{{route('signup')}}" type="button" class="lucky-btn ">Try Your Luck</a>
                             </form>
                           </div>
                       </div>
