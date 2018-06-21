@@ -13,7 +13,7 @@ header {
 	padding-bottom: $space-vs + 2px;
 	.my-navbar {
 		justify-content: flex-start;
-		margin-left: $space-m + $space-l + $space-s + $space-vs;
+		margin-left: auto;
 		margin-top: $space-vs - 1px;
 		@media (max-width: $break-lg){
 			margin-left: $space-none;
