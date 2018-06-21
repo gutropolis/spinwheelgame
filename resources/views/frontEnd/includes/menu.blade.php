@@ -3,11 +3,18 @@
  <nav class="navbar navbar-expand-lg navbar-light  my-nav">
  <div class="container">
 
-	 <a class="navbar-brand" href="#">
-			
-              <img src="{{url::asset('frontEnd/images/logo.png') }}" alt="Raodeals logo"> 
-            </a>
-	
+	                <a class="navbar-brand" href="{{ route('Home') }}">
+                    @if(Helper::GeneralSiteSettings("style_logo_" . trans('backLang.boxCode')) !="")
+                        <img alt=""
+                             src="{{ URL::to('uploads/settings/'.Helper::GeneralSiteSettings("style_logo_" . trans('backLang.boxCode'))) }}">
+                    @else
+                        <img alt="" src="{{ URL::to('uploads/settings/nologo.png') }}">
+                    @endif
+
+                </a>
+	<button class="navbar-toggler menu-icon" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="">
+            <span class="navbar-toggler-icon"></span>
+            </button>
  <div class="collapse navbar-collapse my-navbar" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto mr-auto nav-menu">
    
@@ -15,8 +22,9 @@
                 <li class="nav-item menu-items ">
                     <a class ="menu-items-in" href = "{{route('Home')}}">Home</a>
 					<a class ="menu-items-in" href = "{{route('aboutus')}}">About Us</a>
-					<a class ="menu-items-in" href = "{{route('contactsus')}}">Contact Us</a>
 					<a class ="menu-items-in" href = "{{route('howitwork')}}">How it Work</a>
+					<a class ="menu-items-in" href = "{{route('contactsus')}}">Contact Us</a>
+					<a class ="menu-items-in" href = "{{route('faq')}}">FAQ</a>
                 </li>
           
 
