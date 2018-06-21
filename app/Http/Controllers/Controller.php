@@ -118,6 +118,11 @@ class Controller extends BaseController
                 $section = 1;
                 return $this->addspinner($section, $id);
                 break;
+				case "faq" :
+                $id = 3;
+                $section = 1;
+                return $this->faq($section, $id);
+                break;
             case "privacy" :
                 $id = 3;
                 $section = 1;
