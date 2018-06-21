@@ -259,7 +259,7 @@ class FrontendHomeController extends Controller
 	   $message->to($WebmasterSettings->site_webmails)->subject('Register New User');
 	  });
 			
-           return Redirect::back()->with('success_reg', trans('You Are Succesfully Registered.'));
+           return Redirect::back()->with('success_reg', trans('You Are Succesfully Registered.Now click On Login'));
 
         } catch (UserExistsException $e) {
             $this->messageBag->add('email', trans('Your Email Already Exist'));
@@ -294,7 +294,7 @@ class FrontendHomeController extends Controller
 		$user=Sentinel::getUser();
 		$user_id=Sentinel::getUser()->id;
 		$email=Sentinel::getUser()->email;
-	
+	//return $email;
 		$get_points=Prizelist::where('prize_name',$prize)->pluck('points');
 		//return($get_points);
 		$point=$get_points[0];
