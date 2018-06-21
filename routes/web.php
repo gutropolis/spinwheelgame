@@ -322,7 +322,10 @@ Route::Group(['prefix' => '/api/v1'], function () {
 Route::get('/sitemap.xml', 'SiteMapController@siteMap')->name('siteMap');
 Route::get('/{lang}/sitemap', 'SiteMapController@siteMap')->name('siteMapByLang');
 
-Route::get('/', 'FrontendHomeController@HomePage')->name('Home');
+Route::get('/', 'FrontendHomeController@subscribepopeup');
+
+Route::get('/Home', 'FrontendHomeController@HomePage')->name('Home');
+
 Route::get('/howitwork', 'FrontendHomeController@Howitwork')->name('howitwork');
 Route::get('/faq', 'FrontendHomeController@faq')->name('faq');
 
@@ -337,6 +340,7 @@ Route::get('/loginpage', 'FrontendHomeController@loginpage')->name('loginpage');
 Route::post('/checklogin', 'FrontendHomeController@checklogin');
 Route::post('/password', 'FrontendHomeController@password');
 Route::get('/subscribepopeup', 'FrontendHomeController@subscribepopeup');
+Route::get('/faq', 'FrontendHomeController@faq')->name('faq');
 Route::post('/subscribeform','FrontendHomeController@subscribeform');
 
 //userEdit
