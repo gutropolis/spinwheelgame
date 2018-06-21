@@ -15,23 +15,21 @@
                 <ul class="footer-nav-menu">
                     <!-- menu-items-->
                     <li class="footer-menu-items">
-                        <a class="menu-items-in" href="{{ route("Home") }}">Home <span class="sr-only">(current)</span></a>
+                        <a class="menu-items-in" href="{{ route('Home') }}">Home <span class="sr-only">(current)</span></a>
                     </li>                  
                     <li class="footer-menu-items">
-                        <a class="menu-items-in" >About us</a>
+                       <a class="menu-items-in" href="{{ route('aboutus') }}">About Us </a>
                     </li>
                     <li class="footer-menu-items">
-                        <a class="menu-items-in" >Contact us</a>
+                          <a class="menu-items-in" href="{{ route('contactsus') }}">Contact Us </a>
                     </li>
                     <li class="footer-menu-items">
-                        <a class="menu-items-in" href="#">Privacy Policy</a>
+                         <a class="menu-items-in" href="{{ route('howitwork') }}">How It Work</a>
                     </li> 
-                    <li class="footer-menu-items">
-                        <a class="menu-items-in" href="#">Rules</a>
+					 <li class="footer-menu-items">
+                         <a class="menu-items-in" href="{{ route('faq') }}">FAQ</a>
                     </li> 
-                    <li class="footer-menu-items">
-                        <a class="menu-items-in" >Faq</a>
-                    </li> 
+                    
                     <!-- End  menu-items-->   
                 </ul>
                 <!-- End  nav-menu--> 
