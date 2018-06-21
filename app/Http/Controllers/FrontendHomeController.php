@@ -278,7 +278,7 @@ class FrontendHomeController extends Controller
     {
        return view("frontEnd.spinner");
     }
-	 public function subscribepopeup($lang = "")
+	 public function subscribepopeup()
     {
 
         
