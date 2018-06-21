@@ -189,7 +189,7 @@ class FrontendHomeController extends Controller
     {
        $countries= Country::pluck('title_en');
 			
-        return view("frontEnd.register_1",compact('countries'));
+        return view("frontEnd.register",compact('countries'));
     }
 	 
 	
@@ -282,7 +282,7 @@ class FrontendHomeController extends Controller
     {
 
         
-        return view("frontEnd.spinner_1");
+        return view("frontEnd.subscribepopup");
 
     }
 	
