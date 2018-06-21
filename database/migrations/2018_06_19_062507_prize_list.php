@@ -16,7 +16,7 @@ class PrizeList extends Migration
 		  Schema::create('prizelist', function (Blueprint $table) {
           $table->increments('id');
             $table->string('prize_name');
-            $table->string('descritpion');
+            $table->string('description');
 			 $table->string('points');
 			 $table->string('created_by');
 			 $table->timestamps();
