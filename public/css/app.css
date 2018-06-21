@@ -184,7 +184,7 @@ header {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  margin-left: 95px;
+  margin-left: auto;
   margin-top: 4px;
 }
 
@@ -2741,12 +2741,12 @@ header {
 }
 
 .contactus .address-section-rightbar {
-  background-image: url(/images/girl-baloon.png?bbb49d8cc4a57fe954202a6f471c984f);
+
   background-position: 0 0;
   background-repeat: no-repeat;
   padding: 10px;
   border-radius: 10px;
-  margin-top: 98px;
+ 
   margin-left: 11px;
   background-size: cover;
 }
