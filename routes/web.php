@@ -322,7 +322,7 @@ Route::Group(['prefix' => '/api/v1'], function () {
 Route::get('/sitemap.xml', 'SiteMapController@siteMap')->name('siteMap');
 Route::get('/{lang}/sitemap', 'SiteMapController@siteMap')->name('siteMapByLang');
 
-Route::get('/', 'FrontendHomeController@subscribepopeup');
+Route::get('/', 'FrontendHomeController@subscribepopeup')->name('subscribepopeup');
 
 Route::get('/Home', 'FrontendHomeController@HomePage')->name('Home');
 
