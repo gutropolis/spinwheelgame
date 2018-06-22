@@ -6,7 +6,10 @@ header {
 	z-index: 9999;
 	background-color: $color_white;
 	width: 100%;
-	
+	.navbar-nav{
+		li{
+			background-color: #fff!important;}
+			}
 }
 .navbar.navbar-expand-lg.navbar-light.my-nav {
 	padding-top: $space-vs - 1px;
@@ -35,6 +38,7 @@ header {
 					}
 					@media (max-width: $break-md){
 						font-size: $font-size-8;
+						display: block;
 					}
 				}
 			}
