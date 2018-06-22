@@ -24,18 +24,19 @@
                 </div>
                 <!--contactus-form-->
                 <div class="contactus-form">
-                     <form name="contactus" id="contactus" method="get" action="">
+                     <form name="contactus" id="contactus" method="post" action="/contactus">
+					 	{{ csrf_field() }}
                       <div class="form-group contact-form-group">                       
-                        <input type="text" class="form-control contact-form-control" aria-describedby="emailHelp" 
+                        <input type="text" name= "name" class="form-control contact-form-control" aria-describedby="emailHelp" 
                         placeholder="Name">
-                        <input type="email" class="form-control contact-form-control-2" placeholder="Email">          
+                        <input type="email" name="email" class="form-control contact-form-control-2" placeholder="Email">          
                       </div>
                       <div class="form-group contact-form-group">                       
-                        <input type="text" class="form-control contact-form-control" placeholder="Subject">
-                        <input type="text" class="form-control contact-form-control-2" placeholder="Phone No.">
+                        <input type="text" name="subject" class="form-control contact-form-control" placeholder="Subject">
+                        <input type="text" name="phone" class="form-control contact-form-control-2" placeholder="Phone No.">
                       </div> 
                       <div class="form-group contact-form-group">                       
-                        <textarea class="form-control contact-form-control" rows="7" placeholder="Message"></textarea>
+                        <textarea class="form-control contact-form-control" name="message" rows="7" placeholder="Message"></textarea>
                       </div>                      
                       <button type="submit" class="btn btn-submit" >Submit Now</button>
                     </form>
