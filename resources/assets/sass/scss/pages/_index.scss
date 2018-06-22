@@ -812,7 +812,7 @@
 	    	}
 	    	.btn-submit{
 	    		@include button-red;
-	    		float: right;
+	    		float: left;
 	    		border: 2px solid $color-red;
 	    		padding-top: $space-vs + 1px;
 	    		padding-bottom: $space-vs + 1px;
