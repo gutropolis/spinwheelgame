@@ -84,7 +84,7 @@
 			padding-right: $space-l + $space-n;
 		}
 		@media (max-width: 457px){
-			padding-right: $space-none;
+			padding-right: 30px;
 		}
 		.title-working-section{
 			color: $color_light_black;
@@ -196,6 +196,9 @@
 			align-item: center;
 			border-radius: $font-size-5 + 1px;
 			font-size: $font-size-3;
+			@media (max-width: $break-lg){
+				top: 38px;
+			}
 			@media (max-width: $break-md){
 				left: $space-xll + $space-n;
 			}
@@ -213,11 +216,12 @@
 			height: 2px;
 			box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.95);
 			border-radius: $font-size-5;
-			top: 18px;
+			top: 6px;
 			left: 28px;
 			z-index: -1;
 			@media (max-width: $break-lg){
 			 	width: 71px;
+				
 			}
 			@media (max-width: $break-md){
 				width: 181px;
@@ -266,6 +270,7 @@
 			font-size: $font-size-3;
 			@media (max-width: $break-md){
 				right: $space-xll + $space-l + $space-n + 1px;
+				    top: 47%;
 			}
 			@media (max-width: $break-sm){
 				right: $space-xll + $space-n; 
@@ -318,6 +323,7 @@
 		.step-3-elipse{
 			position: absolute;
 			left: $space-xl + $space-l + 1px;
+			bottom: 43px;
 			width: 40px;
 			height: 40px;
 			background-color: $color-red;
@@ -344,7 +350,7 @@
 			height: 2px;
 			box-shadow: 0px -4px 5px 0px rgba(0, 0, 0, 0.95);
 			border-radius: 25px;
-			top: $space-n;
+			top: 36px;
 			left: $space-n + 8px;
 			z-index: -1;
 			@media (max-width: $break-lg){
@@ -451,6 +457,9 @@
 
 
 .leader-block{
+	@media (max-width: $break-lg){
+			padding-bottom: 50px;
+		}
 	@media (max-width: $break-xs){
 		padding: 0 35px;
 		text-align: center;
@@ -508,7 +517,7 @@
 	    justify-content: center;
 	    font-family: hind;
 	    font-size: 18px;
-	    margin-top: $space-m + $space-vs + 1px;
+	    margin-top: 88px;
 	    margin-bottom: $space-m + $space-s + 1px;
 
 	    @media (max-width: $break-sm){
@@ -523,6 +532,9 @@
   				margin-top: $space-m;
 	    		margin-bottom: $space-s;
   			}
+			a{
+				color: #fff;
+			}
 	    }
 	    .active-element{
 	    	margin-bottom: $space-m + 2px;
@@ -532,6 +544,9 @@
 	    	@media (max-width: 555px){
 	    		margin-bottom: $space-s;
   			}
+			a{
+				color: #fff;
+			}
 	    }
 	    .next{
 	    	margin-bottom: $space-l + $space-s + 3px;
@@ -539,6 +554,9 @@
 	    	@media (max-width: 555px){
 	    		margin-bottom: $space-m;
   			}
+			a{
+				color: #fff;
+			}
 	    }
 	}
 	.leftbar {
