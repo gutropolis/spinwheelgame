@@ -339,13 +339,16 @@ class FrontendHomeController extends Controller
 	 
 	 
 	 public function contactus(Request $request)  {
-	
+	//return $request;
 		// Data to be used on the email view
-		$name = $request->get('name');
+		$contact_name = $request->get('name');
 		$contact_email = $request->get('email');
+		$contact_phone = $request->get('phone');
+		$contact_subject = $request->get('subject');
 		$contact_msg = $request->get('message');
 		$WebmasterSettings = Setting::find(1);
-		$data = array('name'=>$name,'contact_email'=>$contact_email, 'contact_msg'=> $contact_msg );
+		
+		$data = array('contact_name'=>$contact_name,'contact_email'=>$contact_email, 'contact_subject'=>$contact_subject,'contact_phone'=> $contact_phone,'contact_msg'=> $contact_msg );
 	  
 			// Send the activation code through email
 		   Mail::send('emails.contactmail',$data , function($message) use($WebmasterSettings)
