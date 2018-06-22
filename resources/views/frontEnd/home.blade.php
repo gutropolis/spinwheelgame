@@ -437,18 +437,25 @@
             <!--col-md-7-->
             <div class="col-md-7">
                 <!--contactus-form-->
-                <div class="contactus-form">
+               <div class="contactus-form">
                     <form method="post" action="/contactus">
 					{{ csrf_field() }}
-                      <div class="form-group contact-form-group">                       
-                        <input type="email" name="email" class="form-control contact-form-control" aria-describedby="emailHelp" 
-                        placeholder="Email">          
-                      </div>
+                      
                       <div class="form-group contact-form-group">                       
                         <input type="text" name="name" class="form-control contact-form-control" placeholder="Full Name">
                       </div> 
+					  <div class="form-group contact-form-group">                       
+                        <input type="email" name="email" class="form-control contact-form-control" placeholder="Email">
+                      </div>
+						<div class="form-group contact-form-group">                       
+                        <input type="text" name="subject" class="form-control contact-form-control" placeholder="Subject">
+                      </div>
+					<div class="form-group contact-form-group">                       
+                        <input type="text" name="phone" class="form-control contact-form-control" 
+                        placeholder="phone">          
+                      </div>					  
                       <div class="form-group contact-form-group">                       
-                        <textarea class="form-control contact-form-control" name="messsage" rows="4" placeholder="Message"></textarea>
+                        <textarea class="form-control contact-form-control" name="message" rows="4" placeholder="Message"></textarea>
                       </div>                      
                       <button type="submit" class="btn btn-submit" >Submit</button>
                     </form>
