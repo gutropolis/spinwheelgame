@@ -325,10 +325,8 @@ Route::get('/{lang}/sitemap', 'SiteMapController@siteMap')->name('siteMapByLang'
 Route::get('/', 'FrontendHomeController@subscribepopeup')->name('subscribepopeup');
 
 Route::get('/Home', 'FrontendHomeController@HomePage')->name('Home');
-
 Route::get('/howitwork', 'FrontendHomeController@Howitwork')->name('howitwork');
 Route::get('/faq', 'FrontendHomeController@faq')->name('faq');
-
 Route::get('/aboutus', 'FrontendHomeController@aboutus')->name('aboutus');
 Route::get('/contactsus', 'FrontendHomeController@contactsus')->name('contactsus'); 
 
@@ -336,12 +334,14 @@ Route::get('/contactsus', 'FrontendHomeController@contactsus')->name('contactsus
 Route::get('/signup', 'FrontendHomeController@signup')->name('signup');
 Route::post('/storedata', 'FrontendHomeController@AddUser');
 
-Route::get('/loginpage', 'FrontendHomeController@loginpage')->name('loginpage');
+//Login And Check Login
+
 Route::post('/checklogin', 'FrontendHomeController@checklogin');
 Route::post('/password', 'FrontendHomeController@password');
+
+//Pop Up
 Route::get('/subscribepopeup', 'FrontendHomeController@subscribepopeup');
-Route::get('/faq', 'FrontendHomeController@faq')->name('faq');
-Route::post('/subscribeform','FrontendHomeController@subscribeform');
+Route::post('/subscribepopup', 'FrontendHomeController@submitpopup');
 
 //userEdit
 Route::group(['namespace'=>'frontEnd'], function () {
@@ -350,6 +350,7 @@ Route::group(['namespace'=>'frontEnd'], function () {
 });
 
 //add points
+Route::post('/subscribeform','FrontendHomeController@subscribeform');
 Route::get('/add_prize', 'FrontendHomeController@add_prize')->name('add_prize');
 //Show detail
 Route::get('/leaderboard', 'FrontendHomeController@leaderboard')->name('leaderboard');
