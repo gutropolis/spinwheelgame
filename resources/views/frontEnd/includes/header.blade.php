@@ -19,11 +19,16 @@
                 <div class="head-login">
                   LOGIN TO YOUR ACCOUNT
                 </div>
-                  <!--contactus-form-->
-				 
+             
+				
                   <div class="contactus-form">
                        <form name="loginform" id="loginform" method="post" action="/checklogin">
 					 {{ csrf_field() }}
+					   
+						  <div class=" alert alert-success alert-dismissable margin5 response_div " >
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong class="success_response"></strong>
+					   	</div>
                           <div class="form-group login-form {{ $errors->first('email', 'has-error') }}">
                             <label for="email" class="title">Email Address</label>
                             <input type="email" class="form-control login-form-control" required id="email" name="email">
