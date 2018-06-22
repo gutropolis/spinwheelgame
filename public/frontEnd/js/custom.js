@@ -205,6 +205,58 @@
                 }, 500)
             })
 			
-			
-			
-			
+				//Registerd Script
+				
+			  $(document).ready(function(){ 
+				$('.response_div').css('display','none');
+				 $("#registerForm").click(function(e){
+					var first_name = $("#first_name").val();
+					var last_name =$("#last_name").val();
+					var email = $("#email_reg").val();
+					var password = $("#passwords").val();
+					var confirm_password = $("#confirm_passwords").val();
+					
+					if (first_name == '' ) {
+						
+						$('#first_name_err').text(' *First Name is required');
+					}
+					if (last_name == '' ) {
+						
+						$('#last_name_err').text(' *Last Name is required');
+					}
+					if(email == '' )
+					{
+						$('#email_name_err').text(' *Email is required');
+					}
+					if (password == '' || password.length < 3) {
+						$('#password_name_err').text('Password should atleast 3 character in length...!!!!');
+					}
+						if(password != confirm_password)
+						{
+							$('#confirm_password_name_err').text("Your passwords don't match. Try again?");
+						}							
+					$.ajax({
+						type : 'POST',
+						data: $("#register_form_data").serialize(),
+						url : '/storedata',
+						success : function(data){
+							console.log(data);
+							if(data['status'] == '1'){
+								$('.response_div').css('display','block');
+								$("#mymodal").modal("show");
+								$('.success_response').text('You are Register Succesffully.Now Login here');
+							}
+							if(data['status'] == '0')
+							{
+								$('.response_div').css('display','block');
+								$('#errors').text('You have an Error.Email Exist');
+								
+							}
+						}
+						
+					});
+					return false;
+				}); 
+			 });
+			 
+			 
