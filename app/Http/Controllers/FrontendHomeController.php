@@ -38,20 +38,6 @@ class FrontendHomeController extends Controller
 {
    
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int /string $seo_url_slug
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function HomePage()
     {
         return $this->HomePageByLang("");
@@ -87,7 +73,7 @@ class FrontendHomeController extends Controller
         $HomeTopics = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content1_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(3)->get();
         // Home photos
         $HomePhotos = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content2_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->limit(6)->get();
-// Home Partners
+		// Home Partners
         $HomePartners = Topic::where([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $WebmasterSettings->home_content3_section_id], ['expire_date', null]])->orderby('row_no', 'asc')->get();
 
         // Get Latest News
@@ -119,18 +105,24 @@ class FrontendHomeController extends Controller
 		  
 		$userdetails=User::all(); 
 		$yesterday = date("Y-m-d", strtotime( '-1 days' ) );
-		
-		$get_yesterday = Prize::whereDate('created_at', $yesterday )->orderBy('created_at', 'desc')->take(5)->get();
 	
-
-			$currentMonth = date('m');
-      $get_month = Prize::whereRaw('MONTH(created_at) = ?',[$currentMonth])->orderBy('created_at', 'desc')->take(5)->get();
+		$get_yesterday = Prize::selectRaw('sum(point) as maxcount, user_id ,point, avg(point) as progress')
+       ->groupBy('user_id')
+       ->orderBy('maxcount', 'desc')
+       ->with('user')
+       ->whereDate('created_at', $yesterday )
+       ->get();
 	  
-		$get_all = Prize::orderBy('created_at', 'desc')->take(5)->get();
-
-//		return ($get_all);
-//return ($get_month);
-        return view("frontEnd.home",
+		$currentMonth = date('m');
+		$get_month = Prize::selectRaw('sum(point) as maxcount, user_id ,point, avg(point) as progress')
+       ->groupBy('user_id')
+       ->with('user')
+       ->whereRaw('MONTH(created_at) = ?',[$currentMonth])->orderBy('created_at', 'desc')->take(5)->get();
+	  
+	  
+		$get_all = Prize::selectRaw('sum(point) as maxcount, user_id ,point, avg(point) as progress')->groupBy('user_id')->with('user')->orderBy('created_at', 'desc')->take(5)->get();
+        
+		return view("frontEnd.home",
             compact("WebsiteSettings",
 				"get_yesterday",
 				"get_month",
@@ -183,6 +175,11 @@ class FrontendHomeController extends Controller
 		   return view("frontEnd.aboutus");
 	}
 	
+	public function submitpopup(Request$request)
+	{
+		return view("frontEnd.register");
+		
+	}
 	
 		
 	 public function signup()
@@ -230,10 +227,9 @@ class FrontendHomeController extends Controller
     }
 	
 	  public function AddUser(UserRequest $request)
-	  {
-		  
-		  
-		  try {
+	  { 
+	  $userexist=User::where('email',$request->email)->first();
+		  if(!$userexist) {
 		    $user = Sentinel::registerAndActivate([
                 'first_name' => $request->get('first_name'),
                 'last_name' => $request->get('last_name'),
@@ -258,15 +254,24 @@ class FrontendHomeController extends Controller
 	  {
 	   $message->to($WebmasterSettings->site_webmails)->subject('Register New User');
 	  });
-			
-           return Redirect::back()->with('success_reg', trans('You Are Succesfully Registered.Now click On Login'));
+			 // return Redirect::back()->withInput()->withSuccess("You Are Successfully Registered here" );
+			 $return_data = array(
+						'status' => '1',
+						'success' => 'You are success'
+			 );
+			 
+			return $return_data;
 
-        } catch (UserExistsException $e) {
-            $this->messageBag->add('email', trans('Your Email Already Exist'));
-        }
-
-        // Ooops.. something went wrong
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
+        } else{
+			 $return_data = array(
+						'status' => '0',
+						'error' => 'Email Already Exist',
+			 );
+			return $return_data;
+		} 
+          
+			 			
+       
     }
           
 		
@@ -584,6 +589,7 @@ class FrontendHomeController extends Controller
         }
 
     }
+	
 
     /**
      * Show the form for editing the specified resource.
