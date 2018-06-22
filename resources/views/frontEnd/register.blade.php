@@ -14,82 +14,64 @@
         <div class="joinus-block">
             <p class="title-joinus">JOIN NOW FOR FREE REWARDS</p>
             <div class="joinus-block-in">
-			<form  name="registerForm" id="registerForm" method="post" action="/storedata">
+			<form  name="registerForm" id="register_form_data"  method="post" action="/storedata">
 			
 					 {{ csrf_field() }}
-					 @if ($errors->any())
-<div class="alert alert-danger alert-dismissable margin5">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <strong>Error:</strong> Please check the form below for errors
-</div>
-@endif
+					
+					<div class="alert alert-danger alert-dismissable margin5 response_div">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>You have An Error.Below look</strong>
+					</div>
+					
 
-@if ($message = Session::get('success_reg'))
-<div class="alert alert-success alert-dismissable margin5">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Success:</strong> {{ $message }}
-</div>
-@endif
 
-@if ($message = Session::get('error_reg'))
-<div class="alert alert-danger alert-dismissable margin5">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Error:</strong> {{ $message }}
-</div>
-@endif
-
-@if ($message = Session::get('warning_reg'))
-<div class="alert alert-warning alert-dismissable margin5">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Warning:</strong> {{ $message }}
-</div>
-@endif
-
-@if ($message = Session::get('info_reg'))
-<div class="alert alert-info alert-dismissable margin5">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Info:</strong> {{ $message }}
-</div>
-@endif
               <div class="row joinus-block-elements">
                   <div class="col-md-12 col-lg-12 elements-in">
-                    <div class="form-heading">MY DETAILS</div>
+				  <h4 class="text-center form-heading">Fill Your Detail</h4>
+                   
                      <div class="form">
                             <!--field-->
                           <div class="field {{ $errors->first('first_name', 'has-error') }}">
-                            <input type="text" class="inbox-box" required id="first_name" name="first_name" placeholder="Name">
+                            <input type="text" class="inbox-box"  id="first_name" name="first_name" placeholder="Name">
                             <label for="fullname" class="inbox-label">First Name *</label>
 							 {!! $errors->first('first_name', '<span class="help-block">:message</span>') !!}
+							
                           </div>
+						  <span  id="first_name_err"></span>
 						  <div class="field  {{ $errors->first('last_name', 'has-error') }}">
-                            <input type="text" class="inbox-box" required id="last_name" name="last_name" placeholder="Name">
+                            <input type="text" class="inbox-box"  id="last_name" name="last_name" placeholder="Name">
                             <label for="fullname" class="inbox-label">Last Name *</label>
 							{!! $errors->first('last_name', '<span class="help-block">:message</span>') !!}
                           </div>
+						    <span  id="last_name_err"></span>
                 
                             <div class="field {{ $errors->first('email', 'has-error') }}">
-                            <input type="email" class="inbox-box" name="email" required id="email" placeholder="Email">
+                            <input type="email" class="inbox-box" name="email"  id="email_reg" placeholder="Email">
                             <label for="email" class="inbox-label">Email *</label>
 							{!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                           </div>
+						    <span  id="email_name_err"></span>
+							<span id="errors"></span>
                           <!--end field-->
                            <!--field-->
                           <div class="field {{ $errors->first('password', 'has-error') }}">
-                            <input type="password" class="inbox-box" name="password" required id="Password" placeholder="Password">
+                            <input type="password" class="inbox-box" name="password"  id="passwords" placeholder="Password">
                             <label for="Password" class="inbox-label">Password *</label>
 							 {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
                           </div>
+						    <span  id="password_name_err"></span>
                           <!--End field-->
                            <!--field-->
                           <div class="field  {{ $errors->first('confirm_password', 'has-error') }}">
-                            <input type="password" class="inbox-box" name="confirm_password" required id="Confirm Password" placeholder="Confirm Password">
+                            <input type="password" class="inbox-box" name="confirm_password"  id="confirm_passwords " placeholder="Confirm Password">
                             <label for="Confirm Password" class="inbox-label">Confirm Password *</label>
 							 {!! $errors->first('confirm_password', '<span class="help-block">:message</span>') !!}
                           </div>
+						    <span id="confirm_password_name_err"></span>
                         
 
-                          <button type="submit" class="btn-join">Join Raodeals!</button>
-						  <p class="backtosignup">Already have an account ? <a class="btn-login signagain" type="login" data-toggle="modal" data-target="#mymodal">Sign in</a></p>
+                          <button type="button" id="registerForm" class="btn-join">Join Now!</button>
+						  <p class="backtosignup">Already have an account?<a class="btn-login signagain" type="login" data-toggle="modal" data-target="#mymodal">Sign in</a></p>
                           <!--End field-->
 						  </div>
                       </form>
@@ -101,12 +83,5 @@
     </section>
 
 @endsection
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBybmNGcXcsC2ChADSIPX0kGMUiPBqs1v0&libraries=places"></script>
-<script type="text/javascript">
-    google.maps.event.addDomListener(window, 'load', function () {
-        var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
-        google.maps.event.addListener(places, 'place_changed', function () {
+ 
 
-        });
-    });
-</script>
