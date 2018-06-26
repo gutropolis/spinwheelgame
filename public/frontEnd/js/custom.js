@@ -231,8 +231,11 @@
 					if (password == '' || password.length < 3) {
 						$('#password_name_err').text('Password should atleast 3 character in length...!!!!');
 					}
-						if(password != confirm_password)
+						if(confirm_password == password)
 						{
+							
+						}else{
+							
 							$('#confirm_password_name_err').text("Your passwords don't match. Try again?");
 						}							
 					$.ajax({
@@ -249,7 +252,7 @@
 							if(data['status'] == '0')
 							{
 								$('.response_div').css('display','block');
-								$('#errors').text('You have an Error.Email Exist');
+								$('#errors').text('Already Have an Account');
 								
 							}
 						}
