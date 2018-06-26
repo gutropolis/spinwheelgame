@@ -58,7 +58,7 @@ class Controller extends BaseController
             exit();
         }
     }
-	public function SEO($seo_url_slug = 0)
+	/*public function SEO($seo_url_slug = 0)
     {
         return $this->SEOByLang("", $seo_url_slug);
     }
@@ -69,7 +69,7 @@ class Controller extends BaseController
      * @param  int /string $seo_url_slug
      * @return \Illuminate\Http\Response
      */
-    public function SEOByLang($lang = "", $seo_url_slug = 0)
+ /*   public function SEOByLang($lang = "", $seo_url_slug = 0)
     {
         if ($lang != "") {
             // Set Language
@@ -173,7 +173,7 @@ class Controller extends BaseController
             }
         }
 
-    }
+    }*/
 	public function generateUuid(){
   return \App\Helpers\UUID::uuid4();
 }
