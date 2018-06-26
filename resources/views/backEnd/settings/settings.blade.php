@@ -403,6 +403,107 @@
 
                             </div>
                             <hr>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							 <div class="form-group row">
+                                @if(Helper::GeneralWebmasterSettings("ar_box_status"))
+                                    <div class="col-sm-6">
+                                        <label for="style_logo_ar">Footer Logo @if(Helper::GeneralWebmasterSettings("ar_box_status") && Helper::GeneralWebmasterSettings("en_box_status")){!!  trans('backLang.arabicBox') !!}@endif</label>
+                                        @if($Setting->footer_logo_ar!="")
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-12 box p-a-xs text-center">
+                                                        <a target="_blank"
+                                                           href="{{ URL::to('uploads/settings/'.$Setting->footer_logo_ar) }}"><img
+                                                                    src="{{ URL::to('uploads/settings/'.$Setting->footer_logo_ar) }}"
+                                                                    class="img-responsive" id="footer_logo_ar_prv"
+                                                                    style="width: auto;max-width: 260px;max-height: 60px">
+                                                            <br>
+                                                            <small>{{ $Setting->footer_logo_ar }}</small>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-12 box p-a-xs text-center">
+                                                        <img
+                                                                src="{{ URL::to('uploads/settings/nologo.png') }}"
+                                                                class="img-responsive" id="footer_logo_ar_prv"
+                                                                style="width: auto;max-width: 260px;max-height: 60px">
+                                                        <br>
+                                                        <small>nologo.png</small>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        {!! Form::file('footer_logo_ar', array('class' => 'form-control','id'=>'footer_logo_ar','accept'=>'image/*')) !!}
+                                        <small>
+                                            <i class="material-icons">&#xe8fd;</i>( 260x60 px ) -
+                                            {!!  trans('backLang.imagesTypes') !!}
+                                        </small>
+                                    </div>
+                                @endif
+                                @if(Helper::GeneralWebmasterSettings("en_box_status"))
+                                    <div class="col-sm-6">
+                                        <label for="style_logo_en">Footer Logo @if(Helper::GeneralWebmasterSettings("ar_box_status") && Helper::GeneralWebmasterSettings("en_box_status")){!!  trans('backLang.englishBox') !!}@endif</label>
+                                        @if($Setting->footer_logo_en!="")
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-12 box p-a-xs text-center">
+                                                        <a target="_blank"
+                                                           href="{{ URL::to('uploads/settings/'.$Setting->footer_logo_en) }}"><img
+                                                                    src="{{ URL::to('uploads/settings/'.$Setting->footer_logo_en) }}"
+                                                                    class="img-responsive" id="footer_logo_en_prv"
+                                                                    style="width: auto;max-width: 260px;max-height: 60px">
+                                                            <br>
+                                                            <small>{{ $Setting->footer_logo_en }}</small>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-12 box p-a-xs text-center">
+                                                        <img
+                                                                src="{{ URL::to('uploads/settings/nologo.png') }}"
+                                                                class="img-responsive" id="footer_logo_en_prv"
+                                                                style="width: auto;max-width: 260px;max-height: 60px">
+                                                        <br>
+                                                        <small>nologo.png</small>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        {!! Form::file('footer_logo_en', array('class' => 'form-control','id'=>'footer_logo_en','accept'=>'image/*')) !!}
+                                        <small>
+                                            <i class="material-icons">&#xe8fd;</i>( 260x60 px ) -
+                                            {!!  trans('backLang.imagesTypes') !!}
+                                        </small>
+                                    </div>
+                                @endif
+
+                            </div>
+							
+							
+							
+							
+							
+							
+							
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="style_fav">{!!  trans('backLang.favicon') !!}</label>
