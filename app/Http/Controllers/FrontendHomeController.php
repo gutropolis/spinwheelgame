@@ -226,7 +226,7 @@ class FrontendHomeController extends Controller
         return redirect('Home')->with('success', 'You have successfully logged out!');
     }
 	
-	  public function AddUser(UserRequest $request)
+	  public function AddUser(Request $request)
 	  { 
 	  $userexist=User::where('email',$request->email)->first();
 		  if(!$userexist) {
