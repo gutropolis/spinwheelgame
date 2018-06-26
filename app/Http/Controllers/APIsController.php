@@ -1808,7 +1808,7 @@ For more details check <a href='http://smartfordesign.net/smartend/documentation
     {
 
         $this->validate($request, [
-            'api_key' => 'required',
+         //   'api_key' => 'required',
             'topic_id' => 'required',
             'comment_name' => 'required',
             'comment_email' => 'required|email',
