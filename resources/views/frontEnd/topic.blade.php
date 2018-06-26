@@ -27,7 +27,7 @@
         $section = "";
     }
     ?>
-    <section id="inner-headline">
+    <section class="wrapper-contactus">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
