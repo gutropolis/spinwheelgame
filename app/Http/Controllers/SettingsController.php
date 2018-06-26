@@ -110,6 +110,7 @@ class SettingsController extends Controller
 
     public function updateSiteStyle(Request $request)
     {
+		//return $request;
         //
         $id = $this->getId();
         $Setting = Setting::find($id);
@@ -118,6 +119,8 @@ class SettingsController extends Controller
             $this->validate($request, [
                 'style_logo_en' => 'mimes:png,jpeg,jpg,gif|max:3000',
                 'style_logo_ar' => 'mimes:png,jpeg,jpg,gif|max:3000',
+				'footer_logo_en' => 'mimes:png,jpeg,jpg,gif|max:3000',
+                'footer_logo_ar' => 'mimes:png,jpeg,jpg,gif|max:3000',
                 'style_fav' => 'mimes:png,jpeg,jpg,gif|max:3000',
                 'style_apple' => 'mimes:png,jpeg,jpg,gif|max:3000',
                 'style_bg_image' => 'mimes:png,jpeg,jpg,gif|max:5000',
@@ -150,6 +153,39 @@ class SettingsController extends Controller
                 $path = $this->getUploadPath();
                 $request->file($formFileNameAr)->move($path, $fileFinalNameAr);
             }
+			
+			
+			
+			 // Footer of Upload Files
+            $formFileName1 = "footer_logo_en";
+            $fileFinalName1 = "";
+            if ($request->$formFileName1 != "") {
+                // Delete a style_logo_en photo
+                if ($Setting->footer_logo_en != "") {
+                    File::delete($this->getUploadPath() . $Setting->footer_logo_en);
+                }
+
+                $fileFinalName1 = time() . rand(1111,
+                        9999) . '.' . $request->file($formFileName1)->getClientOriginalExtension();
+                $path = $this->getUploadPath();
+                $request->file($formFileName1)->move($path, $fileFinalName1);
+            }
+            $formFileNameAr1 = "footer_logo_ar";
+            $fileFinalNameAr1 = "";
+            if ($request->$formFileNameAr1 != "") {
+                // Delete a style_logo_ar photo
+                if ($Setting->footer_logo_ar != "") {
+                    File::delete($this->getUploadPath() . $Setting->footer_logo_ar);
+                }
+
+                $fileFinalNameAr1 = time() . rand(1111,
+                        9999) . '.' . $request->file($formFileNameAr1)->getClientOriginalExtension();
+                $path = $this->getUploadPath();
+                $request->file($formFileNameAr1)->move($path, $fileFinalNameAr1);
+            }
+			
+			
+			
 
             $formFileName2 = "style_fav";
             $fileFinalName2 = "";
@@ -218,6 +254,13 @@ class SettingsController extends Controller
 
             if ($fileFinalNameAr != "") {
                 $Setting->style_logo_ar = $fileFinalNameAr;
+            }
+			 if ($fileFinalName1 != "") {
+                $Setting->footer_logo_en = $fileFinalName1;
+            }
+
+            if ($fileFinalNameAr1 != "") {
+                $Setting->footer_logo_ar = $fileFinalNameAr1;
             }
             if ($fileFinalName2 != "") {
                 $Setting->style_fav = $fileFinalName2;
