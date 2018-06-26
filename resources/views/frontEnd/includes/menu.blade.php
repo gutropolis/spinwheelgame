@@ -24,6 +24,7 @@
 					<a class ="menu-items-in" href = "{{route('aboutus')}}">About Us</a>
 					<a class ="menu-items-in" href = "{{route('howitwork')}}">How it Work</a>
 					<a class ="menu-items-in" href = "{{route('contactsus')}}">Contact Us</a>
+					<a class="menu-items-in" href="/blog">Blog</a>
 					<a class ="menu-items-in" href = "{{route('faq')}}">FAQ</a>
                 </li>
           
