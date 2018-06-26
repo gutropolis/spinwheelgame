@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section id="inner-headline">
+    <section class="wrapper-contactus">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -31,7 +31,10 @@
             </div>
         </div>
     </section>
-    <section id="content">
+	
+	
+	
+    <section id="content" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-{{(count($Categories)>0)? "8":"12"}}">
