@@ -12,7 +12,7 @@
                         <img alt="" src="{{ URL::to('uploads/settings/nologo.png') }}">
                     @endif
 
-                </a>
+                </a>   
         </div>
         <!--footer-logo-->
 
