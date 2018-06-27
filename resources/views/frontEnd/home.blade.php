@@ -54,29 +54,29 @@
                         <div class="list-block">
                             <!-- checkbox-icon-->
 							
-                            <img src="/FrontEnd/images/checkbox.png" class="checkbox-icon">
+                            <img src="{{ URL::to('/FrontEnd/images/checkbox.png') }}" class="checkbox-icon">
                             <!--list-block-text-->
                             <p class="list-block-text">Check your daily email or sms text message. </p>
                         </div>
                         <!--list-block-->
                         <div class="list-block">
-                            <img src="/FrontEnd/images/checkbox.png" class="checkbox-icon">
+                            <img src="{{ URL::to('/FrontEnd/images/checkbox.png') }}" class="checkbox-icon">
                             <p class="list-block-text">Click on the Link to complete your free entry. </p>
                         </div>
                         <!--list-block-->
                         <div class="list-block">
-                            <img src="/FrontEnd/images/checkbox.png" class="checkbox-icon">
+                            <img src="{{ URL::to('/FrontEnd/images/checkbox.png') }}" class="checkbox-icon">
                             <p class="list-block-text">Earn points by simply answering a few questions.  </p>
                         </div>
                         <!--list-block-->
                         <div class="list-block">
-                            <img src="/FrontEnd/images/checkbox.png" class="checkbox-icon">
+                            <img src="{{ URL::to('/FrontEnd/images/checkbox.png') }}" class="checkbox-icon">
                             <p class="list-block-text">Stay tuned for weekly winner announcements. </p>
                         </div>
                         <!--End list-block-->
                         <!--video-block-->
                         <div class="video-block">
-                            <img src="/FrontEnd/images/play-icon.png" class="play-video-icons">
+                            <img src= "{{ URL::to('/FrontEnd/images/play-icon.png') }}" class="play-video-icons">
                             <h3 class="video-block-text">Watch The Video</h3>
                         </div>
                         <!--End video-block-->
@@ -97,7 +97,7 @@
                     <div class="check-reminder step-1">
                         <!--watch-icons-->
                         <div class="watch">
-                            <img src="/FrontEnd/images/watch.png">
+                            <img src= "{{ URL::to('/FrontEnd/images/watch.png') }}" 
                         </div> 
                         <!--reminder-text-->                   
                         <div class="reminder-text">
@@ -112,7 +112,7 @@
                     <div class="enter-link step-2">
                       <!--hand icon-->
                         <div class="hand-icon">
-                            <img src="/FrontEnd/images/hand.png">
+                            <img src="{{ URL::to('/FrontEnd/images/hand.png') }}"
                         </div>   
                         <!--link text-->                 
                         <div class="enter-link-text">
@@ -126,7 +126,7 @@
                     <div class="winner-announce step-3">
                         <!--envelpe-icon-->
                         <div class="envelpe-icon">
-                            <img src="/FrontEnd/images/envelpe.png">
+                            <img src="{{ URL::to('/FrontEnd/images/envelpe.png') }}">
                         </div>
                         <!--reminder-text-->                    
                         <div class="reminder-text ">
@@ -157,7 +157,7 @@
         <div class="row">
               <!--col-md-4-->
               <div class="col-md-12  col-lg-5">
-                  <img src="/FrontEnd/images/girl.jpg" class="girls">
+                  <img src="{{ URL::to('/FrontEnd/images/girl.jpg') }}" class="girls">
               </div>
               <!--col-md-4-->
               <!--col-md-8-->
@@ -189,7 +189,7 @@
 
               <!--col-md-3-->
               <div class="col-md-12 col-lg-3">
-                  <img src="/FrontEnd/images/card.png" class="card-icon">
+                  <img src="{{ URL::to('/FrontEnd/images/card.png') }}" class="card-icon">
               </div>
               <!--end col-md-3-->
         </div>
@@ -386,7 +386,7 @@
                 <div class="rightbar">
                     <!--clik to win-->
                     <div class="click-to-win">
-                        <img src="/FrontEnd/images/click-to-win.png" class="clik-to-win-img">
+                        <img src="{{ URL::to('/FrontEnd/images/click-to-win.png') }}" class="clik-to-win-img">
                     </div>
                     <!--End clik to win-->
                 </div>
@@ -481,22 +481,22 @@
             <!--col-md-3-->
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-1.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-1.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-2.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-2.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-3.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-3.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-4.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-4.png') }}">
                 </div>
             </div>
             <!-- End col-md-3-->
