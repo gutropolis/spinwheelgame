@@ -31,6 +31,7 @@
 @import 'scss/pages/joinus';
 @import 'scss/pages/subscribepopup';
 @import 'scss/pages/spintowin';
+@import 'scss/pages/blog';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -38,4 +39,128 @@
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+body {
+	background: $color_white;
+	font-size: $font-size-7;
+	font-family: $font_family_pt-sans;
+	color: $color_black;
+	line-height: normal;
+	margin-top: $space-l - $space-vs;
+	@media (max-width: $break-md){
+		margin: $space-none;
+	}
+	@media (max-width: $break-sm){
+		margin-top: -35px;
+	}
+}
+h1 {
+	font-size: $font-size-1;
+	font-weight: bold;
+	color: $color_white;
+	@media (max-width: 555px){
+		font-size: 40px;
+	}
+	@media (max-width: $break-xvs){
+		font-size: 30px;
+	}
+}
+h2 {
+	font-size: $font-size-2;
+	font-weight: bold;
+	@media (max-width: 577px){
+		font-size: 35px; 
+	}
+	@media (max-width: 555px){
+		font-size: 30px;
+	}
+	@media (max-width: $break-xs){
+		font-size: 36px;
+	}
+	
+
+h3 {
+	font-size: $font-size-3;
+	font-weight: bold;
+}
+h4 {
+	font-size: $font-size-4;
+	font-weight: bold;
+	@media (max-width: $break-xvs){
+		font-size: 18px;
+	}
+	
+}
+h5 {
+	font-size: $font-size-5;
+	font-weight: bold;
+}
+h6 {
+	font-size: $font-size-6;
+	font-weight: bold;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	li {
+		list-style: none;
+	}
+}
+a {
+	text-decoration: none;
+}
+a:hover,
+a:focus {
+  	text-decoration: none; }
+
+img {
+	max-width: 100%;
+	border: none;
+}
+}
+ input[type="radio"]{
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+input[type="radio"] + label{
+  position: relative;
+  padding-left: 35px;
+  text-align: left;
+  cursor: pointer;
+}
+
+input[type="radio"] + label:after,
+input[type="radio"] + label:before{
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 0.4s ease-in;
+  background: #fff;
+  border: solid 2px #fff;
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+input[type="radio"] + label:after{
+  border: 0px solid #bb738c;
+  z-index: 4;
+  transform: scale(1);
+  background: none;
+}
+
+input[type="radio"]:checked + label:after{
+  transform: scale(0.45);
+  background: #bb738c;
 }
