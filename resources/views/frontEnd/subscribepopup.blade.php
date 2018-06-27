@@ -26,7 +26,7 @@
                     
                       <div class="row spin2wheel-block-in">
                           <div class="col-lg-6 col-md-4 col-sm-6 col-6 pl-0 spinwheel-img-block">
-                              <img src="frontEnd/images/sidebar-spinwin.png" class="spinwheel-img">
+                              <img src="{{ URL::to('/FrontEnd/images/sidebar-spinwin.png') }}" class="spinwheel-img">
                           </div>
                           <div class="col-lg-6 col-md-8 col-sm-6 col-6 spinwheel-text">
                             <form name="subscribepopup" id="subscribepopup" method="post" action="/subscribepopup">
