@@ -2,10 +2,9 @@
 
 .footer{
 	@include background('../images/footer-bg.jpg');
-	
 	padding-top: $space-l + 3px;
 	padding-bottom: $space-l + $space-m + $space-s;
-
+	background-repeat: repeat;
 	@media (max-width: $break-xs){
 		padding-top: $space-n;
 		padding-bottom: $space-n;				
