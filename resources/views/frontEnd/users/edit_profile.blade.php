@@ -24,17 +24,15 @@
   <strong>Error:</strong> Please check the form below for errors
 </div>
 @endif
-        <div class="joinus-logo">
-          <img src="assets/images/white raodeals logo.png">
-        </div>
+       
         
         <div class="joinus-block">
             <p class="title-joinus">Edit Your Profile</p>
-            <div class="joinus-block-in">
+            <div class="joinus-block-in register_box">
 			  {{Form::open(['route'=>['profileUpdate',$user->id],'method'=>'POST', 'files' => true])}}
 					 {{ csrf_field() }}
-              <div class="row joinus-block-elements">
-                  <div class="col-md-4 elements-in">
+              <div class="row joinus-block-elements ">
+                  <div class="col-md-4 elements-in ">
                     <div class="form-heading">MY DETAILS</div>
                      <div class="form">
                             <!--field-->
@@ -76,42 +74,7 @@
                                    <label class="reason-text" for="female">Female</label>
                              
                           </div>
-						<div class="form-group row">
-                    <label for="photo_file"
-                           class="col-sm-2 form-control-label">{!!  trans('backLang.topicPhoto') !!}</label>
-                    <div class="col-sm-10">
-                        @if($user->photo!="")
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div id="user_photo" class="col-sm-4 box p-a-xs">
-                                        <a target="_blank"
-                                           href="{{ URL::to('uploads/users/'.$user->photo) }}"><img
-                                                    src="{{ URL::to('uploads/users/'.$user->photo) }}"
-                                                    class="img-responsive">
-                                            {{ $user->photo }}
-                                        </a>
-                                        <br>
-                                        <a onclick="document.getElementById('user_photo').style.display='none';document.getElementById('photo_delete').value='1';document.getElementById('undo').style.display='block';"
-                                           class="btn btn-sm btn-default">{!!  trans('backLang.delete') !!}</a>
-                                    </div>
-                                    <div id="undo" class="col-sm-4 p-a-xs" style="display: none">
-                                        <a onclick="document.getElementById('user_photo').style.display='block';document.getElementById('photo_delete').value='0';document.getElementById('undo').style.display='none';">
-                                            <i class="material-icons">&#xe166;</i> {!!  trans('backLang.undoDelete') !!}
-                                        </a>
-                                    </div>
-
-                                    {!! Form::hidden('photo_delete','0', array('id'=>'photo_delete')) !!}
-                                </div>
-                            </div>
-                        @endif
-
-                        {!! Form::file('photo', array('class' => 'form-control','id'=>'photo','accept'=>'image/*')) !!}
-                        <small>
-                            <i class="material-icons">&#xe8fd;</i>
-                            {!!  trans('backLang.imagesTypes') !!}
-                        </small>
-                    </div>
-                </div>
+						
 
 				</div>
 		
@@ -141,6 +104,43 @@
                             <input type="text" id="txtPlaces"  class="inbox-box" name="address" id="address"  value="{!! old('address', $user->address) !!}"/>
                             <label for="Search Address" class="inbox-label">Search Address</label>
                           </div>
+						  
+						  <div class="form-group" style="padding-top:30px">
+                    <label for="photo_file"
+                           class=" form-control-label upload-text">Image Upload</label>
+                    <div class="">
+                        @if($user->photo!="")
+                            <div class="row">
+                                <div class="">
+                                    <div id="user_photo" class="col-sm-4 box p-a-xs">
+                                        <a target="_blank"
+                                           href="{{ URL::to('uploads/users/'.$user->photo) }}"><img
+                                                    src="{{ URL::to('uploads/users/'.$user->photo) }}"
+                                                    class="img-responsive">
+                                            {{ $user->photo }}
+                                        </a>
+                                        <br>
+                                        <a onclick="document.getElementById('user_photo').style.display='none';document.getElementById('photo_delete').value='1';document.getElementById('undo').style.display='block';"
+                                           class="btn btn-sm btn-default">{!!  trans('backLang.delete') !!}</a>
+                                    </div>
+                                    <div id="undo" class="col-sm-4 p-a-xs" style="display: none">
+                                        <a onclick="document.getElementById('user_photo').style.display='block';document.getElementById('photo_delete').value='0';document.getElementById('undo').style.display='none';">
+                                            <i class="material-icons">&#xe166;</i> {!!  trans('backLang.undoDelete') !!}
+                                        </a>
+                                    </div>
+
+                                    {!! Form::hidden('photo_delete','0', array('id'=>'photo_delete')) !!}
+                                </div>
+                            </div>
+                        @endif
+
+                        {!! Form::file('photo', array('class' => 'form-control','id'=>'photo','accept'=>'image/*')) !!}
+                        <small>
+                            <i class="material-icons">&#xe8fd;</i>
+                            {!!  trans('backLang.imagesTypes') !!}
+                        </small>
+                    </div>
+                </div>
                           <!--End field-->
                       </div>
                   </div>
@@ -172,7 +172,7 @@
                           </div>
                         
 
-                          <button type="submit" class="btn-join">Join Raodeal!</button>
+                          <button type="submit" class="btn-join update-profile">Update</button>
                           <!--End field-->
 						  </div>
                       </form>
