@@ -68,7 +68,7 @@
 			letter-spacing: 1px;
 			border: 2px solid $color-red;
 			margin-top: $space-s + 2px;
-
+			
 			&:hover{
 				color: $color-red;
 				border: 2px solid $color-red;
@@ -77,7 +77,12 @@
 		}
 	}
 }
-
+.upload-text
+{
+    padding: 0px 15px;
+    font-size: 16px;
+    color: #fff;
+}
 
 
 .our-partners-signup{
@@ -93,4 +98,17 @@
 			margin-bottom: $space-m;
 		}
 	}
+}
+.error{
+	color:yellow;
+}
+.register_button
+{
+	width:250px;
+	display:block;
+	margin:0px auto;
+	margin-left:auto !important;
+}
+.text-yellow{
+	color:yellow !important;
 }
