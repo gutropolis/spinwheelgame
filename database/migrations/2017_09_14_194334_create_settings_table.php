@@ -49,6 +49,8 @@ class CreateSettingsTable extends Migration
 
             $table->string('style_logo_ar')->nullable();
             $table->string('style_logo_en')->nullable();
+			 $table->string('footer_logo_ar')->nullable();
+            $table->string('footer_logo_en')->nullable();
             $table->string('style_fav')->nullable();;
             $table->string('style_apple')->nullable();
             $table->string('style_color1')->nullable();
