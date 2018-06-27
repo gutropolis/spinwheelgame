@@ -27,31 +27,17 @@
         $section = "";
     }
     ?>
-    <section class="wrapper-contactus">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="breadcrumb">
-                        <li><a href="{{ route("Home") }}"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i>
-                        </li>
-                        @if($WebmasterSection->id != 1)
-                            <li class="active">{!! trans('backLang.'.$WebmasterSection->name) !!}</li>
-                        @else
-                            <li class="active">{{ $title }}</li>
-                        @endif
-                        @if(count($CurrentCategory) >0)
-                            <?php
-                            $category_title_var = "title_" . trans('backLang.boxCode');
-                            ?>
-                            <li class="active"><i
-                                        class="icon-angle-right"></i>{{ $CurrentCategory->$category_title_var }}</li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="content">
+   <div class="wrapper-aboutus">
+    <!--container-->
+    <div class="container">
+        <!--wrapper-title-->
+        <h1 class="wrapper-title">Blog</h1>
+        <!--End wrapper-title-->
+    </div>
+    <!--End container-->
+</div>
+<!--how it work-->
+    <section id="content" class="equal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-{{(count($Categories)>0)? "8":"12"}}">
@@ -111,12 +97,12 @@
                             {{--audio--}}
                             <div class="post-video">
                                 <div class="post-heading">
-                                    <h1>
+                                    <h2>
                                         @if($Topic->icon !="")
                                             <i class="fa {!! $Topic->icon !!} "></i>&nbsp;
                                         @endif
                                         {{ $title }}
-                                    </h1>
+                                    </h2>
                                 </div>
                                 @if($Topic->photo_file !="")
                                     <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"
@@ -136,12 +122,12 @@
                             {{--photo slider--}}
                             <div class="post-slider">
                                 <div class="post-heading">
-                                    <h1>
+                                    <h2>
                                         @if($Topic->icon !="")
                                             <i class="fa {!! $Topic->icon !!} "></i>&nbsp;
                                         @endif
                                         {{ $title }}
-                                    </h1>
+                                    </h2>
                                 </div>
                                 <!-- start flexslider -->
                                 <div class="p-slider flexslider">
@@ -168,12 +154,12 @@
                             {{--one photo--}}
                             <div class="post-image">
                                 <div class="post-heading">
-                                    <h1>
+                                    <h2>
                                         @if($Topic->icon !="")
                                             <i class="fa {!! $Topic->icon !!} "></i>&nbsp;
                                         @endif
                                         {{ $title }}
-                                    </h1>
+                                    </h2>
                                 </div>
                                 @if($Topic->photo_file !="")
                                     <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"
@@ -563,13 +549,13 @@
                                         <br>
                                         <h4><i class="fa fa-plus"></i> {{ trans('frontLang.newComment') }}</h4>
                                         <div class="bottom-article newcomment">
-                                            <div id="sendmessage"><i class="fa fa-check-circle"></i>
+                                           <!-- <div class="sentmessage"><i class="fa fa-check-circle"></i>
                                                 &nbsp;{{ trans('frontLang.youCommentSent') }} &nbsp; <a
                                                         href="{{url()->current()}}"><i
                                                             class="fa fa-refresh"></i> {{ trans('frontLang.refresh') }}
                                                 </a>
                                             </div>
-                                            <div id="errormessage">{{ trans('frontLang.youMessageNotSent') }}</div>
+                                            <div id="errormessage">{{ trans('frontLang.youMessageNotSent') }}</div>-->
 
                                             {{Form::open(['route'=>['Home'],'method'=>'POST','class'=>'commentForm'])}}
                                             <div class="form-group">
@@ -593,7 +579,7 @@
                                             <div>
                                                 <input type="hidden" name="topic_id" value="{{$Topic->id}}">
                                                 <button type="submit"
-                                                        class="btn btn-theme">{{ trans('frontLang.sendComment') }}</button>
+                                                        class="button_bg btn btn-primary">{{ trans('frontLang.sendComment') }}</button>
                                             </div>
                                             {{Form::close()}}
                                         </div>
