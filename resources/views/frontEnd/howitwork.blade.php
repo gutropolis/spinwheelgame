@@ -36,12 +36,12 @@
             <div class="raodeals-work-elements">
                 <div class="row">                    
                     <div class="col-lg-6">
-                        <img src="/FrontEnd/images/i-phone.png" class="elements-images"> 
+                        <img src="{{ URL::to('/FrontEnd/images/i-phone.png') }}"  class="elements-images"> 
                     </div>
                     <div class="col-lg-6">
                         <div class="elements-content">
                             <div class="elements-title">
-                                <img src="/FrontEnd/images/1.png">
+                                <img src="{{ URL::to('/FrontEnd/images/1.png') }}">
                                 <h5 class="title-heading">Check Your Daily My Click Reminder.</h5>
                             </div>
                             <p class="elements-text">
@@ -58,7 +58,7 @@
                     <div class="col-lg-6">
                         <div class="elements-content ml-0">
                             <div class="elements-title">
-                                <img src="/FrontEnd/images/2.png">
+                                <img src="{{ URL::to('/FrontEnd/images/2.png') }}"
                                 <h5 class="title-heading ">Click the link and complete your free entry.</h5>
                             </div>
                             <p class="elements-text elements-text-2">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <img src="/FrontEnd/images/mouse.png" class="elements-images"> 
+                        <img src="{{ URL::to('/FrontEnd/images/mouse.png') }}" class="elements-images"> 
                     </div>                    
                 </div>
             </div>
@@ -76,12 +76,12 @@
             <div class="raodeals-work-elements mt-0 pb-0">
                 <div class="row">                
                     <div class="col-lg-6">
-                        <img src="/FrontEnd/images/laptop.png" class="elements-images"> 
+                        <img src="{{ URL::to('/FrontEnd/images/laptop.png') }}" class="elements-images"> 
                     </div>
                     <div class="col-lg-6">
                         <div class="elements-content">
                             <div class="elements-title">
-                                <img src="/FrontEnd/images/3.png">
+                                <img src="{{ URL::to('/FrontEnd/images/3.png') }}">
                                 <h5 class="title-heading mr-0 title-heading-3">Check your emails,we’ll anno-unce winners daily.</h5>
                             </div>
                             <p class="elements-text">
@@ -130,22 +130,22 @@
             <!--col-md-3-->
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-1.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-1.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-2.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-2.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-3.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-3.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-4.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-4.png') }}">
                 </div>
             </div>
             <!-- End col-md-3-->
