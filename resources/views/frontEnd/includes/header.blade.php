@@ -58,7 +58,7 @@
                           <div class="fb-button">
                             <button class="facebook-btn">
 							
-                              <img src="/FrontEnd/images/fb.png" class="fb-icon">
+                              <img src="{{ URL::to('/FrontEnd/images/fb.png') }}" class="fb-icon">
                               <span class="btn-text"> Sign In With Facebook</span>
                             </button>
                           </div>
