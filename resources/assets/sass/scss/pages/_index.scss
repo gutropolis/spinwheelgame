@@ -3,6 +3,7 @@
 	background-position: center;
 	padding-top: $space-xll;
 	padding-bottom: $space-xll + $space-s + $space-m;
+	background-size: cover;
 	@media (max-width: $break-lg){
 		background-size: cover;
 		padding-bottom: $space-l + $space-l + $space-m;
@@ -23,6 +24,9 @@
 		padding-bottom: $space-l + $space-m + $space-s;
 	}
 	.banner-heading {
+		color:$color_white;
+		font-size: 50px;
+		font-weight: bold;
 		span {
 			color: $color_yellow;
 		}
@@ -695,6 +699,7 @@
 	@include background('../images/get-in-touch-bg.png');
 	padding-top: $space-l;
 	padding-bottom: $space-l + $space-s;
+		background-size: cover;
 	@media (max-width: $break-sm){
 		background-size: cover;
 		margin-top: $space-m + $space-s;
