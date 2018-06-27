@@ -43,15 +43,16 @@
                             <label for="fullname" class="inbox-label">Last Name *</label>
 							{!! $errors->first('last_name', '<span class="help-block">:message</span>') !!}
                           </div>
-						    <span  id="last_name_err"></span>
+						  
+						    <span class="error" id="last_name_err"></span>
                 
                             <div class="field {{ $errors->first('email', 'has-error') }}">
                             <input type="email" class="inbox-box" name="email"  id="email_reg" placeholder="Email">
                             <label for="email" class="inbox-label">Email *</label>
 							{!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                           </div>
-						    <span  id="email_name_err"></span>
-							<span id="errors"></span>
+						    <span   class="error" id="email_name_err"></span>
+							<span  class="error"  id="errors"></span>
                           <!--end field-->
                            <!--field-->
                           <div class="field {{ $errors->first('password', 'has-error') }}">
@@ -59,7 +60,7 @@
                             <label for="Password" class="inbox-label">Password *</label>
 							 {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
                           </div>
-						    <span  id="password_name_err"></span>
+						    <span  class="error"  id="password_name_err"></span>
                           <!--End field-->
                            <!--field-->
                           <div class="field  {{ $errors->first('confirm_password', 'has-error') }}">
@@ -67,11 +68,11 @@
                             <label for="Confirm Password" class="inbox-label">Confirm Password *</label>
 							 {!! $errors->first('confirm_password', '<span class="help-block">:message</span>') !!}
                           </div>
-						    <span id="confirm_password_name_err"></span>
+						    <span  class="error" id="confirm_password_name_err"></span>
                         
 
-                          <button type="button" id="registerForm" class="btn-join">Join Now!</button>
-						  <p class="backtosignup">Already have an account?<a class="btn-login signagain" type="login" data-toggle="modal" data-target="#mymodal">Sign in</a></p>
+                          <button type="button" id="registerForm" class="btn-join register_button">Join Now!</button>
+						  <p class="backtosignup text-center">Already have an account?<a class="btn-login signagain text-yellow" type="login" data-toggle="modal" data-target="#mymodal">Sign in</a></p>
                           <!--End field-->
 						  </div>
                       </form>
