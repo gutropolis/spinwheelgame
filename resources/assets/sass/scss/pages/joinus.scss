@@ -32,6 +32,7 @@
 	        background: linear-gradient(to right, #ce7fc3c7, #cb6c56c7);
 	        border-radius: 24px;
             box-shadow: 0 0 25px 5px #2b2f2b;
+			
             @media (max-width: $break-vs){
             	padding-top: 15px;
             	padding-left: 25px;
@@ -67,6 +68,7 @@
 								text-transform: capitalize;
 								letter-spacing: 0.05em;
 								font-family: 'ABeeZee';
+								color: #fff;
 							}
 							.inbox-box {
 								transition: all 0.2s;
@@ -199,8 +201,19 @@
 				}	
 
 		    }
-
+		
+		}
+		.register_box
+		{
+			max-width:100%;
 		}
 	}
+}
+.update-profile{
+    width: 250px;
+    margin: 0px auto;
+    display: block;
+    margin-top: 30px;
+	margin-left:auto !important;
 }
 
