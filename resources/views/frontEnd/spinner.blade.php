@@ -3,17 +3,7 @@
 @section('content')
 
  <div class="spinwheel-wrapper">
-    	<div class="tophead">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <img href="index.html" src="/frontEnd/images/white raodeals logo.png" class="logo">
-                
-              </div>
-              
-            </div>
-          </div>
-        </div>
+    	
 
         <section class="spinwin text-center">
           <div class="container">
