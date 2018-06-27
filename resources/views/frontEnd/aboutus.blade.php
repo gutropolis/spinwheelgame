@@ -28,7 +28,7 @@
         <div class="welcome-block">
             <div class="row">
                 <div class="col-md-12 col-lg-5">
-                    <img src="/FrontEnd/images/about-welcome.png" class="welcome-image">
+                    <img src="{{ URL::to('/FrontEnd/images/about-welcome.png') }}" class="welcome-image">
                 </div>
                 <div class="col-md-12 col-lg-7">
                     <div class="welcome-title">Raodeals is a new and exciting way to win prizes and redeem deals online</div>
@@ -37,24 +37,24 @@
                     </p>  
                     <div class="aboutus-list-elements">
                         <label class="about-us-list">
-                          <img src="/FrontEnd/images/dot.png" class="dots">
+                          <img src= "{{ URL::to('/FrontEnd/images/dot.png') }}" class="dots">
                             <span class="list-elements">rich</span> 
                         </label>
                         <label class="about-us-list">
-                          <img src="/FrontEnd/images/dot.png" class="dots">
+                          <img src="{{ URL::to('/FrontEnd/images/dot.png') }}" class="dots">
                             <span class="list-elements">abundant </span> 
                         </label>
                         <label class="about-us-list">
-                          <img src="/FrontEnd/images/dot.png" class="dots">
+                          <img src="{{ URL::to('/FrontEnd/images/dot.png') }}" class="dots">
                             <span class="list-elements">exuberant</span> 
                         </label>
                         <label class="about-us-list">
-                          <img src="/FrontEnd/images/dot.png" class="dots">
+                          <img src="{{ URL::to('/FrontEnd/images/dot.png') }}" class="dots">
                             <span class="list-elements">to add for free </span> 
                         </label>
                         
                         <label class="about-us-list">
-                          <img src="/FrontEnd/images/dot.png" class="dots">
+                          <img src="{{ URL::to('/FrontEnd/images/dot.png') }}" class="dots">
                             <span class="list-elements">to throw in as bonus</span> 
                         </label>
                     </div>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="col-md-12 col-lg-6">
-                <img src="/FrontEnd/images/img123.png" class="aboutus-rightside-image">
+                <img src="{{ URL::to('/FrontEnd/images/img123.png') }}" class="aboutus-rightside-image">
             </div>
         </div>
     </div>
@@ -119,7 +119,7 @@
             <div class="col-md-12 col-lg-6 meet-our-agents-section">
                 <div class="agents-block">
                     <div class="profile">
-                        <img src="/FrontEnd/images/agent-1.jpg">
+                        <img src="{{ URL::to('/FrontEnd/images/agent-1.jpg') }}" >
                     </div>
                     <div class="profile-detail">
                         <p class="name m-0">Susan jackson</p>
@@ -150,7 +150,7 @@
                 
                 <div class="agents-block">
                     <div class="profile">
-                        <img src="/FrontEnd/images/agent-2.jpg">
+                        <img src="{{ URL::to('/FrontEnd/images/agent-2.jpg') }}">
                     </div>
                     <div class="profile-detail">
                         <p class="name m-0">Ching Chang</p>
@@ -181,7 +181,7 @@
             <div class="col-md-12 col-lg-6 meet-our-agents-section">
                 <div class="agents-block">
                     <div class="profile">
-                        <img src="/FrontEnd/images/agent-3.jpg">
+                        <img src="{{ URL::to('/FrontEnd/images/agent-3.jpg') }}">
                     </div>
                     <div class="profile-detail">
                         <p class="name m-0">Susan jackson</p>
@@ -212,7 +212,7 @@
                 
                 <div class="agents-block">
                     <div class="profile">
-                        <img src="/FrontEnd/images/agent-4.jpg">
+                        <img src="{{ URL::to('/FrontEnd/images/agent-4.jpg') }}">
                     </div>
 
                     <div class="profile-detail">
@@ -256,7 +256,7 @@
         <div class="card-carousel-elements">
             <div class="card-carousel">
                 <div class="testimonial-card">
-                    <img src="/FrontEnd/images/testimonial-1.png" class="testimonial-profile">
+                    <img src= "{{ URL::to('/FrontEnd/images/testimonial-1.png') }}" class="testimonial-profile">
                     <h6 class="testimonial-name">jane doe</h6>
                     <p class="review">
                         <i class="fa fa-quote-left quote-left"></i>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
@@ -277,22 +277,22 @@
             <!--col-md-3-->
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-1.png">
+                    <img src= "{{ URL::to('/FrontEnd/images/partner-1.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-2.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-2.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-3.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-3.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-4.png">
+                    <img src = "{{ URL::to('/FrontEnd/images/partner-4.png') }}">
                 </div>
             </div>
             <!-- End col-md-3-->

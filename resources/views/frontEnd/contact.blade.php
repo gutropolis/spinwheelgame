@@ -106,7 +106,7 @@
 
 <!--map-->
 <section class="map">
-        <img src="/FrontEnd/images/map.png" class="map-image">
+        <img src= "{{ URL::to('/FrontEnd/images/map.png') }}" class="map-image">
 </section>
 <!--end map-->
 
@@ -121,22 +121,22 @@
             <!--col-md-3-->
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-1.png">
+                    <img src="{{ URL::to('/FrontEnd/partner-1.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-2.png">
+                    <img src="{{ URL::to('/FrontEnd/partner-2.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-3.png">
+                    <img src="{{ URL::to('/FrontEnd/partner-3.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3">
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-4.png">
+                    <img src="{{ URL::to('/FrontEnd/partner-4.png') }}">
                 </div>
             </div>
             <!-- End col-md-3-->
