@@ -173,22 +173,22 @@
             <!--col-md-3-->
             <div class="col-md-12 col-lg-3" >
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-1.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-1.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3" >
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-2.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-2.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3" >
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-3.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-3.png') }}">
                 </div>
             </div>
             <div class="col-md-12 col-lg-3" >
                 <div class="our-partners-block">
-                    <img src="/FrontEnd/images/partner-4.png">
+                    <img src="{{ URL::to('/FrontEnd/images/partner-4.png') }}">
                 </div>
             </div>
             <!-- End col-md-3-->
