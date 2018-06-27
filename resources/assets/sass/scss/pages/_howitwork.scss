@@ -1,10 +1,10 @@
 .wrapper-work{
 	@include background('../images/how-it-work-bg.png');
-	padding-top: $space-l + $space-n + $space-vs + 2px;
-	padding-bottom: $space-l + $space-l + $space-vs + 1px;
+	padding-bottom: $space-l + $space-n + $space-vs + 2px;
+	padding-top: $space-l + $space-l + $space-vs + 1px;
 	background-position: right;
 	text-align: center;
-
+	
 	@media (max-width: $break-md){
 		padding-top: $space-xl + $space-vs;
 	}
@@ -17,6 +17,8 @@
 	.wrapper-title{
 		color: $color-white;
 		position: relative;
+		font-size: 50px;
+		font-weight: bold;
 
 		&:before{
 			content: '';
