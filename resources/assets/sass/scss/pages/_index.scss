@@ -1,5 +1,5 @@
 .banner {
-	@include background('../images/banner.jpg');
+	@include background ('../../../../../public/images/banner.jpg');     
 	background-position: center;
 	padding-top: $space-xll;
 	padding-bottom: $space-xll + $space-s + $space-m;
