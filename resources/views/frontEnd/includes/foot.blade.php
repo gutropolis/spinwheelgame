@@ -16,9 +16,9 @@
 	 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 	
-    <script src="/FrontEnd/js/validation.js"></script>
+    <script src= "{{ URL::to('/FrontEnd/js/validation.js') }}"></script>
 
     <!--for spinner  -->   
-    <script src="/FrontEnd/js/winwheel.js"></script>
-    <script src="/FrontEnd/js/twinmax.js"></script>
-    <script src="/FrontEnd/js/custom.js"></script>
+    <script src= "{{ URL::to('/FrontEnd/js/winwheel.js') }}"></script>
+    <script src="{{ URL::to('/FrontEnd/js/twinmax.js') }}"></script>
+    <script src="{{ URL::to('/FrontEnd/js/custom.js') }}"></script>
