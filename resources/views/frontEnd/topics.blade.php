@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="wrapper-contactus">
+    <!--<section class="wrapper-contactus">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -30,11 +30,22 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 	
 	
-	
-    <section id="content" >
+	<!--how it work-->
+<div class="wrapper-aboutus">
+    <!--container-->
+    <div class="container">
+        <!--wrapper-title-->
+        <h1 class="wrapper-title">Blog</h1>
+        <!--End wrapper-title-->
+    </div>
+    <!--End container-->
+</div>
+<!--how it work-->
+
+    <section id="content" class="equal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-{{(count($Categories)>0)? "8":"12"}}">
